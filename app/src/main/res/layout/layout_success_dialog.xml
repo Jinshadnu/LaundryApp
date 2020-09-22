@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/size_250dp"
+    android:layout_height="350dp"
+    app:cardCornerRadius="@dimen/size_20dp"
+    app:cardMaxElevation="@dimen/size_100dp">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutImage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@id/layoutTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+      <com.airbnb.lottie.LottieAnimationView
+          android:id="@+id/imageAnimation"
+          android:layout_width="@dimen/size_100dp"
+          android:layout_height="@dimen/size_100dp"
+          android:scaleType="centerCrop"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:lottie_autoPlay="true"
+          app:lottie_loop="true"
+          app:lottie_rawRes="@raw/success_in_motion"
+          tools:ignore="MissingClass" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutTitle"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutImage">
+
+      <TextView
+          android:id="@+id/textTitle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/size_15dp"
+          android:text="Yay!"
+          android:textColor="@color/colorPrimaryDark"
+          android:textSize="@dimen/size_22sp"
+          android:textStyle="bold"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+      <TextView
+          android:id="@+id/textMessage"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="@dimen/size_20dp"
+          android:layout_marginTop="@dimen/size_10dp"
+          android:layout_marginEnd="@dimen/size_20dp"
+          android:gravity="center"
+          android:textColor="@color/md_grey_500"
+          android:textSize="@dimen/size_15sp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/textTitle" />
+
+      <Button
+          android:id="@+id/buttonOk"
+          android:layout_width="@dimen/size_150dp"
+          android:layout_height="@dimen/size_35dp"
+          android:background="@drawable/login_button"
+          android:backgroundTint="@color/colorPrimaryDark"
+          android:text="High five!"
+          android:textAllCaps="false"
+          android:textColor="@color/colorwhite"
+          android:textSize="@dimen/size_15sp"
+          android:textStyle="normal"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/textMessage" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

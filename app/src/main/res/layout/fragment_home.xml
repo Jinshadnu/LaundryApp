@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f5f5f5"
+        tools:context=".fragments.HomeFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <include
+                android:id="@+id/layoutBase"
+                layout="@layout/layout_base"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RelativeLayout
+                android:id="@+id/relative"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@color/colorwhite"
+                android:layout_below="@id/layoutBase"
+                tools:ignore="MissingConstraints">
+
+
+                <TextView
+                    android:id="@+id/text_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:drawableLeft="@drawable/ic_baseline_location_on_24"
+                    android:drawablePadding="@dimen/size_10dp"
+                    android:text="Pin your location"
+                    android:textColor="@color/colorDarkstateBlue"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_baseline_notifications_none_24"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:id="@+id/rl_banner"
+                android:layout_width="match_parent"
+                android:layout_below="@id/relative"
+                android:layout_marginTop="0dp"
+                android:layout_height="150dp"
+                android:focusableInTouchMode="true">
+
+                <com.example.laundryapp.utilities.AutoScrollViewPager
+                    android:id="@+id/vp_image"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    tools:ignore="MissingClass"/>
+
+                <com.viewpagerindicator.CirclePageIndicator
+                    android:id="@+id/cp_image"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="bottom"
+                    android:padding="10dip"
+                    app:centered="true"
+                    app:fillColor="@color/colorPrimary"
+                    app:pageColor="@android:color/white"
+                    app:snap="false"
+                    tools:ignore="MissingClass" />
+            </RelativeLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_services"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_below="@id/rl_banner"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="5dp"
+                app:cardBackgroundColor="#F5F5F5">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView_washandFold"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        app:cardBackgroundColor="@color/colorwhite"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="5dp"
+                        app:layout_constraintEnd_toStartOf="@+id/cardView_dryLaundry"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textview_service">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/imageView_wash"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_folding_clothes" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/imageView_wash"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:text="Wash and Iron"
+                                android:textColor="@color/colorDarkstateBlue"
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView_dryLaundry"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
+                        app:cardBackgroundColor="@color/colorwhite"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="5dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/cardView_washandFold"
+                        app:layout_constraintTop_toBottomOf="@+id/textview_service"
+                        tools:ignore="MissingConstraints">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/imageView_dryLaundry"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_laundry" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/imageView_dryLaundry"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:text="Pressing"
+                                android:textColor="@color/colorDarkstateBlue"
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView_ironLaundry"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        app:cardElevation="5dp"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintEnd_toStartOf="@+id/cardView_dryCleaning"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView_washandFold"
+                        tools:ignore="MissingConstraints">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/imageView_ironLaundry"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_laundry_service" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/imageView_ironLaundry"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:text="Dry Cleaning"
+                                android:textColor="@color/colorDarkstateBlue"
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView_dryCleaning"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="16dp"
+                        app:cardElevation="5dp"
+                        android:layout_marginEnd="16dp"
+                        app:cardCornerRadius="10dp"
+                        android:layout_marginRight="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/cardView_ironLaundry"
+                        app:layout_constraintTop_toBottomOf="@+id/cardView_dryLaundry"
+                        tools:ignore="MissingConstraints">
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/imageView_dry_Cleaning"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_suit" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/imageView_dry_Cleaning"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="10dp"
+                                android:text="Urgent"
+                                android:textColor="@color/colorDarkstateBlue"
+                                android:textSize="18dp"
+                                android:textStyle="bold" />
+
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+<!--                    <androidx.cardview.widget.CardView-->
+<!--                        android:id="@+id/cardView6"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="150dp"-->
+<!--                        android:layout_marginStart="16dp"-->
+<!--                        android:layout_marginLeft="16dp"-->
+<!--                        app:cardElevation="5dp"-->
+<!--                        android:layout_marginTop="16dp"-->
+<!--                        app:cardCornerRadius="10dp"-->
+<!--                        app:layout_constraintEnd_toStartOf="@+id/cardView5"-->
+<!--                        app:layout_constraintHorizontal_bias="0.5"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/cardView4" >-->
+
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent">-->
+
+<!--                            <ImageView-->
+<!--                                android:id="@+id/imageView_shoes_Cleaning"-->
+<!--                                android:layout_width="60dp"-->
+<!--                                android:layout_height="60dp"-->
+<!--                                android:layout_centerInParent="true"-->
+<!--                                android:src="@drawable/ic_construction_and_tools" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_below="@id/imageView_shoes_Cleaning"-->
+<!--                                android:layout_centerHorizontal="true"-->
+<!--                                android:layout_marginTop="10dp"-->
+<!--                                android:text="Shoes Clean"-->
+<!--                                android:textColor="@color/colorDarkstateBlue"-->
+<!--                                android:textSize="18dp"-->
+<!--                                android:textStyle="bold" />-->
+
+
+<!--                        </RelativeLayout>-->
+
+<!--                    </androidx.cardview.widget.CardView>-->
+
+<!--                    <androidx.cardview.widget.CardView-->
+<!--                        android:id="@+id/cardView5"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="150dp"-->
+<!--                        android:layout_marginStart="24dp"-->
+<!--                        android:layout_marginLeft="24dp"-->
+<!--                        android:layout_marginTop="16dp"-->
+<!--                        android:layout_marginEnd="16dp"-->
+<!--                        android:layout_marginRight="16dp"-->
+<!--                        app:cardElevation="5dp"-->
+<!--                        app:cardCornerRadius="10dp"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintHorizontal_bias="0.5"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/cardView6"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/cardView3" >-->
+
+
+
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent">-->
+
+<!--                            <ImageView-->
+<!--                                android:id="@+id/imageView_CleaningProducts"-->
+<!--                                android:layout_width="60dp"-->
+<!--                                android:layout_height="60dp"-->
+<!--                                android:layout_centerInParent="true"-->
+<!--                                android:src="@drawable/ic_bleach" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_below="@id/imageView_CleaningProducts"-->
+<!--                                android:layout_centerHorizontal="true"-->
+<!--                                android:layout_marginTop="10dp"-->
+<!--                                android:text="Products"-->
+<!--                                android:textColor="@color/colorDarkstateBlue"-->
+<!--                                android:textSize="18dp"-->
+<!--                                android:textStyle="bold" />-->
+
+
+<!--                        </RelativeLayout>-->
+<!--                    </androidx.cardview.widget.CardView>-->
+
+                    <TextView
+                        android:id="@+id/textview_service"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Service"
+                        android:textColor="@color/colorDarkstateBlue"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/text_plans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Plans"
+                android:textStyle="bold"
+                android:textColor="@color/colorDarkstateBlue"
+                android:textSize="20dp"
+                android:layout_below="@id/card_services"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_plans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_below="@id/text_plans"/>
+
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+</layout>

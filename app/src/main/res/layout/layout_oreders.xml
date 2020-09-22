@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+
+        <variable
+            name="order"
+            type="com.example.laundryapp.fragments.pojo.Orders" />
+
+    </data>
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardCornerRadius="@dimen/size_10dp"
+        app:cardBackgroundColor="@color/colorwhite"
+        app:cardElevation="@dimen/size_5dp"
+        android:layout_marginTop="@dimen/size_16dp"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginRight="@dimen/size_16dp"
+        android:layout_height="@dimen/size_200dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_60dp"
+                android:background="@color/colorDarkstateBlue">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Order Details"
+                    android:textSize="@dimen/size_18dp"
+                    android:textColor="@color/colorwhite"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size_16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View More"
+                    android:textSize="@dimen/size_18dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/size_16dp"
+                    android:textColor="@color/colorwhite"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size_16dp"/>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/text_oreder_Id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order ID  :"
+                android:textColor="@color/colorblack"
+                android:layout_below="@id/relativeLayout"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:textSize="@dimen/size_16dp"/>
+
+            <TextView
+                android:id="@+id/oreder_Id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{order.oreder_id}"
+                android:textColor="#ff471a"
+                android:layout_below="@id/relativeLayout"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:textSize="@dimen/size_16dp"/>
+
+
+
+            <TextView
+                android:id="@+id/text_oreder_receipient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reciepient  :"
+                android:textColor="@color/colorblack"
+                android:layout_below="@id/text_oreder_Id"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:textSize="@dimen/size_16dp"/>
+
+            <TextView
+                android:id="@+id/oreder_receipient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{order.recipient_name}"
+                android:textColor="@color/colorblack"
+                android:layout_below="@id/text_oreder_Id"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:textSize="@dimen/size_16dp"/>
+
+            <TextView
+                android:id="@+id/text_oreder_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone  :"
+                android:textColor="@color/colorblack"
+                android:layout_below="@id/text_oreder_receipient"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:textSize="@dimen/size_16dp"/>
+
+            <TextView
+                android:id="@+id/oreder_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{order.phone}"
+                android:textColor="@color/colorblack"
+                android:layout_below="@id/text_oreder_receipient"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:textSize="@dimen/size_16dp"/>
+
+            <TextView
+                android:id="@+id/text_oreder_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status  :"
+                android:textColor="@color/colorblack"
+                android:layout_below="@id/text_oreder_phone"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:textSize="@dimen/size_16dp"/>
+
+            <TextView
+                android:id="@+id/oreder_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{order.status}"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:textColor="@color/colorblack"
+                android:layout_below="@id/text_oreder_phone"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:textSize="@dimen/size_16dp"/>
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

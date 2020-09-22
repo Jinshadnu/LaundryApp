@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">LaundryApp</string>
+    <string name="next">Next</string>
+    <string name="order">Simply Place your Oreder</string>
+    <string name="shop">Shop</string>
+    <string name="offers">Offers</string>
+    <string name="rewards">Rewards</string>
+    <string name="discover_text">Select your location and pick convenient time and our driver will be on the way Dont worry we will bring the bag </string>
+    <string name="shop_text"><![CDATA[Get the best deals & Coupons]]></string>
+    <string name="offers_text">Find great offers while you discover</string>
+    <string name="rewards_text"><![CDATA[Free recharge coupons & more]]></string>
+    <string name="get_started">Get Started</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    //Bottom Navigation menu's
+    <string name="home">Home</string>
+    <string name="mycart">My Cart</string>
+    <string name="cart">Cart</string>
+    <string name="Help">Help</string>
+    <string name="payment">Payment</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
+
+    <string name="service_details">Our dry cleaning services offer the same pick up and delivery as our laundry services. You can even give us your laundry and dry cleaning at the same time, just make sure they are separated.</string>
+
+
+</resources>

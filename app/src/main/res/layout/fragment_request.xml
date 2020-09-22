@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F5F5F5"
+        tools:context=".fragments.RequestFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+
+
+        <include
+            android:id="@+id/layoutBase"
+            layout="@layout/layout_base"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edittext_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_50dp"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:layout_below="@id/layoutBase"
+            android:drawableRight="@drawable/ic_baseline_search_24"
+            android:background="@drawable/search_background"
+            android:padding="@dimen/size_15dp"
+            android:hint="Search Here"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_orders"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/edittext_search"
+            android:layout_marginTop="@dimen/size_15dp"/>
+
+
+    </RelativeLayout>
+</layout>

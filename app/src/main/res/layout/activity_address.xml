@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/size_10dp"
+        tools:context=".user.AddressActivity">
+
+        <EditText
+            android:id="@+id/editTextTextPersonName9"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/edittext_background"
+            android:ems="10"
+            android:hint="Building Address or Bilding Number"
+            android:inputType="textPersonName"
+            android:padding="@dimen/size_10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName10"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/edittext_background"
+            android:ems="10"
+            android:hint="Street Address,Landmark, etc"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName9" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName11"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/edittext_background"
+            android:ems="10"
+            android:hint="City"
+            android:inputType="textPersonName"
+            android:padding="@dimen/size_10dp"
+            app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName12"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName10" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName12"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/edittext_background"
+            android:ems="10"
+            android:hint="Zip Code"
+            android:inputType="textPersonName"
+            android:padding="@dimen/size_10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName11"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName10" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Select Pick up and Delivery Address"
+            android:textColor="@color/colorblack"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Enter Address Detals"
+            android:textColor="@color/colorblack"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView_home" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="32dp"
+            android:text="Select Adress"
+            android:textColor="@color/colorblack"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView_office"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_150dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/colorwhite"
+            app:cardBackgroundColor="@color/colorwhite"
+            app:cardElevation="@dimen/size_5dp"
+            app:cardCornerRadius="@dimen/size_5dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/cardView_home"
+            app:layout_constraintTop_toBottomOf="@+id/textView23">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageView_office"
+                    android:layout_width="@dimen/size_60dp"
+                    android:layout_height="@dimen/size_60dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:src="@drawable/ic_baseline_local_post_office_24" />
+
+                <TextView
+                    android:id="@+id/text_office"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imageView_office"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:layout_marginTop="@dimen/size_5dp"
+                    android:text="Office"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/size_16dp"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView_home"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/size_150dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="@color/colorDarkstateBlue"
+            app:cardCornerRadius="@dimen/size_5dp"
+            app:cardElevation="@dimen/size_5dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toStartOf="@+id/cardView_office"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView23">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageView_home"
+                    android:layout_width="@dimen/size_60dp"
+                    android:layout_height="@dimen/size_60dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:src="@drawable/ic_home_241" />
+
+                <TextView
+                    android:id="@+id/text_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imageView_home"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:text="Home"
+                    android:textColor="@color/colorwhite"
+                    android:textSize="@dimen/size_16dp"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/buttonsubmit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/login_button"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textColor="@color/colorwhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName12" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

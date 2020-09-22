@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f7f7f7"
+    tools:context=".splash.SplashActivity"
+    >
+
+    <ImageView
+        android:id="@+id/imageView_logo"
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_height="@dimen/size_250dp"
+        android:src="@drawable/logo"
+        android:scaleType="centerInside"
+        />
+
+    <TextView
+        android:id="@+id/text_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Al khor, Doha-Qatar"
+        android:layout_below="@id/imageView_logo"
+        android:layout_centerInParent="true"
+        android:textColor="@color/colorDarkstateBlue"
+        android:textStyle="bold"
+        android:textSize="@dimen/size_25dp"
+        android:layout_marginTop="@dimen/size_50dp"/>
+
+
+
+</RelativeLayout>

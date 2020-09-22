@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.laundryapp">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".user.CartActivity"></activity>
+        <activity android:name=".utilities.BaseActivity" />
+        <activity android:name=".user.ForgetPasswordActivity" />
+        <activity android:name=".user.SuccessActivity" />
+        <activity android:name=".user.OrderActivity" />
+        <activity android:name=".user.PaymentActivity" />
+        <activity android:name=".user.HistoryActivity" />
+        <activity android:name=".user.AddressActivity" />
+        <activity android:name=".user.DetailsActivity" />
+        <activity android:name=".user.ChangePassword" />
+        <activity android:name=".user.ServiceDetails" />
+        <activity android:name=".user.HomeActivity" />
+        <activity android:name=".register.RegisterActivity" />
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".welcome.WelcomeActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+</manifest>

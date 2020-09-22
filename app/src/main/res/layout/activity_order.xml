@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout >
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".user.OrderActivity">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+
+            <include
+                android:id="@+id/layoutBase"
+                layout="@layout/layout_base"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="@dimen/size_24dp"
+                android:text="Select Clothes"
+                android:textStyle="bold"
+                android:textColor="@color/colorblack"
+                android:layout_below="@id/layoutBase"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_80dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_below="@id/textView34"
+                app:layout_constraintTop_toBottomOf="@+id/textView34">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/button_mens"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/size_16dp"
+                        android:background="@drawable/capsule_background"
+                        android:padding="@dimen/size_10dp"
+                        android:text="Mens"
+                        android:textColor="@color/colorwhite"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/button_womens"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="@dimen/size_16dp"
+                        android:background="@drawable/clothes_background"
+                        android:padding="@dimen/size_10dp"
+                        android:text="Womens" />
+
+                    <Button
+                        android:id="@+id/button_kids"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/size_16dp"
+                        android:textStyle="bold"
+                        android:background="@drawable/clothes_background"
+                        android:padding="@dimen/size_10dp"
+                        android:text="Kids" />
+
+                    <Button
+                        android:id="@+id/button_other"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/size_16dp"
+                        android:background="@drawable/clothes_background"
+                        android:padding="@dimen/size_10dp"
+                        android:textStyle="bold"
+                        android:text="Others" />
+
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_products"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/horizontalScrollView" />
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_70dp"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@id/recycler_products"
+                android:background="@color/colorDarkstateBlue">
+
+                <TextView
+                    android:id="@+id/text_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Price"
+                    android:textColor="@color/colorwhite"
+                    android:layout_marginTop="@dimen/size_10dp"
+                    android:textSize="@dimen/size_18dp"
+                    android:layout_marginLeft="@dimen/size_16dp"/>
+
+                <TextView
+                    android:id="@+id/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:layout_marginTop="@dimen/size_5dp"
+                    android:text="$ 150"
+                    android:textStyle="bold"
+                    android:layout_below="@id/text_total"
+                    android:textColor="@color/colorwhite"
+                    android:textSize="@dimen/size_18dp" />
+
+                <Button
+                    android:id="@+id/button_order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/redeem_button"
+                    android:textColor="@color/colorwhite"
+                    android:layout_marginRight="@dimen/size_16dp"
+                    android:text="Order Now"
+                    android:padding="@dimen/size_16dp"/>
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+</layout>
