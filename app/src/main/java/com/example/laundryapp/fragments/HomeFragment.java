@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 import androidx.lifecycle.Observer;
@@ -26,6 +27,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
 
 import com.example.laundryapp.MainActivity;
@@ -33,9 +36,12 @@ import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.FragmentHomeBinding;
 import com.example.laundryapp.fragments.adapter.ImageSliderAdapter;
 import com.example.laundryapp.fragments.adapter.PlansAdapter;
+import com.example.laundryapp.fragments.adapter.ServiceAdapter;
 import com.example.laundryapp.fragments.pojo.Plans;
+import com.example.laundryapp.fragments.pojo.Services;
 import com.example.laundryapp.fragments.viewmodel.CategoryViewModel;
 import com.example.laundryapp.fragments.viewmodel.PlansViewModel;
+import com.example.laundryapp.fragments.viewmodel.ServiceViewModel;
 import com.example.laundryapp.user.DetailsActivity;
 import com.example.laundryapp.user.ServiceDetails;
 import com.example.laundryapp.utilities.GetAddressIntentService;
@@ -49,6 +55,7 @@ import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,7 +66,9 @@ public class HomeFragment extends Fragment {
     public FragmentHomeBinding homeBinding;
     public CategoryViewModel categoryViewModel;
     public PlansViewModel plansViewModel;
+    public ServiceViewModel serviceViewModel;
     public PlansAdapter plansAdapter;
+    public ServiceAdapter serviceAdapter;
     public double latitude;
     public double longitude;
     public Location currentLocation;
@@ -109,6 +118,8 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        serviceViewModel = ViewModelProviders.of((FragmentActivity) this.getActivity()).get(ServiceViewModel.class);
         plansViewModel = ViewModelProviders.of((FragmentActivity) this.getActivity()).get(PlansViewModel.class);
 
     }
@@ -121,26 +132,33 @@ public class HomeFragment extends Fragment {
         homeBinding.layoutBase.toolbar.setTitle("Home");
 
 
+        homeBinding.recyclerService.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        homeBinding.recyclerService.setHasFixedSize(true);
+
         homeBinding.recyclerPlans.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         homeBinding.recyclerPlans.setHasFixedSize(true);
 
-        homeBinding.cardViewWashandFold.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), DetailsActivity.class));
-        });
 
-        homeBinding.cardViewDryLaundry.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), DetailsActivity.class));
-        });
-
-        homeBinding.cardViewDryCleaning.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), DetailsActivity.class));
-        });
-
-        homeBinding.cardViewIronLaundry.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), DetailsActivity.class));
-        });
+//
+//        homeBinding.cardViewWashandFold.setOnClickListener(v -> {
+//            startActivity(new Intent(getActivity(), DetailsActivity.class));
+//        });
+//
+//        homeBinding.cardViewDryLaundry.setOnClickListener(v -> {
+//            startActivity(new Intent(getActivity(), DetailsActivity.class));
+//        });
+//
+//        homeBinding.cardViewDryCleaning.setOnClickListener(v -> {
+//            startActivity(new Intent(getActivity(), DetailsActivity.class));
+//        });
+//
+//        homeBinding.cardViewIronLaundry.setOnClickListener(v -> {
+//            startActivity(new Intent(getActivity(), DetailsActivity.class));
+//        });
 
         setValuesToFields();
+
+        runAnimationAgain();
 
 //        if(ContextCompat.checkSelfPermission(context.getApplicationContext(),Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
 //          ActivityCompat.requestPermissions(getActivity(),new String[] {Manifest.permission.ACCESS_FINE_LOCATION},LOCATION_PERMISSION_REQUEST_CODE);
@@ -162,6 +180,8 @@ public class HomeFragment extends Fragment {
 
         startLocationUpdates();
 
+        getServices();
+
         getPlans();
 
         return homeBinding.getRoot();
@@ -177,6 +197,16 @@ public class HomeFragment extends Fragment {
             public void onChanged(List<Plans> banners) {
              plansAdapter=new PlansAdapter(getActivity(),banners);
              homeBinding.recyclerPlans.setAdapter(plansAdapter);
+            }
+        });
+    }
+
+    private void getServices() {
+        serviceViewModel.getServices().observe((LifecycleOwner) this.getActivity(), new Observer<List<Services>>() {
+            @Override
+            public void onChanged(List<Services> services) {
+                serviceAdapter=new ServiceAdapter(getActivity(),services);
+                homeBinding.recyclerService.setAdapter(serviceAdapter);
             }
         });
     }
@@ -317,6 +347,18 @@ public class HomeFragment extends Fragment {
 
     private void showResults(String currentAdd) {
         homeBinding.textLocation.setText(currentAdd);
+    }
+
+    private void runAnimationAgain() {
+
+
+        final LayoutAnimationController controller =
+                AnimationUtils.loadLayoutAnimation(getActivity(), R.anim.gridlayout_animation_from_bottom);
+
+        homeBinding.recyclerService.setLayoutAnimation(controller);
+//        itemAdapter.notifyDataSetChanged();
+        homeBinding.recyclerService.scheduleLayoutAnimation();
+
     }
 
 
