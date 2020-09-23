@@ -8,11 +8,14 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.FragmentCartBinding;
@@ -85,10 +88,12 @@ public class CartFragment extends Fragment {
 
         cartBinding.layoutBase.toolbar.setTitle("My Cart");
 
-        cartBinding.recyclerCart.setLayoutManager(new LinearLayoutManager(getActivity()));
+        cartBinding.recyclerCart.setLayoutManager(new GridLayoutManager(getActivity(),1));
         cartBinding.recyclerCart.setHasFixedSize(true);
 
         getcartItems();
+
+        runAnimationAgain();
 
 
         return cartBinding.getRoot();
@@ -102,6 +107,18 @@ public class CartFragment extends Fragment {
                 cartBinding.recyclerCart.setAdapter(cartAdapter);
             }
         });
+    }
+
+    private void runAnimationAgain() {
+
+
+        final LayoutAnimationController controller =
+                AnimationUtils.loadLayoutAnimation(getActivity(), R.anim.gridlayout_animation_from_bottom);
+
+        cartBinding.recyclerCart.setLayoutAnimation(controller);
+//        itemAdapter.notifyDataSetChanged();
+        cartBinding.recyclerCart.scheduleLayoutAnimation();
+
     }
 
 }

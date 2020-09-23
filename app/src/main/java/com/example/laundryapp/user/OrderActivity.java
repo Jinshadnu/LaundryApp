@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.ActivityOrderBinding;
@@ -119,6 +121,8 @@ public ItemAdapter itemAdapter;
         itemsViewModel= ViewModelProviders.of(this).get(ItemsViewModel.class);
 
         fetchItems();
+
+        runAnimationAgain();
     }
 
     private void fetchItems() {
@@ -129,5 +133,18 @@ public ItemAdapter itemAdapter;
                 orderBinding.recyclerProducts.setAdapter(itemAdapter);
             }
         });
+    }
+
+
+    private void runAnimationAgain() {
+
+
+        final LayoutAnimationController controller =
+                AnimationUtils.loadLayoutAnimation(this, R.anim.gridlayout_animation_from_bottom);
+
+        orderBinding.recyclerProducts.setLayoutAnimation(controller);
+//        itemAdapter.notifyDataSetChanged();
+        orderBinding.recyclerProducts.scheduleLayoutAnimation();
+
     }
 }

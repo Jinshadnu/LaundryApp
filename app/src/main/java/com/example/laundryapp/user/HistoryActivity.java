@@ -6,9 +6,12 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.ActivityHistoryBinding;
@@ -29,12 +32,13 @@ public ActivityHistoryBinding historyBinding;
 
         historyBinding.layoutBase.toolbar.setTitle("My Orders");
 
-        historyBinding.recyclerOrders.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        historyBinding.recyclerOrders.setLayoutManager(new GridLayoutManager(this,1));
         historyBinding.recyclerOrders.setHasFixedSize(true);
 
         orderViewModel = ViewModelProviders.of(this).get(OrderViewModel.class);
 
         fetchOrders();
+        runAnimationAgain();
 
     }
 
@@ -46,6 +50,18 @@ public ActivityHistoryBinding historyBinding;
                 historyBinding.recyclerOrders.setAdapter(orderAdapter);
             }
         });
+    }
+
+    private void runAnimationAgain() {
+
+
+        final LayoutAnimationController controller =
+                AnimationUtils.loadLayoutAnimation(this, R.anim.gridlayout_animation_from_bottom);
+
+        historyBinding.recyclerOrders.setLayoutAnimation(controller);
+//        itemAdapter.notifyDataSetChanged();
+        historyBinding.recyclerOrders.scheduleLayoutAnimation();
+
     }
 
 
