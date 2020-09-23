@@ -23,6 +23,9 @@ public class CartRepostory {
         cartList.add(new Cart("Shirt", R.drawable.shirt,7));
         cartList.add(new Cart("Pant", R.drawable.pant,10));
         cartList.add(new Cart("Shorts",R.drawable.shorts,4));
+        cartList.add(new Cart("Shirt", R.drawable.shirt,7));
+        cartList.add(new Cart("T-shirt",R.drawable.t_shirt,5));
+        cartList.add(new Cart("Shorts",R.drawable.shorts,4));
 
         mutableLiveData.setValue(cartList);
 

@@ -71,6 +71,11 @@ public FragmentSettingsBinding settingsBinding;
 
         settingsBinding.layoutBase.toolbar.setTitle("Settings");
 
+        settingsBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+        settingsBinding.layoutBase.toolbar.setNavigationOnClickListener(v -> {
+            getActivity().onBackPressed();
+        });
+
 
         settingsBinding.textChangePassword.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), ChangePassword.class));

@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 
@@ -24,6 +26,7 @@ import com.example.laundryapp.fragments.pojo.Items;
 import com.example.laundryapp.fragments.pojo.Orders;
 import com.example.laundryapp.fragments.viewmodel.ItemsViewModel;
 import com.example.laundryapp.fragments.viewmodel.OrderViewModel;
+import com.example.laundryapp.utilities.GridSpacingItemDecoration;
 
 import java.util.List;
 
@@ -43,6 +46,8 @@ public ItemAdapter itemAdapter;
         orderBinding.layoutBase.toolbar.setTitle("Place Order");
 
         orderBinding.recyclerProducts.setLayoutManager(new GridLayoutManager(this,2));
+        orderBinding.recyclerProducts.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+
         orderBinding.recyclerProducts.setHasFixedSize(true);
 
         orderBinding.buttonOrder.setOnClickListener(v -> {
@@ -146,5 +151,10 @@ public ItemAdapter itemAdapter;
 //        itemAdapter.notifyDataSetChanged();
         orderBinding.recyclerProducts.scheduleLayoutAnimation();
 
+    }
+
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 }

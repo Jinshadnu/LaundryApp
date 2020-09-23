@@ -69,6 +69,9 @@ public FragmentProfileBinding profileBinding;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         profileBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
+
+
+
         profileBinding.textViewChangePassword.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), ChangePassword.class));
         });

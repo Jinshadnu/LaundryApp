@@ -1,7 +1,10 @@
 package com.example.laundryapp.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -37,6 +40,7 @@ public class CartFragment extends Fragment {
     public CartViewModel cartViewModel;
     public CartAdapter cartAdapter;
     public FragmentCartBinding cartBinding;
+    public Context context;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -87,6 +91,11 @@ public class CartFragment extends Fragment {
         cartBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_cart, container, false);
 
         cartBinding.layoutBase.toolbar.setTitle("My Cart");
+
+        cartBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+        cartBinding.layoutBase.toolbar.setNavigationOnClickListener(v -> {
+            getActivity().onBackPressed();
+        });
 
         cartBinding.recyclerCart.setLayoutManager(new GridLayoutManager(getActivity(),1));
         cartBinding.recyclerCart.setHasFixedSize(true);
