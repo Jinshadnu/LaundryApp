@@ -1,40 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <RelativeLayout
+<layout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_price"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_80dp"
-        android:background="@color/colorwhite"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:ignore="MissingConstraints">
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total Price"
-            android:textColor="@color/colorDarkstateBlue"
-            android:textSize="@dimen/size_20dp"
-            android:textStyle="bold"
-            android:layout_marginLeft="@dimen/size_16dp"
-            android:layout_centerVertical="true"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_80dp"
+            android:background="@color/colorwhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="MissingConstraints">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/redeem_button"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textColor="@color/colorDarkstateBlue"
-            android:layout_marginRight="@dimen/size_16dp"
-            android:text="Order Now"
-            android:textAllCaps="false"/>
+            <TextView
+                android:id="@+id/text_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Price"
+                android:textColor="@color/colorDarkstateBlue"
+                android:textSize="@dimen/size_20dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_total"
+                android:textSize="@dimen/size_18dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorDarkstateBlue"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:text="0.00"/>
+
+            <Button
+                android:id="@+id/button_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/redeem_button"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/colorDarkstateBlue"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:text="Order Now"
+                android:textAllCaps="false"/>
 
 
 
-    </RelativeLayout>
+        </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

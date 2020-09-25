@@ -30,21 +30,21 @@ public class SliderItemFragment extends Fragment {
     // prepare all title ids arrays
     @StringRes
     private static final int[] PAGE_TITLES =
-            new int[] { R.string.order, R.string.shop, R.string.offers, R.string.rewards };
+            new int[] { R.string.order, R.string.shop, R.string.rewards };
 
     @StringRes
     private static final int[] PAGE_TEXT =
             new int[] {
-                    R.string.discover_text, R.string.shop_text, R.string.offers_text, R.string.rewards_text
+                    R.string.discover_text, R.string.shop_text, R.string.rewards_text
             };
     // prepare all subtitle images arrays
     @StringRes
     private static final int[] PAGE_IMAGE =
             new int[] {
-                    R.drawable.laundrybnr, R.drawable.laundryimg, R.drawable.technical_service, R.drawable.delivery
+                    R.drawable.laundrybnr, R.drawable.laundryimg, R.drawable.delivery
             };
     private static final int[] BG_IMAGE = new int[] {
-            R.color.colorDarkstateBlue, R.color.colorDarkstateBlue, R.color.colorDarkstateBlue,
+            R.color.colorDarkstateBlue, R.color.colorDarkstateBlue,
             R.color.colorDarkstateBlue
     };
     private int position;

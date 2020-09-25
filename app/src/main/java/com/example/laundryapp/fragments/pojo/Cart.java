@@ -8,6 +8,19 @@ public class Cart {
     public int item_id;
     public String item_name;
     public int item_image;
+    public int quantity;
+
+
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+
 
     public String getItem_name() {
         return item_name;
@@ -35,10 +48,11 @@ public class Cart {
 
     public int price;
 
-    public Cart(String item_name, int item_image, int price) {
+    public Cart(String item_name, int item_image, int price,int quantity) {
         this.item_name = item_name;
         this.item_image = item_image;
         this.price = price;
+        this.quantity=quantity;
     }
 
     @BindingAdapter("carts")

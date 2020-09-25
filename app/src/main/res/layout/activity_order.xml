@@ -116,49 +116,49 @@
 
 
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_70dp"
-                android:layout_alignParentBottom="true"
-                android:layout_below="@id/recycler_products"
-                android:background="@color/colorDarkstateBlue">
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/size_70dp"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:layout_below="@id/recycler_products"-->
+<!--                android:background="@color/colorDarkstateBlue">-->
 
-                <TextView
-                    android:id="@+id/text_total"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Total Price"
-                    android:textColor="@color/colorwhite"
-                    android:layout_marginTop="@dimen/size_10dp"
-                    android:textSize="@dimen/size_18dp"
-                    android:layout_marginLeft="@dimen/size_16dp"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/text_total"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Total Price"-->
+<!--                    android:textColor="@color/colorwhite"-->
+<!--                    android:layout_marginTop="@dimen/size_10dp"-->
+<!--                    android:textSize="@dimen/size_18dp"-->
+<!--                    android:layout_marginLeft="@dimen/size_16dp"/>-->
 
-                <TextView
-                    android:id="@+id/text_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/size_16dp"
-                    android:layout_marginTop="@dimen/size_5dp"
-                    android:text="$ 150"
-                    android:textStyle="bold"
-                    android:layout_below="@id/text_total"
-                    android:textColor="@color/colorwhite"
-                    android:textSize="@dimen/size_18dp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/text_price"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="@dimen/size_16dp"-->
+<!--                    android:layout_marginTop="@dimen/size_5dp"-->
+<!--                    android:text="$ 150"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_below="@id/text_total"-->
+<!--                    android:textColor="@color/colorwhite"-->
+<!--                    android:textSize="@dimen/size_18dp" />-->
 
-                <Button
-                    android:id="@+id/button_order"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/redeem_button"
-                    android:textColor="@color/colorwhite"
-                    android:layout_marginRight="@dimen/size_16dp"
-                    android:text="Order Now"
-                    android:padding="@dimen/size_16dp"/>
+<!--                <Button-->
+<!--                    android:id="@+id/button_order"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:background="@drawable/redeem_button"-->
+<!--                    android:textColor="@color/colorwhite"-->
+<!--                    android:layout_marginRight="@dimen/size_16dp"-->
+<!--                    android:text="Order Now"-->
+<!--                    android:padding="@dimen/size_16dp"/>-->
 
 
-            </RelativeLayout>
+<!--            </RelativeLayout>-->
 
         </RelativeLayout>
 

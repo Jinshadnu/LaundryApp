@@ -1,6 +1,7 @@
 package com.example.laundryapp.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 
@@ -28,6 +29,7 @@ import com.example.laundryapp.fragments.pojo.Cart;
 import com.example.laundryapp.fragments.pojo.Orders;
 import com.example.laundryapp.fragments.viewmodel.CartViewModel;
 import com.example.laundryapp.fragments.viewmodel.OrderViewModel;
+import com.example.laundryapp.user.AddressActivity;
 
 import java.util.List;
 
@@ -39,7 +41,8 @@ import java.util.List;
 public class CartFragment extends Fragment {
     public CartViewModel cartViewModel;
     public CartAdapter cartAdapter;
-    public FragmentCartBinding cartBinding;
+    public static FragmentCartBinding cartBinding;
+    public static int total=0;
     public Context context;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -97,6 +100,12 @@ public class CartFragment extends Fragment {
             getActivity().onBackPressed();
         });
 
+        cartBinding.orederLayout.buttonOrder.setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), AddressActivity.class));
+        });
+
+       // cartBinding.orederLayout.textTotal.
+
         cartBinding.recyclerCart.setLayoutManager(new GridLayoutManager(getActivity(),1));
         cartBinding.recyclerCart.setHasFixedSize(true);
 
@@ -105,8 +114,22 @@ public class CartFragment extends Fragment {
         runAnimationAgain();
 
 
+        //calculateTotal();
+
+
+
         return cartBinding.getRoot();
     }
+
+//    private void calculateTotal() {
+//        int i=0;
+//        total=0;
+//        while(i<CartAdapter.selecteditems.size()){
+//            total= total + ( Integer.valueOf(CartAdapter.selecteditems.get(i).getPrice()) * Integer.valueOf(CartAdapter.selecteditems.get(i).getQuantity()) );
+//            i++;
+//        }
+//        cartBinding.orederLayout.textTotal.setText(""+total);
+//    }
 
     private void getcartItems() {
         cartViewModel.getcartItems().observe((LifecycleOwner) this.getActivity(), new Observer<List<Cart>>() {
@@ -129,6 +152,14 @@ public class CartFragment extends Fragment {
         cartBinding.recyclerCart.scheduleLayoutAnimation();
 
     }
+
+    public static void getTotal(int total){
+      cartBinding.orederLayout.total.setText(String.valueOf(total));
+    }
+
+
+
+
 
 
 }

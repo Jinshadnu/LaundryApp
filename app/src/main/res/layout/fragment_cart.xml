@@ -40,7 +40,10 @@
 
 
 
-                <include layout="@layout/layout_price" />
+                <include
+                    android:id="@+id/oreder_layout"
+                    layout="@layout/layout_price"
+                    />
 
             </LinearLayout>
 

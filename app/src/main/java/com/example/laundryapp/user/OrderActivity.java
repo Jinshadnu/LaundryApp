@@ -51,9 +51,7 @@ public ItemAdapter itemAdapter;
 
         orderBinding.recyclerProducts.setHasFixedSize(true);
 
-        orderBinding.buttonOrder.setOnClickListener(v -> {
-            startActivity(new Intent(OrderActivity.this,AddressActivity.class));
-        });
+//
 
         orderBinding.buttonMens.setOnClickListener(v -> {
             orderBinding.buttonWomens.setBackground(requireNonNull(this)
@@ -159,7 +157,9 @@ public ItemAdapter itemAdapter;
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
-public static void getTotal(int total){
-    orderBinding.textPrice.setText(String.valueOf(total));
-}
+//public static void getTotal(int total){
+//    orderBinding.textPrice.setText(String.valueOf(total));
+//}
+
+
 }

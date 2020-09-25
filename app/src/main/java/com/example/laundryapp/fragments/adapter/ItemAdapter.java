@@ -18,7 +18,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import static android.view.LayoutInflater.from;
-import static com.example.laundryapp.user.OrderActivity.getTotal;
+//import static com.example.laundryapp.user.OrderActivity.;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemsViewViewHolder> {
     public Context context;
@@ -43,6 +43,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemsViewViewH
         holder.itemsBinding.setItems(items);
 
 
+
         holder.itemsBinding.elegantCount.setOnValueChangeListener((view, oldValue, newValue) -> {
             Toast.makeText(context.getApplicationContext(),"Total",Toast.LENGTH_LONG).show();
             //getTotal();
@@ -52,7 +53,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemsViewViewH
                 price=itemsList.get(i).getProduct_price();
                 total=total+price*count;
             }
-            getTotal(total);
+            //getTotal(total);
         });
 
     }
