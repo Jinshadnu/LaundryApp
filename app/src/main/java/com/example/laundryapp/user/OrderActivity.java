@@ -28,13 +28,14 @@ import com.example.laundryapp.fragments.viewmodel.ItemsViewModel;
 import com.example.laundryapp.fragments.viewmodel.OrderViewModel;
 import com.example.laundryapp.utilities.GridSpacingItemDecoration;
 
+import java.lang.invoke.MethodHandles;
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
 public class OrderActivity extends AppCompatActivity {
 public ItemsViewModel itemsViewModel;
-public ActivityOrderBinding orderBinding;
+public static ActivityOrderBinding orderBinding;
 public ItemAdapter itemAdapter;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -157,4 +158,8 @@ public ItemAdapter itemAdapter;
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
+
+public static void getTotal(int total){
+    orderBinding.textPrice.setText(String.valueOf(total));
+}
 }

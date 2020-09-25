@@ -2,7 +2,9 @@ package com.example.laundryapp.splash;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.laundryapp.MainActivity;
 import com.example.laundryapp.R;
+import com.example.laundryapp.utilities.Constants;
 import com.example.laundryapp.welcome.WelcomeActivity;
 
 public class SplashActivity extends AppCompatActivity {
@@ -50,5 +53,13 @@ public class SplashActivity extends AppCompatActivity {
         },SPLASH_TIME_OUT);
 
 
+    }
+
+    public void openScreens(){
+        SharedPreferences sharedPreferences=getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
+        boolean isLogdin=sharedPreferences.getBoolean(Constants.IsUserLogIn,false);
+        if (isLogdin){
+            
+        }
     }
 }

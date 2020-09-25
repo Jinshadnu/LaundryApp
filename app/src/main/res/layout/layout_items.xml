@@ -74,7 +74,7 @@
 
 
                     <TextView
-                        android:id="@+id/textView37"
+                        android:id="@+id/textView_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{String.valueOf(items.product_price)}"
@@ -92,6 +92,7 @@
 
 
                 <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+                    android:id="@+id/elegant_count"
                     android:layout_width="@dimen/size_80dp"
                     android:layout_height="@dimen/size_30dp"
                     android:layout_marginLeft="@dimen/size_10dp"
