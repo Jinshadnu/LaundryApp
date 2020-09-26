@@ -51,6 +51,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
         holder.cartBinding.setCarts(cart);
         int i=0;
         total=0;
+
+
         //String quantity=cartBinding.elegantCount.getNumber();
        // int quant=Integer.parseInt(quantity);
 //        while (i<cartList.size()){

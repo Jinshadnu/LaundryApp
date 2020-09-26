@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F5F5F5"
+        tools:context=".user.PriceDetailsActivity">
+
+
+
+        <TextView
+            android:id="@+id/text_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price Details"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/size_16dp"
+            android:textSize="@dimen/size_25dp"
+            android:textColor="@color/colorDarkstateBlue"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_details"
+            app:cardBackgroundColor="@color/colorwhite"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            app:cardElevation="@dimen/size_5dp"
+            android:layout_marginTop="@dimen/size_16dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/text_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:padding="@dimen/size_8dp"
+                    android:text="Date  :"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/size_18dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/text_date"
+                    android:padding="@dimen/size_8dp"
+                    android:text="28-09-2020"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/size_18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_date"
+                    android:layout_marginLeft="@dimen/size_16sp"
+                    android:layout_marginTop="@dimen/size_16sp"
+                    android:padding="@dimen/size_8dp"
+                    android:text="Order Total :"
+                    android:textColor="@color/colorblack"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_date"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/size_16dp"
+                    android:layout_marginRight="@dimen/size_16dp"
+                    android:padding="@dimen/size_8dp"
+                    android:text="150 QAR"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/size_18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text_charge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delivery Charge :"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/size_18dp"
+                    android:textStyle="normal"
+                    android:layout_below="@id/textView_total"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:padding="@dimen/size_8dp"/>
+
+                <TextView
+                    android:id="@+id/charge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4 QAR"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/size_18dp"
+                    android:textStyle="bold"
+                    android:layout_below="@id/textView_total"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/size_16dp"
+                    android:padding="@dimen/size_8dp"/>
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/text_charge"
+                    android:background="@color/colorblack"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:layout_marginRight="@dimen/size_16dp"
+                    android:layout_marginTop="@dimen/size_5dp"
+                    android:padding="@dimen/size_3dp"/>
+
+                <TextView
+                    android:id="@+id/text_subtotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:textStyle="normal"
+                    android:textColor="@color/colorblack"
+                    android:text="Sub Total  :"
+                    android:padding="@dimen/size_8dp"
+                    android:textSize="@dimen/size_18dp"
+                    android:layout_marginTop="@dimen/size_5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view"
+                    android:layout_marginRight="@dimen/size_16dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorblack"
+                    android:text="154 QAR"
+                    android:padding="@dimen/size_8dp"
+                    android:layout_alignParentRight="true"
+                    android:textSize="@dimen/size_18dp"
+                    android:layout_marginTop="@dimen/size_5dp"/>
+
+                <TextView
+                    android:id="@+id/text__amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_subtotal"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:textStyle="normal"
+                    android:textColor="@color/colorblack"
+                    android:text="Amount Payable  :"
+                    android:padding="@dimen/size_8dp"
+                    android:textSize="@dimen/size_18dp"
+                    android:layout_marginTop="@dimen/size_5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_subtotal"
+                    android:layout_marginRight="@dimen/size_16dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorblack"
+                    android:text="154 QAR"
+                    android:padding="@dimen/size_8dp"
+                    android:layout_alignParentRight="true"
+                    android:textSize="@dimen/size_18dp"
+                    android:layout_marginTop="@dimen/size_5dp"/>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_price"
+            app:cardCornerRadius="@dimen/size_5dp"
+            android:layout_marginTop="@dimen/size_16dp"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            app:cardElevation="@dimen/size_5dp"
+            app:cardBackgroundColor="@color/colorwhite">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/login_button">
+
+                <TextView
+                    android:id="@+id/text_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Items :"
+                    android:textSize="@dimen/size_18dp"
+                    android:padding="@dimen/size_8dp"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:textStyle="normal"
+                    android:textColor="@color/colorwhite"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:textSize="@dimen/size_18dp"
+                    android:padding="@dimen/size_8dp"
+                    android:layout_marginRight="@dimen/size_16dp"
+                    android:textStyle="bold"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/colorwhite"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Payable :"
+                    android:textSize="@dimen/size_18dp"
+                    android:padding="@dimen/size_8dp"
+                    android:layout_below="@id/text_quantity"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:textStyle="normal"
+                    android:textColor="@color/colorwhite"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="154 QAR"
+                    android:textSize="@dimen/size_18dp"
+                    android:padding="@dimen/size_8dp"
+                    android:layout_marginRight="@dimen/size_16dp"
+                    android:layout_below="@id/text_quantity"
+                    android:textStyle="bold"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/colorwhite"/>
+
+
+
+            </RelativeLayout>
+
+
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/button_pickup"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_50dp"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/colorwhite"
+            android:background="@drawable/button_shape"
+            android:text="Pickup Order"
+            android:textAllCaps="false"/>
+
+
+    </RelativeLayout>
+</layout>

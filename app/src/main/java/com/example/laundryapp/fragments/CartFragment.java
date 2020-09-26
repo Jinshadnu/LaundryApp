@@ -30,6 +30,7 @@ import com.example.laundryapp.fragments.pojo.Orders;
 import com.example.laundryapp.fragments.viewmodel.CartViewModel;
 import com.example.laundryapp.fragments.viewmodel.OrderViewModel;
 import com.example.laundryapp.user.AddressActivity;
+import com.example.laundryapp.user.PriceDetailsActivity;
 
 import java.util.List;
 
@@ -44,6 +45,7 @@ public class CartFragment extends Fragment {
     public static FragmentCartBinding cartBinding;
     public static int total=0;
     public Context context;
+    public int totalAmount=0;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -101,7 +103,7 @@ public class CartFragment extends Fragment {
         });
 
         cartBinding.orederLayout.buttonOrder.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), AddressActivity.class));
+            startActivity(new Intent(getActivity(), PriceDetailsActivity.class));
         });
 
        // cartBinding.orederLayout.textTotal.
@@ -114,22 +116,31 @@ public class CartFragment extends Fragment {
         runAnimationAgain();
 
 
-        //calculateTotal();
+        calculateTotal();
 
 
 
         return cartBinding.getRoot();
     }
 
-//    private void calculateTotal() {
-//        int i=0;
-//        total=0;
-//        while(i<CartAdapter.selecteditems.size()){
-//            total= total + ( Integer.valueOf(CartAdapter.selecteditems.get(i).getPrice()) * Integer.valueOf(CartAdapter.selecteditems.get(i).getQuantity()) );
-//            i++;
-//        }
-//        cartBinding.orederLayout.textTotal.setText(""+total);
-//    }
+    private void calculateTotal() {
+
+        for (int i = 0; i < cartAdapter.cartList.size(); i++) {
+
+         int quantity=cartAdapter.cartList.get(i).getQuantity();
+         int price=cartAdapter.cartList.get(i).getPrice();
+         price=price*quantity;
+         totalAmount=totalAmount + price;
+
+
+
+        }
+
+        cartBinding.orederLayout.total.setText(String.valueOf(totalAmount));
+
+
+
+    }
 
     private void getcartItems() {
         cartViewModel.getcartItems().observe((LifecycleOwner) this.getActivity(), new Observer<List<Cart>>() {

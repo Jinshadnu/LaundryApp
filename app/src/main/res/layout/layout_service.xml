@@ -17,7 +17,7 @@
         app:cardElevation="@dimen/size_5dp"
         android:layout_marginTop="@dimen/size_8dp"
         android:layout_marginBottom="@dimen/size_8dp"
-        app:cardCornerRadius="@dimen/size_10dp"
+        app:cardCornerRadius="@dimen/size_5dp"
         app:cardBackgroundColor="@color/colorwhite">
 
         <RelativeLayout
@@ -40,6 +40,7 @@
                 android:layout_marginTop="@dimen/size_5dp"
                 android:text="@{services.service_name}"
                 android:textColor="@color/colorDarkstateBlue"
+                android:textStyle="bold"
                 android:textSize="@dimen/size_18dp"/>
 
         </RelativeLayout>
