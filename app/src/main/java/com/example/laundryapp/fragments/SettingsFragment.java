@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.FragmentSettingsBinding;
 import com.example.laundryapp.login.LoginActivity;
+import com.example.laundryapp.user.AboutUsActivity;
 import com.example.laundryapp.user.ChangePassword;
 import com.example.laundryapp.user.HistoryActivity;
 
@@ -74,6 +75,10 @@ public FragmentSettingsBinding settingsBinding;
         settingsBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
         settingsBinding.layoutBase.toolbar.setNavigationOnClickListener(v -> {
             getActivity().onBackPressed();
+        });
+
+        settingsBinding.textAbout.setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), AboutUsActivity.class));
         });
 
 

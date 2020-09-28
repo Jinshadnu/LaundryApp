@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -47,32 +47,33 @@
                 android:layout_marginEnd="@dimen/size_20dp"
                 android:background="@color/md_grey_400" />
 
-            <!--        <TextView-->
-            <!--            android:id="@+id/text_profile"-->
-            <!--            android:layout_width="wrap_content"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            android:layout_marginStart="20dp"-->
-            <!--            android:layout_marginTop="24dp"-->
-            <!--            android:drawableLeft="@drawable/ic_person_black_24dp"-->
-            <!--            android:drawablePadding="@dimen/size_10dp"-->
-            <!--            android:text="My Profile"-->
-            <!--            android:padding="@dimen/size_10dp"-->
-            <!--            android:textColor="@color/white"-->
-            <!--            android:textSize="@dimen/size_15sp"-->
-            <!--            app:layout_constraintStart_toStartOf="parent"-->
-            <!--            app:layout_constraintTop_toBottomOf="@id/view_students"-->
-            <!--            tools:ignore="MissingConstraints" />-->
+                    <TextView
+                        android:id="@+id/text_about"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="24dp"
+                        android:drawableLeft="@drawable/ic_baseline_supervisor_account_24"
+                        android:drawablePadding="@dimen/size_10dp"
+                        android:text="Contact us"
+                        android:padding="@dimen/size_10dp"
+                        android:textColor="@color/colorwhite"
+                        android:textSize="@dimen/size_15sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/view_students"
+                        tools:ignore="MissingConstraints"
+                        android:layout_marginLeft="20dp" />
 
-            <!--        <View-->
-            <!--            android:id="@+id/view_profile"-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:layout_height="@dimen/size_1dp"-->
-            <!--            android:layout_below="@id/text_students"-->
-            <!--            app:layout_constraintTop_toBottomOf="@id/text_profile"-->
-            <!--            android:layout_marginStart="@dimen/size_20dp"-->
-            <!--            android:layout_marginTop="@dimen/size_10dp"-->
-            <!--            android:layout_marginEnd="@dimen/size_20dp"-->
-            <!--            android:background="@color/md_grey_400" />-->
+                    <View
+                        android:id="@+id/view_about"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_1dp"
+                        android:layout_below="@id/text_about"
+                        app:layout_constraintTop_toBottomOf="@id/text_about"
+                        android:layout_marginStart="@dimen/size_20dp"
+                        android:layout_marginTop="@dimen/size_10dp"
+                        android:layout_marginEnd="@dimen/size_20dp"
+                        android:background="@color/md_grey_400" />
 
 
             <TextView
@@ -88,7 +89,7 @@
                 android:textColor="@color/colorwhite"
                 android:textSize="@dimen/size_15sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view_students"
+                app:layout_constraintTop_toBottomOf="@id/view_about"
                 tools:ignore="MissingConstraints"
                 android:layout_marginLeft="20dp" />
 
