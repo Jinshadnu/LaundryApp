@@ -14,8 +14,14 @@ import com.example.laundryapp.register.RegisterActivity;
 import com.example.laundryapp.user.ForgetPasswordActivity;
 import com.example.laundryapp.user.HomeActivity;
 
+import java.util.Objects;
+
+import static android.text.TextUtils.isEmpty;
+import static java.util.Objects.requireNonNull;
+
 public class LoginActivity extends AppCompatActivity {
 public ActivityLoginBinding loginBinding;
+public String username,password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,13 +33,32 @@ public ActivityLoginBinding loginBinding;
         });
 
         loginBinding.buttonLogin.setOnClickListener(v -> {
-            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-            finish();
+            if (validatefields()){
+                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                finish();
+            }
         });
         loginBinding.textViewForget.setOnClickListener(v -> {
             startActivity(new Intent(LoginActivity.this, ForgetPasswordActivity.class));
         });
 
 
+    }
+
+    public boolean validatefields(){
+        username= requireNonNull(loginBinding.edittextName.getText().toString().trim());
+        password= requireNonNull(loginBinding.edittextPhone.getText().toString().trim());
+
+        if (isEmpty(username)){
+            loginBinding.edittextName.setError("please enter your name");
+            return false;
+        }
+
+        if (isEmpty(password)){
+            loginBinding.edittextPhone.setError("please enter password");
+            return false;
+        }
+
+        return true;
     }
 }

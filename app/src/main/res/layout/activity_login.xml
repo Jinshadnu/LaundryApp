@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout>
     <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F5F5F5"
@@ -59,7 +60,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView_forget" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName4"
+                    android:id="@+id/edittext_name"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="16dp"
@@ -78,7 +79,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName5"
+                    android:id="@+id/edittext_phone"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="16dp"
@@ -141,7 +142,7 @@
                     android:layout_marginTop="8dp"
                     android:text="Enter Password"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
+                    app:layout_constraintTop_toBottomOf="@+id/edittext_name" />
 
                 <TextView
                     android:id="@+id/textView_forget"
@@ -154,7 +155,7 @@
                     android:text="Forget Password"
                     android:textColor="@color/colorblack"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
+                    app:layout_constraintTop_toBottomOf="@+id/edittext_phone" />
 
 
                 <ImageView
