@@ -3,6 +3,7 @@ package com.example.laundryapp.fragments.repository;
 import com.example.laundryapp.R;
 import com.example.laundryapp.fragments.pojo.Cart;
 import com.example.laundryapp.fragments.pojo.Items;
+import com.example.laundryapp.utilities.CommonResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,11 @@ public class CartRepostory {
 
         mutableLiveData.setValue(cartList);
 
+        return mutableLiveData;
+    }
+
+    public LiveData<CommonResponse> addToCart(){
+        MutableLiveData mutableLiveData=new MutableLiveData();
         return mutableLiveData;
     }
 }

@@ -70,7 +70,8 @@ public FragmentSettingsBinding settingsBinding;
         // Inflate the layout for this fragment
         settingsBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false);
 
-        settingsBinding.layoutBase.toolbar.setTitle("Settings");
+        settingsBinding.layoutBase.textTitle.setText("Settings");
+
 
         settingsBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
         settingsBinding.layoutBase.toolbar.setNavigationOnClickListener(v -> {

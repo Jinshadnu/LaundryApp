@@ -44,7 +44,11 @@ public ItemAdapter itemAdapter;
         setContentView(R.layout.activity_order);
         orderBinding= DataBindingUtil.setContentView(this,R.layout.activity_order);
 
-        orderBinding.layoutBase.toolbar.setTitle("Place Order");
+        orderBinding.layoutBase.textTitle.setText("Items");
+
+        orderBinding.layoutBase.imageViewCart.setOnClickListener(v -> {
+            startActivity(new Intent(OrderActivity.this,CartActivity.class));
+        });
 
         orderBinding.recyclerProducts.setLayoutManager(new GridLayoutManager(this,2));
         orderBinding.recyclerProducts.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));

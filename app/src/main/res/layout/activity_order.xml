@@ -14,8 +14,6 @@
             android:layout_height="match_parent">
 
 
-
-
             <include
                 android:id="@+id/layoutBase"
                 layout="@layout/layout_base"
