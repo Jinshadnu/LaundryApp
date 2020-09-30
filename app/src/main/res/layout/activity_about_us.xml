@@ -7,11 +7,19 @@
     android:background="#F5F5F5"
     tools:context=".user.AboutUsActivity">
 
+    <include
+        android:id="@+id/layoutBase"
+        layout="@layout/layout_base"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/card_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/size_16dp"
+        android:layout_below="@id/layoutBase"
         app:cardUseCompatPadding="true"
         app:cardBackgroundColor="@color/colorDarkstateBlue"
         android:background="@color/colorDarkstateBlue">

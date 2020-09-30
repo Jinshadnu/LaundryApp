@@ -18,6 +18,11 @@ public class PriceDetailsActivity extends AppCompatActivity {
 
         priceDetailsBinding= DataBindingUtil.setContentView(this,R.layout.activity_price_details);
 
+        priceDetailsBinding.layoutBase.textTitle.setText("Price Details");
+
+        priceDetailsBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+
+
         priceDetailsBinding.buttonPickup.setOnClickListener(v -> {
             startActivity(new Intent(PriceDetailsActivity.this,AddressActivity.class));
         });

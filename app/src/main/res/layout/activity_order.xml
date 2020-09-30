@@ -20,6 +20,21 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+            
+            
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext_background"
+                android:layout_below="@id/layoutBase"
+                app:queryHint="Search Here"
+                android:autofillHints="Search Here"
+                app:defaultQueryHint="Search"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_16dp"/>
+
 
             <TextView
                 android:id="@+id/textView34"
@@ -28,10 +43,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="@dimen/size_24dp"
-                android:text="Select Clothes"
+                android:text="Select Category"
                 android:textStyle="bold"
                 android:textColor="@color/colorblack"
-                android:layout_below="@id/layoutBase"
+                android:layout_below="@id/searchview"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

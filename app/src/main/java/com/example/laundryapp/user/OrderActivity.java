@@ -2,6 +2,7 @@ package com.example.laundryapp.user;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
@@ -45,6 +46,9 @@ public ItemAdapter itemAdapter;
         orderBinding= DataBindingUtil.setContentView(this,R.layout.activity_order);
 
         orderBinding.layoutBase.textTitle.setText("Items");
+
+        orderBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+
 
         orderBinding.layoutBase.imageViewCart.setOnClickListener(v -> {
             startActivity(new Intent(OrderActivity.this,CartActivity.class));
@@ -139,6 +143,19 @@ public ItemAdapter itemAdapter;
             public void onChanged(List<Items> items) {
                 itemAdapter=new ItemAdapter(OrderActivity.this,items);
                 orderBinding.recyclerProducts.setAdapter(itemAdapter);
+
+                orderBinding.searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        itemAdapter.getFilter().filter(newText);
+                        return false;
+                    }
+                });
             }
         });
     }

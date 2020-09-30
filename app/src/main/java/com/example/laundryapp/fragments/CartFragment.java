@@ -97,6 +97,8 @@ public class CartFragment extends Fragment {
 
         cartBinding.layoutBase.textTitle.setText("My Cart");
 
+
+
         cartBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
         cartBinding.layoutBase.toolbar.setNavigationOnClickListener(v -> {
             getActivity().onBackPressed();

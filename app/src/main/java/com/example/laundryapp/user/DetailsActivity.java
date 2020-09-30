@@ -39,7 +39,11 @@ public class DetailsActivity extends AppCompatActivity {
         textView.setText("Service Details");
 
 //        toolbar.setTitle("Service Details");
+
         setSupportActionBar(toolbar);
+
+        //toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+
 
 
 
