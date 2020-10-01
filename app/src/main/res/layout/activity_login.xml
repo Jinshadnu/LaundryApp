@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F5F5F5"
@@ -66,13 +65,18 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
+                    android:textSize="@dimen/size_18dp"
+                    android:textStyle="bold"
                     android:layout_marginEnd="16dp"
+                    android:textColor="@color/colorblack"
+                    android:drawablePadding="@dimen/size_8dp"
                     android:layout_marginRight="16dp"
                     android:background="@drawable/edittext_background"
+                    android:drawableLeft="@drawable/ic_person_2"
                     android:ems="10"
                     android:hint="Email"
                     android:inputType="textPersonName"
-                    android:paddingLeft="20dp"
+                    android:paddingLeft="@dimen/size_10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -87,11 +91,16 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/size_18dp"
                     android:background="@drawable/edittext_background"
                     android:ems="10"
                     android:hint="Password"
+                    android:drawableLeft="@drawable/ic_lock_2"
+                    android:drawablePadding="@dimen/size_8dp"
                     android:inputType="textPassword"
-                    android:paddingLeft="20dp"
+                    android:paddingLeft="@dimen/size_10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView13" />
@@ -158,16 +167,16 @@
                     app:layout_constraintTop_toBottomOf="@+id/edittext_phone" />
 
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imageView2"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="@dimen/size_70dp"
+                    android:layout_height="@dimen/size_70dp"
                     android:layout_marginTop="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginBottom="10dp"
-                    app:srcCompat="@drawable/logo" />
+                    android:src="@drawable/logo" />
 
                 <TextView
                     android:id="@+id/textView_signup"
