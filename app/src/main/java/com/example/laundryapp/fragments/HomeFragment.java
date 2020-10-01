@@ -130,7 +130,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         homeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
         homeBinding.layoutBase.toolbar.setTitle("Home");
-
+        homeBinding.layoutBase.textTitle.setText("Home");
 
         homeBinding.recyclerService.setLayoutManager(new GridLayoutManager(getActivity(),2));
         homeBinding.recyclerService.setHasFixedSize(true);

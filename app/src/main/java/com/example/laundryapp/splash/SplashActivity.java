@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.laundryapp.MainActivity;
 import com.example.laundryapp.R;
+import com.example.laundryapp.user.HomeActivity;
 import com.example.laundryapp.utilities.Constants;
 import com.example.laundryapp.welcome.WelcomeActivity;
 
@@ -40,26 +41,37 @@ public class SplashActivity extends AppCompatActivity {
         textView.setAnimation(bottomAnim);
 
 
+        new Handler().postDelayed(this::openScreens,SPLASH_TIME_OUT);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent i = new Intent(SplashActivity.this, WelcomeActivity.class);
-                startActivity(i);
-
-                finish();
-
-            }
-        },SPLASH_TIME_OUT);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                Intent i = new Intent(SplashActivity.this, WelcomeActivity.class);
+//                startActivity(i);
+//
+//                finish();
+//
+//            }
+//        },SPLASH_TIME_OUT);
 
 
     }
 
-    public void openScreens(){
-        SharedPreferences sharedPreferences=getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
-        boolean isLogdin=sharedPreferences.getBoolean(Constants.IsUserLogIn,false);
-        if (isLogdin){
-            
+
+    private void openScreens() {
+        SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
+        boolean isLogdin = sharedpreferences.getBoolean(Constants.IsUserLogIn, false);
+
+        if(isLogdin){
+            startActivity(new Intent(this, HomeActivity.class));
+            finish();
         }
+
+        else {
+            startActivity(new Intent(this, WelcomeActivity.class));
+            finish();
+        }
+
     }
+
 }

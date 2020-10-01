@@ -2,7 +2,9 @@ package com.example.laundryapp.register;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -10,30 +12,40 @@ import android.view.WindowManager;
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.ActivityRegisterBinding;
 import com.example.laundryapp.login.LoginActivity;
+import com.example.laundryapp.register.viewmodel.RegisterViewModel;
 import com.example.laundryapp.user.HomeActivity;
+import com.example.laundryapp.utilities.BaseActivity;
+import com.example.laundryapp.utilities.Constants;
 
 import static android.text.TextUtils.isEmpty;
+import static com.example.laundryapp.utilities.NetworkUtilities.getNetworkInstance;
 import static java.util.Objects.requireNonNull;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends BaseActivity {
 public ActivityRegisterBinding registerBinding;
    public boolean isPasswordShown = false;
+   public ProgressDialog progressDialog;
    public String userName,password,phone,email,confirm_password;
+   public RegisterViewModel registerViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         registerBinding= DataBindingUtil.setContentView(this,R.layout.activity_register);
 
+        registerViewModel= ViewModelProviders.of(this).get(RegisterViewModel.class);
+
         registerBinding.buttonRegister.setOnClickListener(v -> {
             if (validateFields()){
-                startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
+              userRegistration();
             }
         });
 
         registerBinding.textViewSignIn.setOnClickListener(v -> {
             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
         });
+
+
 
 
     }
@@ -74,5 +86,27 @@ public ActivityRegisterBinding registerBinding;
         }
 
         return true;
+    }
+
+    public void userRegistration(){
+        if (getNetworkInstance(this).isConnectedToInternet()){
+            progressDialog = new ProgressDialog(RegisterActivity.this);
+            progressDialog.setMessage("Please wait");
+            progressDialog.show();
+
+            registerViewModel.registerUser(userName,phone,email,password).observe(this,commonResponse -> {
+                progressDialog.dismiss();
+                if (commonResponse != null && commonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                  startActivity(new Intent(RegisterActivity.this,HomeActivity.class));
+                }
+                else {
+                    showSnackBar(this,commonResponse.getMessage());
+                }
+            });
+
+        }
+        else {
+            showErrorSnackBar(this, getString(R.string.no_internet_message));
+        }
     }
 }

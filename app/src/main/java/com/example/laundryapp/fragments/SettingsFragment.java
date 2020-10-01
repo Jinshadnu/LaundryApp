@@ -1,5 +1,6 @@
 package com.example.laundryapp.fragments;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -16,6 +17,10 @@ import com.example.laundryapp.login.LoginActivity;
 import com.example.laundryapp.user.AboutUsActivity;
 import com.example.laundryapp.user.ChangePassword;
 import com.example.laundryapp.user.HistoryActivity;
+import com.example.laundryapp.user.session.SessionManager;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -92,8 +97,19 @@ public FragmentSettingsBinding settingsBinding;
         });
 
         settingsBinding.logout.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), LoginActivity.class));
-            getActivity().finish();
+            AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
+            alertDialog.setTitle(getActivity().getString(R.string.logout));
+            alertDialog.setTitle(getActivity().getString(R.string.logout_message));
+
+            alertDialog.setPositiveButton(getActivity().getString(R.string.yes),(dialog, which) -> {
+                SessionManager.getSessionInstance(getActivity()).clearUserCredentials();
+                Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+                loginIntent.setFlags((FLAG_ACTIVITY_CLEAR_TASK | FLAG_ACTIVITY_NEW_TASK));
+                dialog.cancel();
+                startActivity(loginIntent);
+            });
+            alertDialog.setNegativeButton(getActivity().getString(R.string.no), (dialog, which) -> dialog.cancel());
+            alertDialog.show();
         });
         return settingsBinding.getRoot();
     }

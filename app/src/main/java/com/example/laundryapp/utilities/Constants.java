@@ -9,4 +9,7 @@ public class Constants {
     public static final String MyPREFERENCES="myPreference";
     public static final String IsUserLogIn="isUserlogin";
 
+    public static final String SERVER_RESPONSE_SUCCESS="success";
+    public static final String SERVER_RESPONSE_ERROR="failed";
+
 }
