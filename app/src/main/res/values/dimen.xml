@@ -80,4 +80,8 @@
     <dimen name="size_490dp">490dp</dimen>
     <dimen name="size_22dp">22dp</dimen>
     <dimen name="size_170dp">170dp</dimen>
+
+    <dimen name="padd_10">10dp</dimen>
+    <dimen name="ic_delete">30dp</dimen>
+    <dimen name="thumbnail">90dp</dimen>
 </resources>

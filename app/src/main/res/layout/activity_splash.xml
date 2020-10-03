@@ -29,17 +29,23 @@
         android:textSize="@dimen/size_25dp"
         android:layout_marginTop="@dimen/size_50dp"/>
 
+
+
     <TextView
         android:id="@+id/text_copyRight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Powered by Vingcoz Technologies Pvt Ltd."
-        android:textSize="@dimen/size_16dp"
+        android:textSize="@dimen/size_18dp"
+        android:singleLine="false"
+        android:textAlignment="center"
+        android:lines="2"
+        android:maxLines="2"
         android:textColor="@color/colorDarkstateBlue"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/size_18dp"
-        />
+        android:gravity="center_horizontal" />
 
 
 

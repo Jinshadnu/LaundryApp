@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -13,7 +14,9 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +34,8 @@ import com.example.laundryapp.fragments.viewmodel.CartViewModel;
 import com.example.laundryapp.fragments.viewmodel.OrderViewModel;
 import com.example.laundryapp.user.AddressActivity;
 import com.example.laundryapp.user.PriceDetailsActivity;
+import com.example.laundryapp.utilities.RecyclerItemTouchHelper;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -39,13 +44,14 @@ import java.util.List;
  * Use the {@link CartFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
     public CartViewModel cartViewModel;
     public CartAdapter cartAdapter;
     public static FragmentCartBinding cartBinding;
     public static int total=0;
     public Context context;
     public int totalAmount=0;
+    public List<Cart>  cartList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -113,7 +119,12 @@ public class CartFragment extends Fragment {
         cartBinding.recyclerCart.setLayoutManager(new GridLayoutManager(getActivity(),1));
         cartBinding.recyclerCart.setHasFixedSize(true);
 
+
         getcartItems();
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(cartBinding.recyclerCart);
+
+
 
         runAnimationAgain();
 
@@ -150,6 +161,19 @@ public class CartFragment extends Fragment {
             public void onChanged(List<Cart> cartList) {
                 cartAdapter=new CartAdapter(getActivity(),cartList);
                 cartBinding.recyclerCart.setAdapter(cartAdapter);
+
+                cartBinding.searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        cartAdapter.getFilter().filter(newText);
+                        return false;
+                    }
+                });
             }
         });
     }
@@ -171,8 +195,32 @@ public class CartFragment extends Fragment {
     }
 
 
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+        if (viewHolder instanceof CartAdapter.CartViewModel) {
+            // get the removed item name to display it in snack bar
+          //  String name = cartList.get(viewHolder.getAdapterPosition()).getItem_name();
 
+            // backup of removed item for undo purpose
+//            final Cart deletedItem = cartList.get(viewHolder.getAdapterPosition());
+//            final int deletedIndex = viewHolder.getAdapterPosition();
 
+            // remove the item from recycler view
+            cartAdapter.removeItem(viewHolder.getAdapterPosition());
 
-
+            // showing snack bar with Undo option
+//            Snackbar snackbar = Snackbar
+//                    .make(coordinatorLayout, name + " removed from cart!", Snackbar.LENGTH_LONG);
+//            snackbar.setAction("UNDO", new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//
+//                    // undo is selected, restore the deleted item
+//                    mAdapter.restoreItem(deletedItem, deletedIndex);
+//                }
+//            });
+//            snackbar.setActionTextColor(Color.YELLOW);
+//            snackbar.show();
+        }
+    }
 }

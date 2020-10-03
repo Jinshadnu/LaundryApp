@@ -146,7 +146,7 @@ public ItemAdapter itemAdapter;
 
                 orderBinding.searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
-                    public boolean onQueryTextSubmit(String query) {
+                    public boolean onQueryTextSubmit(String query)  {
                         return false;
                     }
 

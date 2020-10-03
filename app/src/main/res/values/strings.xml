@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">LaundryApp</string>
     <string name="next">Next</string>
-    <string name="order">Simply Place your Oreder</string>
-    <string name="shop">Shop</string>
-    <string name="offers">Offers</string>
+    <string name="service">24 Hour Service</string>
+    <string name="expresslaundry">Express Laundry</string>
+    <string name="homedelivery">Home Delivery</string>
     <string name="rewards">Rewards</string>
+    <string name="service1">Select your location and pick convenient time and our driver will be on the way Dont worry we will bring the bag </string>
     <string name="discover_text">Select your location and pick convenient time and our driver will be on the way Dont worry we will bring the bag </string>
     <string name="shop_text"><![CDATA[Get the best deals & Coupons]]></string>
     <string name="offers_text">Find great offers while you discover</string>
@@ -31,6 +32,6 @@
     <string name="no_internet_message">No Internet Connection</string>
 
     <string name="service_details">Our dry cleaning services offer the same pick up and delivery as our laundry services. You can even give us your laundry and dry cleaning at the same time, just make sure they are separated.</string>
-
+    <string name="delete">Delete</string>
 
 </resources>

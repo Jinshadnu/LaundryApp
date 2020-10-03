@@ -9,7 +9,9 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -27,6 +29,7 @@ public class DetailsActivity extends AppCompatActivity {
     public Toolbar toolbar;
     public TextView textView;
     public Button button_order;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,20 @@ public class DetailsActivity extends AppCompatActivity {
         textView=(TextView) findViewById(R.id.text_title);
 
         textView.setText("Service Details");
+
+        ImageView backButton = findViewById(R.id.backButton);
+        backButton.setVisibility(View.VISIBLE);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+//       toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+//        toolbar.setNavigationOnClickListener(v -> {
+//            this.onBackPressed();
+//        });
 
 //        toolbar.setTitle("Service Details");
 

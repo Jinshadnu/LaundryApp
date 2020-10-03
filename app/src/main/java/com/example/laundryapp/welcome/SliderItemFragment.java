@@ -30,7 +30,7 @@ public class SliderItemFragment extends Fragment {
     // prepare all title ids arrays
     @StringRes
     private static final int[] PAGE_TITLES =
-            new int[] { R.string.order, R.string.shop, R.string.rewards };
+            new int[] { R.string.service, R.string.expresslaundry, R.string.homedelivery };
 
     @StringRes
     private static final int[] PAGE_TEXT =
@@ -39,13 +39,14 @@ public class SliderItemFragment extends Fragment {
             };
     // prepare all subtitle images arrays
     @StringRes
+
     private static final int[] PAGE_IMAGE =
             new int[] {
-                    R.drawable.laundrybnr, R.drawable.laundryimg, R.drawable.delivery
+                    R.drawable.unnamedcopy, R.drawable.expresslaundry, R.drawable.ourdelivery
             };
     private static final int[] BG_IMAGE = new int[] {
-            R.color.colorDarkstateBlue, R.color.colorDarkstateBlue,
-            R.color.colorDarkstateBlue
+            R.color.colorwhite, R.color.colorwhite,
+            R.color.colorwhite
     };
     private int position;
 

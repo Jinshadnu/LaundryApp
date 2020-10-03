@@ -12,6 +12,7 @@ import com.example.laundryapp.databinding.LayoutItemsBinding;
 import com.example.laundryapp.fragments.pojo.Cart;
 import com.example.laundryapp.fragments.pojo.Items;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
     public List<Cart> cartListFiltered;
     public static List <Cart> selecteditems;
     public static int total=0;
+    public ValueFilter valueFilter;
     public static LayoutCartBinding cartBinding;
 
 
@@ -51,29 +53,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
         holder.cartBinding.setCarts(cart);
         int i=0;
         total=0;
-
-
-        //String quantity=cartBinding.elegantCount.getNumber();
-       // int quant=Integer.parseInt(quantity);
-//        while (i<cartList.size()){
-//            total=total + ( cartList.get(i).getPrice() * quant );
-//            i++;
-//        }
-//        getTotal(total);
-
-//        cartBinding.elegantCount.setOnValueChangeListener((view, oldValue, newValue) -> {
-//            int j=0;
-//            total=0;
-//            String quantit=cartBinding.elegantCount.getNumber();
-//            int quanti=Integer.parseInt(quantit);
-//            while (j<cartList.size()){
-//                total=total + ( cartList.get(j).getPrice() * quanti );
-//                j++;
-//            }
-//            getTotal(total);
-//        });
-
-
     }
 
     @Override
@@ -81,27 +60,54 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
         return cartList.size();
     }
 
+    public void removeItem(int position) {
+        cartList.remove(position);
+        // notify the item removed by position
+        // to perform recycler view delete animations
+        // NOTE: don't call notifyDataSetChanged()
+        notifyItemRemoved(position);
+    }
+
+    public void restoreItem(Cart item, int position) {
+        cartList.add(position, item);
+        // notify item added by position
+        notifyItemInserted(position);
+    }
+
     @Override
     public Filter getFilter() {
+        if (valueFilter == null) {
+            valueFilter = new ValueFilter();
+        }
+        return valueFilter;
+    }
 
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                String charString = constraint.toString();
-                if (charString.isEmpty()){
-                    cartListFiltered=cartList;
+    public class ValueFilter extends Filter{
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            if (constraint != null && constraint.length() > 0) {
+                List<Cart> filterList = new ArrayList<>();
+                for (int i = 0; i < cartListFiltered.size(); i++) {
+                    if ((cartListFiltered.get(i).getItem_name().toUpperCase()).contains(constraint.toString().toUpperCase())) {
+                        filterList.add(cartListFiltered.get(i));
+                    }
                 }
-                else {
-
-                }
-                return null;
+                results.count = filterList.size();
+                results.values = filterList;
+            } else {
+                results.count = cartListFiltered.size();
+                results.values = cartListFiltered;
             }
+            return results;
+        }
 
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-
-            }
-        };
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            cartList = (List<Cart>) results.values;
+            notifyDataSetChanged();
+        }
     }
 
     public class CartViewModel extends RecyclerView.ViewHolder {
