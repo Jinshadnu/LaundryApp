@@ -20,6 +20,10 @@ public class PriceDetailsActivity extends AppCompatActivity {
 
         priceDetailsBinding.layoutBase.textTitle.setText("Price Details");
 
+        priceDetailsBinding.layoutBase.toolbar.setNavigationOnClickListener(v -> {
+            onBackPressed();
+        });
+
         priceDetailsBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
 
 

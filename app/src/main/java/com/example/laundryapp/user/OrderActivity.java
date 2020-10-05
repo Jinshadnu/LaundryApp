@@ -54,6 +54,10 @@ public ItemAdapter itemAdapter;
             startActivity(new Intent(OrderActivity.this,CartActivity.class));
         });
 
+        orderBinding.layoutBase.toolbar.setNavigationOnClickListener(v -> {
+            onBackPressed();
+        });
+
         orderBinding.recyclerProducts.setLayoutManager(new GridLayoutManager(this,2));
         orderBinding.recyclerProducts.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
 

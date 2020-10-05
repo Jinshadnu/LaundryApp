@@ -47,6 +47,15 @@ public ActivityAddressBinding addressBinding;
 
         addressBinding= DataBindingUtil.setContentView(this,R.layout.activity_address);
 
+        addressBinding.layoutBase.textTitle.setText("Address Details");
+
+        addressBinding.layoutBase.toolbar.setNavigationOnClickListener(v -> {
+            onBackPressed();
+        });
+
+        addressBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+
+
         addressBinding.buttonsubmit.setOnClickListener(v -> {
 
                     try{

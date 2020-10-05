@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Powered by Vingcoz Technologies Pvt Ltd."
-        android:textSize="@dimen/size_18dp"
+        android:textSize="@dimen/size_16dp"
         android:singleLine="false"
         android:textAlignment="center"
         android:lines="2"
