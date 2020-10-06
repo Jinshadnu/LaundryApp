@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -18,13 +19,19 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.LinearLayout;
 
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.ActivityOrderBinding;
+import com.example.laundryapp.fragments.adapter.CartAdapter;
+import com.example.laundryapp.fragments.adapter.CategoriesAdapater;
 import com.example.laundryapp.fragments.adapter.ItemAdapter;
 import com.example.laundryapp.fragments.adapter.OrderAdapter;
+import com.example.laundryapp.fragments.pojo.Cart;
+import com.example.laundryapp.fragments.pojo.Categories;
 import com.example.laundryapp.fragments.pojo.Items;
 import com.example.laundryapp.fragments.pojo.Orders;
+import com.example.laundryapp.fragments.viewmodel.CategoriesViewModel;
 import com.example.laundryapp.fragments.viewmodel.ItemsViewModel;
 import com.example.laundryapp.fragments.viewmodel.OrderViewModel;
 import com.example.laundryapp.utilities.GridSpacingItemDecoration;
@@ -37,7 +44,9 @@ import static java.util.Objects.requireNonNull;
 public class OrderActivity extends AppCompatActivity {
 public ItemsViewModel itemsViewModel;
 public static ActivityOrderBinding orderBinding;
+public CategoriesAdapater categoriesAdapater;
 public ItemAdapter itemAdapter;
+public CategoriesViewModel categoriesViewModel;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,83 +67,23 @@ public ItemAdapter itemAdapter;
             onBackPressed();
         });
 
+        orderBinding.recyclerCategories.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false));
+        orderBinding.recyclerCategories.setHasFixedSize(true);
+
+
         orderBinding.recyclerProducts.setLayoutManager(new GridLayoutManager(this,2));
         orderBinding.recyclerProducts.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
 
         orderBinding.recyclerProducts.setHasFixedSize(true);
 
-//
-
-        orderBinding.buttonMens.setOnClickListener(v -> {
-            orderBinding.buttonWomens.setBackground(requireNonNull(this)
-                    .getDrawable(R.drawable.clothes_background));
-            orderBinding.buttonMens.setBackground(requireNonNull(this)
-                    .getDrawable(R.drawable.capsule_background));
-            orderBinding.buttonKids.setBackground(requireNonNull(this)
-                    .getDrawable(R.drawable.clothes_background));
-            orderBinding.buttonOther.setBackground(requireNonNull(this)
-                    .getDrawable(R.drawable.clothes_background));
-            orderBinding.buttonWomens.setTextColor(getResources().getColor(R.color.colorblack));
-            orderBinding.buttonMens.setTextColor(getResources().getColor(R.color.colorwhite));
-            orderBinding.buttonKids.setTextColor(getResources().getColor(R.color.colorblack));
-            orderBinding.buttonOther.setTextColor(getResources().getColor(R.color.colorblack));
-
-        });
 
 
-        orderBinding.buttonWomens.setOnClickListener(v -> {
-            orderBinding.buttonWomens.setBackground(requireNonNull(this)
-                    .getDrawable(R.drawable.capsule_background));
-            orderBinding.buttonMens.setBackground(requireNonNull(this)
-                    .getDrawable(R.drawable.clothes_background));
-            orderBinding.buttonKids.setBackground(requireNonNull(this)
-                    .getDrawable(R.drawable.clothes_background));
-            orderBinding.buttonOther.setBackground(requireNonNull(this)
-                    .getDrawable(R.drawable.clothes_background));
-            orderBinding.buttonWomens.setTextColor(getResources().getColor(R.color.colorwhite));
-            orderBinding.buttonMens.setTextColor(getResources().getColor(R.color.colorblack));
-            orderBinding.buttonKids.setTextColor(getResources().getColor(R.color.colorblack));
-            orderBinding.buttonOther.setTextColor(getResources().getColor(R.color.colorblack));
-
-        });
-
-        orderBinding.buttonKids.setOnClickListener(v -> {
-            orderBinding.buttonWomens.setBackground(requireNonNull(this)
-                    .getDrawable(R.drawable.clothes_background));
-            orderBinding.buttonMens.setBackground(requireNonNull(this)
-                    .getDrawable(R.drawable.clothes_background));
-            orderBinding.buttonKids.setBackground(requireNonNull(this)
-                    .getDrawable(R.drawable.capsule_background));
-            orderBinding.buttonOther.setBackground(requireNonNull(this)
-                    .getDrawable(R.drawable.clothes_background));
-            orderBinding.buttonKids.setTextColor(getResources().getColor(R.color.colorwhite));
-            orderBinding.buttonWomens.setTextColor(getResources().getColor(R.color.colorblack));
-            orderBinding.buttonMens.setTextColor(getResources().getColor(R.color.colorblack));
-            orderBinding.buttonOther.setTextColor(getResources().getColor(R.color.colorblack));
-
-        });
-
-        orderBinding.buttonOther.setOnClickListener(v -> {
-            orderBinding.buttonWomens.setBackground(requireNonNull(this)
-                    .getDrawable(R.drawable.clothes_background));
-            orderBinding.buttonMens.setBackground(requireNonNull(this)
-                    .getDrawable(R.drawable.clothes_background));
-            orderBinding.buttonKids.setBackground(requireNonNull(this)
-                    .getDrawable(R.drawable.clothes_background));
-            orderBinding.buttonOther.setBackground(requireNonNull(this)
-                    .getDrawable(R.drawable.capsule_background));
-            orderBinding.buttonOther.setTextColor(getResources().getColor(R.color.colorwhite));
-            orderBinding.buttonMens.setTextColor(getResources().getColor(R.color.colorblack));
-            orderBinding.buttonKids.setTextColor(getResources().getColor(R.color.colorblack));
-            orderBinding.buttonWomens.setTextColor(getResources().getColor(R.color.colorblack));
-
-        });
-
-
-
+        categoriesViewModel=ViewModelProviders.of(this).get(CategoriesViewModel.class);
 
 
         itemsViewModel= ViewModelProviders.of(this).get(ItemsViewModel.class);
+
+        fetchCategories();
 
         fetchItems();
 
@@ -164,8 +113,18 @@ public ItemAdapter itemAdapter;
         });
     }
 
+    private void fetchCategories() {
+        categoriesViewModel.getCategories().observe((LifecycleOwner) this, new Observer<List<Categories>>() {
+            @Override
+            public void onChanged(List<Categories> categoriesList) {
+                categoriesAdapater=new CategoriesAdapater(OrderActivity.this,categoriesList);
+                orderBinding.recyclerCategories.setAdapter(categoriesAdapater);
+            }
+        });
+    }
 
-    private void runAnimationAgain() {
+
+        private void runAnimationAgain() {
 
 
         final LayoutAnimationController controller =
