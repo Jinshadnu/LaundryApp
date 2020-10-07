@@ -30,7 +30,13 @@ public ActivityHistoryBinding historyBinding;
         super.onCreate(savedInstanceState);
         historyBinding= DataBindingUtil.setContentView(this,R.layout.activity_history);
 
-        historyBinding.layoutBase.toolbar.setTitle("My Orders");
+        historyBinding.layoutBase.textTitle.setText("My Orders");
+
+        historyBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+
+        historyBinding.layoutBase.toolbar.setNavigationOnClickListener(v -> {
+            onBackPressed();
+        });
 
         historyBinding.recyclerOrders.setLayoutManager(new GridLayoutManager(this,1));
         historyBinding.recyclerOrders.setHasFixedSize(true);

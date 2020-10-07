@@ -7,6 +7,7 @@
     android:background="#F5F5F5"
     tools:context=".user.AboutUsActivity">
 
+
     <include
         android:id="@+id/layoutBase"
         layout="@layout/layout_base"
@@ -18,8 +19,8 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_below="@id/layoutBase"
         android:background="@drawable/login_background"
+        android:layout_below="@id/layoutBase"
         tools:ignore="MissingConstraints">
 
         <RelativeLayout
@@ -35,7 +36,8 @@
                 android:textColor="@color/colorwhite"
                 android:textStyle="bold"
                 android:layout_centerHorizontal="true"
-                android:textSize="@dimen/size_25dp"/>
+                android:textSize="@dimen/size_25dp"
+                tools:ignore="DuplicateIds" />
 
 
             <ImageView

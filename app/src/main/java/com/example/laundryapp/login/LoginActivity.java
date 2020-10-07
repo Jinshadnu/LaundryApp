@@ -87,6 +87,7 @@ public ProgressDialog progressDialog;
                     SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor=sharedpreferences.edit();
                     editor.putBoolean(Constants.IsUserLogIn, true);
+                    editor.putInt(Constants.USER_ID,loginResponse.getUser().getId());
                     editor.commit();
                     startActivity(new Intent(LoginActivity.this,HomeActivity.class));
                     finish();

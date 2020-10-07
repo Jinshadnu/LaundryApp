@@ -2,7 +2,7 @@ package com.example.laundryapp.login.pojo;
 
 public class User {
 
-    private String id;
+    private int id;
 
     private String phone;
 
@@ -20,7 +20,7 @@ public class User {
         return name;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

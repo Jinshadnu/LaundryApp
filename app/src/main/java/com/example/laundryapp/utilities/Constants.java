@@ -8,8 +8,9 @@ public class Constants {
     public static final String PROFILE_FRAGMENT_TAG = "ProfileTag";
     public static final String MyPREFERENCES="myPreference";
     public static final String IsUserLogIn="isUserlogin";
-
+    public static final String USER_ID="userId";
     public static final String SERVER_RESPONSE_SUCCESS="success";
     public static final String SERVER_RESPONSE_ERROR="failed";
+
 
 }

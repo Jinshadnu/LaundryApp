@@ -7,6 +7,7 @@
     android:background="#F5F5F5"
     tools:context=".user.AboutUsActivity">
 
+
     <include
         android:id="@+id/layoutBase"
         layout="@layout/layout_base"
@@ -17,7 +18,7 @@
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         android:layout_below="@id/layoutBase"
         android:background="@drawable/login_background"
         tools:ignore="MissingConstraints">
@@ -31,8 +32,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Contact us"
-                android:layout_marginTop="@dimen/size_16dp"
                 android:textColor="@color/colorwhite"
+                android:layout_marginTop="@dimen/size_40dp"
                 android:textStyle="bold"
                 android:layout_centerHorizontal="true"
                 android:textSize="@dimen/size_25dp"/>
@@ -60,7 +61,7 @@
         android:src="@drawable/ic_baseline_location_on_24"
         android:layout_below="@id/relativeLayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/size_10dp"/>
+        android:layout_marginTop="@dimen/size_20dp"/>
 
     <TextView
         android:id="@+id/text_location"

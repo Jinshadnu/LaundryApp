@@ -14,10 +14,14 @@ import com.example.laundryapp.utilities.BaseActivity;
 import com.example.laundryapp.utilities.Constants;
 import com.example.laundryapp.utilities.NetworkUtilities;
 
+import static android.text.TextUtils.isEmpty;
+import static java.util.Objects.requireNonNull;
+
 public class ForgetPasswordActivity extends BaseActivity {
 public ActivityForgetPasswordBinding forgetPasswordBinding;
 public ForgotViewModel forgotViewModel;
 public ProgressDialog progressDialog;
+public String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +33,22 @@ public ProgressDialog progressDialog;
 
 
         forgetPasswordBinding.buttonSbumit.setOnClickListener(v -> {
-            openSuccessDialog("Success");
+            if (validatefield()){
+                forgetPassword();
+            }
         });
 
 
+    }
+
+    public boolean validatefield(){
+        email=requireNonNull(forgetPasswordBinding.edittextEmail.getText().toString().trim());
+
+        if (isEmpty(email)){
+            forgetPasswordBinding.edittextEmail.setError("please enter your email");
+            return false;
+        }
+        return true;
     }
 
     public void forgetPassword(){
@@ -41,7 +57,7 @@ public ProgressDialog progressDialog;
             progressDialog.setMessage("Loading...");
             progressDialog.show();
 
-            forgotViewModel.forgotPassword(forgetPasswordBinding.edittextEmail.getText().toString()).observe(this,commonResponse -> {
+            forgotViewModel.forgotPassword(email).observe(this,commonResponse -> {
                 progressDialog.dismiss();
 
                 if(commonResponse != null && commonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
