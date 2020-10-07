@@ -5,7 +5,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".user.OrderActivity">
+        tools:context=".user.OrderActivity"
+        android:background="#F5F7F7">
 
 
         <RelativeLayout
@@ -25,7 +26,7 @@
                 android:id="@+id/searchview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext_background"
+                android:background="@drawable/search_background"
                 android:layout_below="@id/layoutBase"
                 app:queryHint="Search Here"
                 android:autofillHints="Search Here"

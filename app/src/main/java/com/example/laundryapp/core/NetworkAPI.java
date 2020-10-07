@@ -21,6 +21,14 @@ public interface NetworkAPI {
     @POST("Api_1.php?apicall=login")
     Call<LoginResponse> userLogin(@Field("email") String email, @Field("password")String password);
 
+    @FormUrlEncoded
+    @POST("Api_1.php?apicall=forgot_password")
+    Call<CommonResponse> forgetPassword(@Field("email") String email);
+
+    @FormUrlEncoded
+    @POST("Api_1.php?apicall=change_password")
+    Call<CommonResponse> forgetPassword(@Field("id") int id,@Field("oldPassword") String oldPassword,@Field("newPassword")String newPassword);
+
 
 
 

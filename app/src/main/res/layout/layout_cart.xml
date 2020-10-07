@@ -51,6 +51,8 @@
             android:layout_width="match_parent"
             android:background="@color/colorwhite"
             android:layout_height="@dimen/size_100dp"
+            android:elevation="@dimen/size_25dp"
+            android:clipToPadding="false"
             android:padding="@dimen/padd_10">
 
 

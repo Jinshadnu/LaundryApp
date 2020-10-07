@@ -6,6 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#F5F7F7"
         tools:context=".fragments.CartFragment"
         >
 
@@ -34,7 +35,7 @@
                     android:id="@+id/searchview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/edittext_background"
+                    android:background="@drawable/search_background"
                     android:layout_below="@id/layoutBase"
                     app:queryHint="Search Here"
                     android:autofillHints="Search Here"
