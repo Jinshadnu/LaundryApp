@@ -12,6 +12,8 @@ import com.example.laundryapp.databinding.LayoutItemsBinding;
 import com.example.laundryapp.databinding.LayoutPlansBinding;
 import com.example.laundryapp.fragments.pojo.Items;
 import com.example.laundryapp.fragments.pojo.Plans;
+import com.example.laundryapp.user.OrderActivity;
+import com.example.laundryapp.user.interfaces.AddCartCallBack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +62,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemsViewViewH
                 total=total+price*count;
             }
             //getTotal(total);
+        });
+
+        holder.itemsBinding.buttonAddCart.setOnClickListener(v -> {
+         if (context instanceof OrderActivity){
+             ((AddCartCallBack)context).onAddProduct();
+         }
         });
 
     }

@@ -25,15 +25,48 @@
                         android:textSize="@dimen/size_16dp"
                         android:layout_marginLeft="@dimen/size_16dp"/>
 
-
-                    <ImageView
-                        android:id="@+id/imageView_cart"
-                        android:layout_width="@dimen/size_40dp"
-                        android:layout_height="@dimen/size_30dp"
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/size_5dp"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="@dimen/size_10dp"
-                        android:src="@drawable/ic_baseline_shopping_cart_24" />
+                        android:layout_marginRight="@dimen/size_1dp">
+
+                        <ImageView
+                            android:id="@+id/imageView_cart"
+                            android:layout_width="@dimen/size_40dp"
+                            android:layout_height="@dimen/size_30dp"
+                            android:src="@drawable/ic_baseline_shopping_cart_24" />
+
+
+                        <FrameLayout
+                            android:id="@+id/counterValuePanel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|top">
+
+                            <TextView
+                                android:id="@+id/count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corner"
+                                android:text=""
+                                android:visibility="gone"
+                                android:paddingLeft="10dp"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:paddingRight="10dp"
+                                android:textColor="#ffffff"
+                                android:textSize="8sp"
+                                android:textStyle="bold" />
+
+                        </FrameLayout>
+
+
+
+                    </FrameLayout>
+
 
 
 

@@ -17,6 +17,7 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.LinearLayout;
@@ -34,6 +35,7 @@ import com.example.laundryapp.fragments.pojo.Orders;
 import com.example.laundryapp.fragments.viewmodel.CategoriesViewModel;
 import com.example.laundryapp.fragments.viewmodel.ItemsViewModel;
 import com.example.laundryapp.fragments.viewmodel.OrderViewModel;
+import com.example.laundryapp.user.interfaces.AddCartCallBack;
 import com.example.laundryapp.utilities.GridSpacingItemDecoration;
 
 import java.lang.invoke.MethodHandles;
@@ -41,12 +43,14 @@ import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-public class OrderActivity extends AppCompatActivity {
+public class OrderActivity extends AppCompatActivity implements AddCartCallBack {
 public ItemsViewModel itemsViewModel;
 public static ActivityOrderBinding orderBinding;
 public CategoriesAdapater categoriesAdapater;
 public ItemAdapter itemAdapter;
 public CategoriesViewModel categoriesViewModel;
+    private static int cart_count=0;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +143,18 @@ public CategoriesViewModel categoriesViewModel;
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+    @Override
+    public void onAddProduct() {
+        cart_count++;
+        orderBinding.layoutBase.count.setVisibility(View.VISIBLE);
+        orderBinding.layoutBase.count.setText(String.valueOf(cart_count));
+    }
+
+    @Override
+    public void onRemoveProduct() {
+
     }
 
 //public static void getTotal(int total){

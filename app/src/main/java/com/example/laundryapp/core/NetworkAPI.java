@@ -23,7 +23,7 @@ public interface NetworkAPI {
     Call<LoginResponse> userLogin(@Field("email") String email, @Field("password")String password);
 
     @FormUrlEncoded
-    @POST("Api_1.php?apicall=forgot_password")
+    @POST("Api_1.php?apicall=forgot")
     Call<CommonResponse> forgetPassword(@Field("email") String email);
 
     @FormUrlEncoded
@@ -32,6 +32,11 @@ public interface NetworkAPI {
 
     @GET("getservice")
     Call<CommonResponse> getServices();
+
+    @FormUrlEncoded
+    @POST("addToCart")
+    Call<CommonResponse> addToCart(@Field("user_id")int id);
+
 
 
 }

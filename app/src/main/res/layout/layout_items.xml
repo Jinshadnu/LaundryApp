@@ -106,7 +106,7 @@
 
 
                 <Button
-                    android:id="@+id/button3"
+                    android:id="@+id/buttonAddCart"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:background="@drawable/button_shape"
