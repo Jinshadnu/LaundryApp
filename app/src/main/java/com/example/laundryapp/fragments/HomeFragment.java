@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import androidx.lifecycle.Observer;
 import android.os.Handler;
 import android.os.ResultReceiver;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +47,7 @@ import com.example.laundryapp.fragments.viewmodel.ServiceViewModel;
 import com.example.laundryapp.user.DetailsActivity;
 import com.example.laundryapp.user.ServiceDetails;
 import com.example.laundryapp.utilities.GetAddressIntentService;
+import com.example.laundryapp.utilities.GridSpacingItemDecoration;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -132,29 +135,13 @@ public class HomeFragment extends Fragment {
         homeBinding.layoutBase.toolbar.setTitle("Home");
         homeBinding.layoutBase.textTitle.setText("Home");
 
+        ///homeBinding.recyclerService.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         homeBinding.recyclerService.setLayoutManager(new GridLayoutManager(getActivity(),2));
         homeBinding.recyclerService.setHasFixedSize(true);
 
         homeBinding.recyclerPlans.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         homeBinding.recyclerPlans.setHasFixedSize(true);
 
-
-//
-//        homeBinding.cardViewWashandFold.setOnClickListener(v -> {
-//            startActivity(new Intent(getActivity(), DetailsActivity.class));
-//        });
-//
-//        homeBinding.cardViewDryLaundry.setOnClickListener(v -> {
-//            startActivity(new Intent(getActivity(), DetailsActivity.class));
-//        });
-//
-//        homeBinding.cardViewDryCleaning.setOnClickListener(v -> {
-//            startActivity(new Intent(getActivity(), DetailsActivity.class));
-//        });
-//
-//        homeBinding.cardViewIronLaundry.setOnClickListener(v -> {
-//            startActivity(new Intent(getActivity(), DetailsActivity.class));
-//        });
 
         setValuesToFields();
 
@@ -186,6 +173,13 @@ public class HomeFragment extends Fragment {
 
         return homeBinding.getRoot();
     }
+
+
+        private int dpToPx(int dp) {
+            Resources r = getResources();
+            return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+        }
+
 
     private void getCurrentLocation() {
 

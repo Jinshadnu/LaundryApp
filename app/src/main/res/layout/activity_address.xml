@@ -43,6 +43,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:background="@drawable/edittext_background"
+            android:padding="@dimen/size_10dp"
             android:ems="10"
             android:hint="Street Address,Landmark, etc"
             android:inputType="textPersonName"
@@ -50,41 +51,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextaddress" />
 
-        <EditText
-            android:id="@+id/editTextTextPersonName11"
-            android:layout_width="0dp"
+        <Spinner
+            android:id="@+id/spinner_zone"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/size_50dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/edittext_background"
-            android:ems="10"
-            android:hint="City"
-            android:inputType="textPersonName"
-            android:padding="@dimen/size_10dp"
-            app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName12"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName10" />
-
-        <EditText
-            android:id="@+id/editTextTextPersonName12"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/size_50dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
+            android:gravity="left"
             android:background="@drawable/edittext_background"
-            android:ems="10"
-            android:hint="Zip Code"
-            android:inputType="textPersonName"
-            android:padding="@dimen/size_10dp"
+            android:textColorHint="#CFD8DC"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName11"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName10" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editTextTextPersonName10"
+            app:met_floatingLabel="normal"
+            tools:ignore="MissingConstraints" />
+
+
 
         <TextView
             android:id="@+id/textView23"
@@ -93,6 +78,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
+            android:fontFamily="@font/open_sans"
             android:text="Select Pick up and Delivery Address"
             android:textColor="@color/colorblack"
             android:textSize="18sp"
@@ -106,6 +92,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
+            android:fontFamily="@font/open_sans"
             android:text="Enter Address Detals"
             android:textColor="@color/colorblack"
             android:textSize="18sp"
@@ -119,6 +106,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="32dp"
+            android:fontFamily="@font/open_sans_semibold"
             android:text="Select Adress"
             android:textColor="@color/colorblack"
             android:textSize="24sp"
@@ -226,7 +214,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:background="@drawable/login_button"
@@ -234,8 +222,10 @@
             android:textAllCaps="false"
             android:textColor="@color/colorwhite"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName12" />
+            app:layout_constraintTop_toBottomOf="@+id/spinner_zone"
+            tools:ignore="MissingConstraints" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,10 +18,10 @@ public class ServiceRepository {
         MutableLiveData mutableLiveData=new MutableLiveData();
 
         List<Services> servicesList=new ArrayList<>();
-        servicesList.add(new Services("Wash and Iron",R.drawable.ic_folding_clothes));
-        servicesList.add(new Services("Pressing", R.drawable.ic_laundry));
-        servicesList.add(new Services("Dry Cleaning",R.drawable.ic_laundry_service));
-        servicesList.add(new Services("Urgent", R.drawable.ic_suit));
+        servicesList.add(new Services("Wash and Iron",R.drawable.washandiron));
+        servicesList.add(new Services("Pressing", R.drawable.steam_pressing));
+        servicesList.add(new Services("Dry Cleaning",R.drawable.drycleaning));
+        servicesList.add(new Services("Urgent", R.drawable.urgent));
 
         mutableLiveData.setValue(servicesList);
 

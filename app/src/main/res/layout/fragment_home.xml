@@ -38,6 +38,7 @@
                     android:layout_marginLeft="@dimen/size_16dp"
                     android:drawableLeft="@drawable/ic_baseline_location_on_24"
                     android:drawablePadding="@dimen/size_10dp"
+                    android:fontFamily="@font/rubik_medium"
                     android:text="Pin your location"
                     android:textColor="@color/colorDarkstateBlue"
                     android:textSize="20dp"
@@ -106,6 +107,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="16dp"
+                        android:fontFamily="@font/rubik_medium"
                         android:text="Service"
                         android:textColor="@color/colorDarkstateBlue"
                         android:textSize="20dp"
@@ -132,14 +134,14 @@
                 android:id="@+id/text_plans"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Plans"
-                android:textStyle="bold"
-                android:textColor="@color/colorDarkstateBlue"
-                android:textSize="20dp"
                 android:layout_below="@id/card_services"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                />
+                android:fontFamily="@font/rubik_medium"
+                android:text="Plans"
+                android:textColor="@color/colorDarkstateBlue"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_plans"

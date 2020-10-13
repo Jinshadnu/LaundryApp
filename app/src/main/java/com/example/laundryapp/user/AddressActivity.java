@@ -1,6 +1,7 @@
 package com.example.laundryapp.user;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -18,16 +19,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.ActivityAddressBinding;
 import com.example.laundryapp.databinding.ActivityOrderBinding;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
@@ -38,16 +48,63 @@ public ActivityAddressBinding addressBinding;
 
 
 
+
+
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint({"ResourceAsColor", "NewApi"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+       // getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         addressBinding= DataBindingUtil.setContentView(this,R.layout.activity_address);
 
         addressBinding.layoutBase.textTitle.setText("Address Details");
+
+        String[] ZONES = new String[]{
+                "Select your zone",
+                "71",
+                "74",
+                "75",
+                "76"
+        };;
+
+        final List<String> plantsList = new ArrayList<>(Arrays.asList(ZONES));
+
+        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
+                this,R.layout.spinner_item,plantsList){
+            @Override
+            public boolean isEnabled(int position){
+                if(position == 0)
+                {
+                    // Disable the first item from Spinner
+                    // First item will be use for hint
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if(position == 0){
+                    // Set the hint text color gray
+                    tv.setTextColor(Color.GRAY);
+                }
+                else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return view;
+            }
+        };
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
+        addressBinding.spinnerZone.setAdapter(spinnerArrayAdapter);
+
 
         addressBinding.layoutBase.toolbar.setNavigationOnClickListener(v -> {
             onBackPressed();
@@ -161,3 +218,4 @@ public ActivityAddressBinding addressBinding;
         mNotificationManager.notify(0, mBuilder.build());
     }
 }
+
