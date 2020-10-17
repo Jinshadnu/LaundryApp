@@ -184,13 +184,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
-                    android:text="Already have Account ?  Signup"
-                    android:textColor="@color/colorblack"
+                    android:textStyle="bold"
+                    android:text="New User ?  Signup"
+                    android:textColor="@color/colorDarkstateBlue"
                     android:textSize="18sp"
+                    android:padding="@dimen/size_5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/button_login" />
+
+                <View
+                    android:layout_width="155dp"
+                    android:layout_height="1dp"
+                    android:background="@color/colorDarkstateBlue"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView_signup" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

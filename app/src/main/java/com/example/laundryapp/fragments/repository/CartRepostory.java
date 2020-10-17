@@ -40,27 +40,27 @@ public class CartRepostory {
         return mutableLiveData;
     }
 
-    public LiveData<CommonResponse> addToCart(int id){
-        MutableLiveData mutableLiveData=new MutableLiveData();
-
-        networkAPI= NetworkService.getRetrofitInstance().create(NetworkAPI.class);
-
-        Call<CommonResponse> responseCall=networkAPI.addToCart(id);
-        responseCall.enqueue(new Callback<CommonResponse>() {
-            @Override
-            public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
-                CommonResponse commonResponse=response.body();
-                if (commonResponse != null){
-                    mutableLiveData.postValue(commonResponse);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CommonResponse> call, Throwable t) {
-             mutableLiveData.postValue(null);
-            }
-        });
-
-        return mutableLiveData;
-    }
+//    public LiveData<CommonResponse> addToCart(int id){
+//        MutableLiveData mutableLiveData=new MutableLiveData();
+//
+//        networkAPI= NetworkService.getRetrofitInstance().create(NetworkAPI.class);
+//
+//        Call<CommonResponse> responseCall=networkAPI.addToCart(id);
+//        responseCall.enqueue(new Callback<CommonResponse>() {
+//            @Override
+//            public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
+//                CommonResponse commonResponse=response.body();
+//                if (commonResponse != null){
+//                    mutableLiveData.postValue(commonResponse);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<CommonResponse> call, Throwable t) {
+//             mutableLiveData.postValue(null);
+//            }
+//        });
+//
+//        return mutableLiveData;
+//    }
 }
