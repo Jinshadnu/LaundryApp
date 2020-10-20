@@ -281,7 +281,7 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getActivity(), "Address not found, ", Toast.LENGTH_SHORT).show();
             }
             String currentAdd = resultData.getString("address_result");
-            showResults(currentAdd);
+            //showResults(currentAdd);
         }
     }
 
@@ -339,9 +339,9 @@ public class HomeFragment extends Fragment {
 //        }
 //    }
 
-    private void showResults(String currentAdd) {
-        homeBinding.textLocation.setText(currentAdd);
-    }
+//    private void showResults(String currentAdd) {
+//        homeBinding.textLocation.setText(currentAdd);
+//    }
 
     private void runAnimationAgain() {
 

@@ -16,49 +16,18 @@
 
             <include
                 android:id="@+id/layoutBase"
-                layout="@layout/layout_base"
+                layout="@layout/location_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <RelativeLayout
-                android:id="@+id/relative"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:background="@color/colorwhite"
-                android:layout_below="@id/layoutBase"
-                tools:ignore="MissingConstraints">
-
-
-                <TextView
-                    android:id="@+id/text_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/size_16dp"
-                    android:drawableLeft="@drawable/ic_baseline_location_on_24"
-                    android:drawablePadding="@dimen/size_10dp"
-                    android:fontFamily="@font/rubik_medium"
-                    android:text="Pin your location"
-                    android:textColor="@color/colorDarkstateBlue"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_baseline_notifications_none_24"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"
-                    android:layout_alignParentRight="true"/>
-            </RelativeLayout>
 
 
 
             <RelativeLayout
                 android:id="@+id/rl_banner"
                 android:layout_width="match_parent"
-                android:layout_below="@id/relative"
+                android:layout_below="@id/layoutBase"
                 android:layout_marginTop="0dp"
                 android:layout_height="150dp"
                 android:focusableInTouchMode="true">

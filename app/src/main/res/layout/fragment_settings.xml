@@ -13,7 +13,7 @@
 
             <include
                 android:id="@+id/layoutBase"
-                layout="@layout/layout_base"
+                layout="@layout/root_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
