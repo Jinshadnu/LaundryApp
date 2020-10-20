@@ -1,6 +1,7 @@
 package com.example.laundryapp.fragments.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -20,6 +21,8 @@ public class CategoriesAdapater extends RecyclerView.Adapter<CategoriesAdapater.
     public Context  context;
     public List<Categories> categoriesList;
     public LayoutCategoryBinding categoryBinding;
+    private int row_index = 0;
+    private ItemClickListener clickListener;
 
     public CategoriesAdapater(Context context, List<Categories> categoriesList) {
         this.context = context;
@@ -38,6 +41,15 @@ public class CategoriesAdapater extends RecyclerView.Adapter<CategoriesAdapater.
         Categories categories=categoriesList.get(position);
         holder.categoryBinding.setCategories(categories);
 
+
+        if(row_index == position){
+            holder.categoryBinding.relativeLayout.setBackgroundColor(Color.parseColor("#253a95"));
+            holder.categoryBinding.textCategory.setTextColor(Color.parseColor("#253a95"));
+        }else{
+            holder.categoryBinding.relativeLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            holder.categoryBinding.textCategory.setTextColor(Color.parseColor("#253a95"));
+        }
+
     }
 
     @Override
@@ -45,13 +57,30 @@ public class CategoriesAdapater extends RecyclerView.Adapter<CategoriesAdapater.
         return categoriesList.size();
     }
 
-    public class CategoriesViewHolder extends RecyclerView.ViewHolder {
+    public class CategoriesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public LayoutCategoryBinding categoryBinding;
         public CategoriesViewHolder(@NonNull LayoutCategoryBinding categoryBinding) {
             super(categoryBinding.getRoot());
 
             this.categoryBinding=categoryBinding;
 
+            itemView.setOnClickListener(this);
+
         }
+
+        @Override
+        public void onClick(View view) {
+            row_index = getAdapterPosition();
+            if (clickListener != null) clickListener.onClick(view, getPosition());
+            notifyDataSetChanged();
+        }
+        }
+    public interface ItemClickListener {
+        void onClick(View view, int position);
     }
+    public void setItemClickListener(ItemClickListener itemClickListener) {
+        this.clickListener = itemClickListener;
+    }
+
 }
+

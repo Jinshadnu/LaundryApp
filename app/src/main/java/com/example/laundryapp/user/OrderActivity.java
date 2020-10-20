@@ -43,13 +43,14 @@ import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-public class OrderActivity extends AppCompatActivity implements AddCartCallBack {
+public class OrderActivity extends AppCompatActivity implements AddCartCallBack,CategoriesAdapater.ItemClickListener {
 public ItemsViewModel itemsViewModel;
 public static ActivityOrderBinding orderBinding;
 public CategoriesAdapater categoriesAdapater;
 public ItemAdapter itemAdapter;
 public CategoriesViewModel categoriesViewModel;
     private static int cart_count=0;
+    public int position;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -117,15 +118,7 @@ public CategoriesViewModel categoriesViewModel;
         });
     }
 
-    private void fetchCategories() {
-        categoriesViewModel.getCategories().observe((LifecycleOwner) this, new Observer<List<Categories>>() {
-            @Override
-            public void onChanged(List<Categories> categoriesList) {
-                categoriesAdapater=new CategoriesAdapater(OrderActivity.this,categoriesList);
-                orderBinding.recyclerCategories.setAdapter(categoriesAdapater);
-            }
-        });
-    }
+
 
 
         private void runAnimationAgain() {
@@ -157,9 +150,24 @@ public CategoriesViewModel categoriesViewModel;
 
     }
 
+    @Override
+    public void onClick(View view, int position) {
+     categoriesAdapater.setItemClickListener(this);
+     this.position=position;
+    }
+
 //public static void getTotal(int total){
 //    orderBinding.textPrice.setText(String.valueOf(total));
 //}
+private void fetchCategories() {
+    categoriesViewModel.getCategories().observe((LifecycleOwner) this, new Observer<List<Categories>>() {
+        @Override
+        public void onChanged(List<Categories> categoriesList) {
+            categoriesAdapater=new CategoriesAdapater(OrderActivity.this,categoriesList);
+            orderBinding.recyclerCategories.setAdapter(categoriesAdapater);
 
+        }
+    });
+}
 
 }

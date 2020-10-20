@@ -44,6 +44,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="@dimen/size_10dp"
+                android:fontFamily="@font/nunito"
                 android:text="Select Category"
                 android:textColor="@color/colorblack"
                 android:textSize="24sp"
