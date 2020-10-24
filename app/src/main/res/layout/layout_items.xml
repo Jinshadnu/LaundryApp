@@ -45,6 +45,7 @@
                     android:text="@{items.product_name}"
                     android:layout_marginLeft="@dimen/size_10dp"
                     android:textColor="@color/colorblack"
+                    android:fontFamily="@font/amaranth"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:lineSpacingExtra="2sp"
@@ -74,7 +75,7 @@
 
 
                     <TextView
-                        android:id="@+id/textView_price"
+                        android:id="@+id/text_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{String.valueOf(items.product_price)}"

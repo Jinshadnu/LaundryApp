@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -8,9 +10,6 @@
     </data>
     
     <FrameLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_7dp"
@@ -51,7 +50,7 @@
             android:layout_width="match_parent"
             android:background="@color/colorwhite"
             android:layout_height="@dimen/size_100dp"
-            android:elevation="@dimen/size_25dp"
+            android:elevation="@dimen/size_50dp"
             android:clipToPadding="false"
             android:padding="@dimen/padd_10">
 
@@ -65,32 +64,34 @@
                     android:layout_marginLeft="@dimen/size_10dp"
                     android:src="@drawable/t_shirt"/>
 
-                <TextView
-                    android:id="@+id/text_itemName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/image_item"
-                    android:text="@{carts.item_name}"
-                    android:textSize="@dimen/size_20dp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/nunito"
-                    android:textColor="@color/colorDarkstateBlue"
-                    android:layout_marginTop="@dimen/size_10dp"
-                    android:layout_marginLeft="@dimen/size_16dp"/>
+            <TextView
+                android:id="@+id/text_itemName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_toRightOf="@id/image_item"
+                android:fontFamily="@font/amaranth"
+                android:text="@{carts.item_name}"
+                android:textColor="@color/colorDarkstateBlue"
+                android:textSize="@dimen/size_20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_itemName"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_2dp"
+                android:layout_toRightOf="@id/image_item"
+                android:fontFamily="@font/nunito"
+                android:text="QAR :"
+                android:textColor="@color/colorDarkstateBlue"
+                android:textSize="@dimen/size_18dp" />
 
                 <TextView
-                    android:id="@+id/text_currency"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="QAR :"
-                    android:textSize="@dimen/size_18dp"
-                    android:layout_toRightOf="@id/image_item"
-                    android:layout_below="@id/text_itemName"
-                    android:layout_marginTop="@dimen/size_2dp"
-                    android:textColor="@color/colorDarkstateBlue"
-                    android:layout_marginLeft="@dimen/size_16dp"/>
-
-                <TextView
+                    android:id="@+id/text_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorblack"
@@ -148,6 +149,8 @@
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/size_16dp"/>
+
+
 
 
 

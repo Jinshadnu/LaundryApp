@@ -185,6 +185,7 @@ public class HomeFragment extends Fragment {
 
     }
 
+    //get Plans
     private void getPlans() {
         plansViewModel.getPlans().observe((LifecycleOwner) this.getActivity(), new Observer<List<Plans>>() {
             @Override
@@ -195,6 +196,7 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    //Get services
     private void getServices() {
         serviceViewModel.getServices().observe((LifecycleOwner) this.getActivity(), new Observer<List<Services>>() {
             @Override
@@ -206,7 +208,7 @@ public class HomeFragment extends Fragment {
     }
 
 
-
+    //set Banner
     private void setValuesToFields() {
         //banner image
         List<String> bannerList = new ArrayList<>();

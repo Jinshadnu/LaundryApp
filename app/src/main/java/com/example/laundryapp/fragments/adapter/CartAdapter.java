@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.Toast;
 
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.LayoutCartBinding;
@@ -28,6 +29,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
     public List<Cart> cartListFiltered;
     public static List <Cart> selecteditems;
     public static int total=0;
+    public int price,quantity,totals;
     public ValueFilter valueFilter;
     public static LayoutCartBinding cartBinding;
 
@@ -53,6 +55,21 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
         holder.cartBinding.setCarts(cart);
         int i=0;
         total=0;
+
+        holder.cartBinding.elegantCount.setOnValueChangeListener((view, oldValue, newValue) -> {
+            //getTotal();
+            String quantity=holder.cartBinding.elegantCount.getNumber();
+            int count=Integer.parseInt(quantity);
+            price=cartList.get(position).getPrice();
+            totals=totals+price*count;
+            holder.cartBinding.textPrice.setText(String.valueOf(calculatePrice(price,count)));
+
+            //getTotal(total);
+        });
+    }
+
+    private int  calculatePrice(int priceValue, int quantity) {
+        return priceValue * quantity;
     }
 
     @Override

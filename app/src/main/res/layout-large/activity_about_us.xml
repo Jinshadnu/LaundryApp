@@ -7,50 +7,29 @@
     android:background="#F5F5F5"
     tools:context=".user.AboutUsActivity">
 
+
+
     <include
         android:id="@+id/layoutBase"
-        layout="@layout/layout_base"
+        layout="@layout/root_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorDarkstateBlue"
+        android:fontFamily="@font/amaranth"
         android:layout_below="@id/layoutBase"
-        android:background="@drawable/login_background"
-        tools:ignore="MissingConstraints">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/text_about"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Contact us"
-                android:layout_marginTop="@dimen/size_16dp"
-                android:textColor="@color/colorwhite"
-                android:textStyle="bold"
-                android:layout_centerHorizontal="true"
-                android:textSize="@dimen/size_25dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/size_20dp"
+        android:textStyle="bold"
+        android:textSize="@dimen/size_20dp"
+        android:text="Contact us" />
 
 
-            <ImageView
-                android:layout_width="@dimen/size_120dp"
-                android:layout_height="@dimen/size_100dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/size_16dp"
-                android:src="@drawable/ic_personal_computer"
-                android:layout_marginBottom="@dimen/size_16dp"
-                android:layout_below="@id/text_about"
-                />
-
-        </RelativeLayout>
-
-    </RelativeLayout>
 
 
     <ImageView
@@ -58,9 +37,9 @@
         android:layout_width="@dimen/size_60dp"
         android:layout_height="@dimen/size_60dp"
         android:src="@drawable/ic_baseline_location_on_24"
-        android:layout_below="@id/relativeLayout"
+        android:layout_below="@id/textView14"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/size_10dp"/>
+        android:layout_marginTop="@dimen/size_20dp"/>
 
     <TextView
         android:id="@+id/text_location"
@@ -139,18 +118,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/size_10dp"
         android:text="33903692"/>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </RelativeLayout>

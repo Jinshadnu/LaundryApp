@@ -1,5 +1,6 @@
 package com.example.laundryapp.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ import com.example.laundryapp.user.PriceDetailsActivity;
 import com.example.laundryapp.utilities.RecyclerItemTouchHelper;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,10 +50,10 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
     public CartViewModel cartViewModel;
     public CartAdapter cartAdapter;
     public static FragmentCartBinding cartBinding;
-    public static int total=0;
+    public static int total = 0;
     public Context context;
-    public int totalAmount=0;
-    public List<Cart>  cartList;
+    public int totalAmount = 0;
+    public List<Cart> cartList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -104,7 +106,6 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
         cartBinding.layoutBase.textTitle.setText("My Cart");
 
 
-
         cartBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
         cartBinding.layoutBase.toolbar.setNavigationOnClickListener(v -> {
             getActivity().onBackPressed();
@@ -114,9 +115,9 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
             startActivity(new Intent(getActivity(), PriceDetailsActivity.class));
         });
 
-       // cartBinding.orederLayout.textTotal.
+        // cartBinding.orederLayout.textTotal.
 
-        cartBinding.recyclerCart.setLayoutManager(new GridLayoutManager(getActivity(),1));
+        cartBinding.recyclerCart.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         cartBinding.recyclerCart.setHasFixedSize(true);
 
 
@@ -124,13 +125,13 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(cartBinding.recyclerCart);
 
-
+        List<Cart> shoppingCart = new ArrayList<>();
+        setPayableAmount(shoppingCart);
 
         runAnimationAgain();
 
 
         calculateTotal();
-
 
 
         return cartBinding.getRoot();
@@ -140,26 +141,23 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
 
         for (int i = 0; i < cartAdapter.cartList.size(); i++) {
 
-         int quantity=cartAdapter.cartList.get(i).getQuantity();
-         int price=cartAdapter.cartList.get(i).getPrice();
-         price=price*quantity;
-         totalAmount=totalAmount + price;
-
-
-
+            int quantity = cartAdapter.cartList.get(i).getQuantity();
+            int price = cartAdapter.cartList.get(i).getPrice();
+            price = price * quantity;
+            totalAmount = totalAmount + price;
         }
 
         cartBinding.orederLayout.total.setText(String.valueOf(totalAmount));
 
 
-
     }
+
 
     private void getcartItems() {
         cartViewModel.getcartItems().observe((LifecycleOwner) this.getActivity(), new Observer<List<Cart>>() {
             @Override
             public void onChanged(List<Cart> cartList) {
-                cartAdapter=new CartAdapter(getActivity(),cartList);
+                cartAdapter = new CartAdapter(getActivity(), cartList);
                 cartBinding.recyclerCart.setAdapter(cartAdapter);
 
                 cartBinding.searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -190,8 +188,8 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
 
     }
 
-    public static void getTotal(int total){
-      cartBinding.orederLayout.total.setText(String.valueOf(total));
+    public static void getTotal(int total) {
+        cartBinding.orederLayout.total.setText(String.valueOf(total));
     }
 
 
@@ -199,7 +197,7 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
         if (viewHolder instanceof CartAdapter.CartViewModel) {
             // get the removed item name to display it in snack bar
-          //  String name = cartList.get(viewHolder.getAdapterPosition()).getItem_name();
+            //  String name = cartList.get(viewHolder.getAdapterPosition()).getItem_name();
 
             // backup of removed item for undo purpose
 //            final Cart deletedItem = cartList.get(viewHolder.getAdapterPosition());
@@ -207,6 +205,8 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
 
             // remove the item from recycler view
             cartAdapter.removeItem(viewHolder.getAdapterPosition());
+
+            calculateTotal();
 
             // showing snack bar with Undo option
 //            Snackbar snackbar = Snackbar
@@ -223,4 +223,16 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
 //            snackbar.show();
         }
     }
+
+    @SuppressLint("SetTextI18n")
+    private void setPayableAmount(List<Cart> shoppingCart) {
+        Double totalAmount = 0.0;
+        for (int i = 0; i < shoppingCart.size(); i++) {
+            int itemQuantity = shoppingCart.get(i).getQuantity();
+            int price = shoppingCart.get(i).getPrice();
+            price = price * itemQuantity;
+            totalAmount = totalAmount + price;
+        }
+    }
+
 }

@@ -4,6 +4,7 @@ import com.example.laundryapp.login.pojo.LoginResponse;
 import com.example.laundryapp.register.pojo.user;
 import com.example.laundryapp.user.response.AddressResponse;
 import com.example.laundryapp.user.response.CartResponse;
+import com.example.laundryapp.user.response.OrderResponse;
 import com.example.laundryapp.utilities.CommonResponse;
 
 import java.util.List;
@@ -53,6 +54,11 @@ public interface NetworkAPI {
 
     @GET("getaddress")
     Call<AddressResponse> getAddress(@Query("user_id")int user_id);
+
+    @GET("getOrders")
+    Call<OrderResponse> getOrders(@Query("user_id")int user_id);
+
+
 
 
 

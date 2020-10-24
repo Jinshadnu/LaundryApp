@@ -38,7 +38,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/image_service"
                 android:layout_marginTop="@dimen/size_5dp"
-                android:fontFamily="@font/open_sans"
+                android:fontFamily="@font/amaranth"
                 android:text="@{services.service_name}"
                 android:textColor="@color/colorDarkstateBlue"
                 android:textStyle="bold"

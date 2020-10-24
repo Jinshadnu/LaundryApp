@@ -8,6 +8,15 @@ public class Items {
     public int product_id;
     public String product_name;
     public int product_price;
+    public int product_image;
+
+
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int quantity;
 
     public Items(String product_name, int product_price, int product_image) {
         this.product_name = product_name;
@@ -15,7 +24,6 @@ public class Items {
         this.product_image = product_image;
     }
 
-    public int product_image;
 
     public int getProduct_image() {
         return product_image;
@@ -59,6 +67,9 @@ public class Items {
         imageView.setImageResource(image);
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
 
 
 }

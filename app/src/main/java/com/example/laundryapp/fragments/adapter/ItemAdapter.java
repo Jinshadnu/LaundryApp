@@ -50,17 +50,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemsViewViewH
         Items items=itemsList.get(position);
         holder.itemsBinding.setItems(items);
 
+        //calculate price value
+
 
 
         holder.itemsBinding.elegantCount.setOnValueChangeListener((view, oldValue, newValue) -> {
             Toast.makeText(context.getApplicationContext(),"Total",Toast.LENGTH_LONG).show();
             //getTotal();
-            for (int i= 0;i<itemsList.size();i++){
                 String quantity=holder.itemsBinding.elegantCount.getNumber();
                 int count=Integer.parseInt(quantity);
-                price=itemsList.get(i).getProduct_price();
+                price=itemsList.get(position).getProduct_price();
                 total=total+price*count;
-            }
+                holder.itemsBinding.textPrice.setText(String.valueOf(calculatePrice(price,count)));
+
             //getTotal(total);
         });
 
@@ -70,6 +72,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemsViewViewH
          }
         });
 
+    }
+
+    private int  calculatePrice(int priceValue, int quantity) {
+        return priceValue * quantity;
     }
 
 

@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".user.OrderActivity"
-        android:background="#F5F7F7">
+        android:background="#F5F5F5">
 
 
         <RelativeLayout
@@ -44,7 +44,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="@dimen/size_10dp"
-                android:fontFamily="@font/nunito"
+                android:fontFamily="@font/amaranth"
                 android:text="Select Category"
                 android:textColor="@color/colorblack"
                 android:textSize="24sp"
@@ -66,6 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="2dp"
+                android:elevation="@dimen/size_15dp"
                 android:layout_below="@id/recycler_categories" />
 
 
