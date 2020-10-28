@@ -92,7 +92,7 @@ public class ChangePassword extends BaseActivity {
                 progressDialog.dismiss();
 
                 if (commonResponse != null && commonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                    openSuccessDialog(commonResponse.getMessage());
+                    openSuccessDialog(commonResponse.getError_message());
                 }
             });
         }

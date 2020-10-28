@@ -27,8 +27,10 @@ public class DetailsActivity extends AppCompatActivity {
     private ViewPager productImageViewPager;
     private TabLayout viewpagerIndicator;
     public Toolbar toolbar;
-    public TextView textView;
+    public TextView textView,textView_description;
     public Button button_order;
+    public String description,pos;
+    public int position;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -38,6 +40,12 @@ public class DetailsActivity extends AppCompatActivity {
         button_order=(Button)findViewById(R.id.button_order);
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         textView=(TextView) findViewById(R.id.text_title);
+        textView_description=(TextView)findViewById(R.id.textView_description);
+        description=getIntent().getStringExtra("description");
+        textView_description.setText(description);
+        pos=getIntent().getStringExtra("position");
+
+
 
         textView.setText("Service Details");
 
@@ -67,7 +75,10 @@ public class DetailsActivity extends AppCompatActivity {
 
 
         button_order.setOnClickListener(v -> {
-            startActivity(new Intent(DetailsActivity.this,OrderActivity.class));
+            Intent intent=new Intent(DetailsActivity.this,OrderActivity.class);
+            intent.putExtra("position",pos);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         });
 
 

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools">
     <data>
-
         <variable
             name="services"
-            type="com.example.laundryapp.fragments.pojo.Services" />
+            type="com.example.laundryapp.user.pojo.ServiceResponse.OurServices" />
 
     </data>
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.cardview.widget.CardView
         android:layout_width="@dimen/size_150dp"
         android:layout_height="@dimen/size_150dp"
         android:id="@+id/cardView_services"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_marginLeft="@dimen/size_8dp"
         android:layout_marginRight="@dimen/size_8dp"
         app:cardElevation="@dimen/size_5dp"
@@ -29,8 +29,8 @@
                 android:layout_width="@dimen/size_60dp"
                 android:layout_height="@dimen/size_60dp"
                 android:layout_centerInParent="true"
-                app:services="@{services.service_image}"
-                android:src="@drawable/ic_folding_clothes"/>
+                bind:service_image="@{services.service_image}"
+                />
 
             <TextView
                 android:layout_width="wrap_content"

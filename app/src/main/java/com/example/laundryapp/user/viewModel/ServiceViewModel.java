@@ -1,5 +1,6 @@
 package com.example.laundryapp.user.viewModel;
 
+import com.example.laundryapp.user.pojo.ServiceResponse;
 import com.example.laundryapp.user.repository.ServiceRepository;
 import com.example.laundryapp.utilities.CommonResponse;
 
@@ -14,7 +15,7 @@ public class ServiceViewModel extends ViewModel {
         this.serviceRepository=new ServiceRepository();
     }
 
-    public LiveData<CommonResponse> getService(){
+    public LiveData<ServiceResponse> getService(){
         return serviceRepository.getService();
     }
 }

@@ -1,13 +1,11 @@
 package com.example.laundryapp.core;
 
 import com.example.laundryapp.login.pojo.LoginResponse;
-import com.example.laundryapp.register.pojo.user;
+import com.example.laundryapp.user.pojo.ServiceResponse;
 import com.example.laundryapp.user.response.AddressResponse;
 import com.example.laundryapp.user.response.CartResponse;
 import com.example.laundryapp.user.response.OrderResponse;
 import com.example.laundryapp.utilities.CommonResponse;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -19,12 +17,15 @@ import retrofit2.http.Query;
 public interface NetworkAPI {
 
     @FormUrlEncoded
-    @POST("Api_1.php?apicall=signup")
+    @POST("register")
     Call<CommonResponse> userRegistration(@Field("name") String name,@Field("phone")String phone,@Field("email")String email,@Field("password")String password);
 
     @FormUrlEncoded
-    @POST("Api_1.php?apicall=login")
-    Call<LoginResponse> userLogin(@Field("email") String email, @Field("password")String password);
+    @POST("login")
+    Call<LoginResponse> userLogin(@Field("phone") String phone, @Field("password")String password);
+
+    @GET("get_service")
+    Call<ServiceResponse> getServices();
 
     @FormUrlEncoded
     @POST("Api_1.php?apicall=forgot")
@@ -34,8 +35,6 @@ public interface NetworkAPI {
     @POST("Api_1.php?apicall=change_password")
     Call<CommonResponse> forgetPassword(@Field("id") int id,@Field("oldPassword") String oldPassword,@Field("newPassword")String newPassword);
 
-    @GET("getservice")
-    Call<CommonResponse> getServices();
 
     @FormUrlEncoded
     @POST("addToCart")

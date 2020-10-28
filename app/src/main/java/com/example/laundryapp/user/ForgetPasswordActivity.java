@@ -61,7 +61,7 @@ public String email;
                 progressDialog.dismiss();
 
                 if(commonResponse != null && commonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                    openSuccessDialog(commonResponse.getMessage());
+                    openSuccessDialog(commonResponse.getError_message());
                 }
             });
 

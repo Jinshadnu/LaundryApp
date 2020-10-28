@@ -1,5 +1,11 @@
 package com.example.laundryapp.user.pojo;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.laundryapp.fragments.pojo.Categories;
 import com.example.laundryapp.fragments.pojo.Services;
 import com.google.gson.annotations.SerializedName;
@@ -12,15 +18,15 @@ public class ServiceResponse {
     public String status;
 
     @SerializedName("services")
-    public ArrayList<ourServices> services;
+    public ArrayList<OurServices> services;
 
 
 
-    public ArrayList<ourServices> getServices() {
+    public ArrayList<OurServices> getServices() {
         return services;
     }
 
-    public void setServices(ArrayList<ourServices> services) {
+    public void setServices(ArrayList<OurServices> services) {
         this.services = services;
     }
 
@@ -38,21 +44,21 @@ public class ServiceResponse {
 
 
 
-    private class ourServices {
+    public class OurServices {
         @SerializedName("service_description")
-        private String service_description;
+        public String service_description;
 
         @SerializedName("service_name")
-        private String service_name;
+        public String service_name;
 
         @SerializedName("service_id")
-        private String service_id;
+        public String service_id;
 
         @SerializedName("service_image")
-        private String service_image;
+        public String service_image;
 
         @SerializedName("category")
-        private ArrayList<Categorise> category;
+        public ArrayList<Categorise> category;
 
         public ArrayList<Categorise> getCategory() {
             return category;
@@ -101,7 +107,7 @@ public class ServiceResponse {
         }
 
 
-        private class Categorise {
+        public class Categorise {
             @SerializedName("category_name")
             private String category_name;
 
@@ -109,14 +115,49 @@ public class ServiceResponse {
             private String category_id;
 
             @SerializedName("items")
-            private Item[] items;
+            private ArrayList<Item> items;
 
-            private class Item {
+            public String getCategory_name() {
+                return category_name;
+            }
+
+            public String getCategory_id() {
+                return category_id;
+            }
+
+            public ArrayList<Item> getItems() {
+                return items;
+            }
+
+
+
+            public class Item {
                 @SerializedName("quantity")
                 private String quantity;
 
+                @SerializedName("category_id")
+                private String category_id;
+
+                public String getCategory_id() {
+                    return category_id;
+                }
+
+                public String getService_id() {
+                    return service_id;
+                }
+
+                @SerializedName("service_id")
+                private String service_id;
+
                 @SerializedName("item_id")
                 private String item_id;
+
+                public String getItem_image() {
+                    return item_image;
+                }
+
+                @SerializedName("item_image")
+                private String item_image;
 
                 @SerializedName("price")
                 private String price;
@@ -167,5 +208,18 @@ public class ServiceResponse {
 
             }
         }
+    }
+
+    @BindingAdapter({"service_image"})
+    public static void loadImage(ImageView view, String imageUrl) {
+        Glide.with(view.getContext())
+                .load(imageUrl).apply(new RequestOptions().circleCrop())
+                .into(view);
+    }
+    @BindingAdapter({"item_image"})
+    public static void loadItemImage(ImageView view, String imageUrl) {
+        Glide.with(view.getContext())
+                .load(imageUrl).apply(new RequestOptions().circleCrop())
+                .into(view);
     }
 }

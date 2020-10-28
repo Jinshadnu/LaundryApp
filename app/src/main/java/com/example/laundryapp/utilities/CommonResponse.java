@@ -8,10 +8,17 @@ public class CommonResponse {
      * Private Members
      * ------------------------------------------------------------- */
 
+
     @SerializedName("status")
     private String status;
-    @SerializedName("message")
-    private String message;
+
+
+
+
+
+
+    @SerializedName("error_message")
+    private String error_message;
 
 
 
@@ -19,9 +26,9 @@ public class CommonResponse {
      * Constructor
      * ------------------------------------------------------------- */
 
-    public CommonResponse(String result, String message) {
-        this.status = result;
-        this.message = message;
+    public CommonResponse(String status, String error_message) {
+        this.status = status;
+        this.error_message = error_message;
     }
 
     /* ------------------------------------------------------------- *
@@ -32,7 +39,9 @@ public class CommonResponse {
         return status;
     }
 
-    public String getMessage() {
-        return message;
+    public String getError_message() {
+        return error_message;
     }
+
+
 }

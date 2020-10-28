@@ -35,7 +35,10 @@ import com.example.laundryapp.fragments.pojo.Orders;
 import com.example.laundryapp.fragments.viewmodel.CategoriesViewModel;
 import com.example.laundryapp.fragments.viewmodel.ItemsViewModel;
 import com.example.laundryapp.fragments.viewmodel.OrderViewModel;
+import com.example.laundryapp.fragments.viewmodel.ServiceViewModel;
 import com.example.laundryapp.user.interfaces.AddCartCallBack;
+import com.example.laundryapp.user.pojo.ServiceResponse;
+import com.example.laundryapp.utilities.Constants;
 import com.example.laundryapp.utilities.GridSpacingItemDecoration;
 
 import java.lang.invoke.MethodHandles;
@@ -48,7 +51,8 @@ public ItemsViewModel itemsViewModel;
 public static ActivityOrderBinding orderBinding;
 public CategoriesAdapater categoriesAdapater;
 public ItemAdapter itemAdapter;
-public CategoriesViewModel categoriesViewModel;
+public ServiceViewModel serviceViewModel;
+public int pos;
     private static int cart_count=0;
     public int position;
 
@@ -60,6 +64,8 @@ public CategoriesViewModel categoriesViewModel;
         orderBinding= DataBindingUtil.setContentView(this,R.layout.activity_order);
 
         orderBinding.layoutBase.textTitle.setText("Items");
+
+        pos=Integer.parseInt(getIntent().getStringExtra("position"));
 
         orderBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
 
@@ -83,40 +89,35 @@ public CategoriesViewModel categoriesViewModel;
 
 
 
-        categoriesViewModel=ViewModelProviders.of(this).get(CategoriesViewModel.class);
+        serviceViewModel=ViewModelProviders.of(this).get(ServiceViewModel.class);
 
 
         itemsViewModel= ViewModelProviders.of(this).get(ItemsViewModel.class);
 
         fetchCategories();
 
-        fetchItems();
+
 
         runAnimationAgain();
     }
 
-    private void fetchItems() {
-        itemsViewModel.fetchItems().observe((LifecycleOwner) this, new Observer<List<Items>>() {
-            @Override
-            public void onChanged(List<Items> items) {
-                itemAdapter=new ItemAdapter(OrderActivity.this,items);
-                orderBinding.recyclerProducts.setAdapter(itemAdapter);
-
-                orderBinding.searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String query)  {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onQueryTextChange(String newText) {
-                        itemAdapter.getFilter().filter(newText);
-                        return false;
-                    }
-                });
-            }
-        });
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchItems(0);
     }
+
+    private void fetchItems(int clickedPosition) {
+        serviceViewModel.getServices().observe((LifecycleOwner) this, serviceResponse -> {
+            if (serviceResponse != null && serviceResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+             itemAdapter=new ItemAdapter(this,serviceResponse.getServices().get(pos).getCategory().get(clickedPosition).getItems());
+             orderBinding.recyclerProducts.setAdapter(itemAdapter);
+            }
+
+            });
+        }
+
+
 
 
 
@@ -160,14 +161,18 @@ public CategoriesViewModel categoriesViewModel;
 //    orderBinding.textPrice.setText(String.valueOf(total));
 //}
 private void fetchCategories() {
-    categoriesViewModel.getCategories().observe((LifecycleOwner) this, new Observer<List<Categories>>() {
-        @Override
-        public void onChanged(List<Categories> categoriesList) {
-            categoriesAdapater=new CategoriesAdapater(OrderActivity.this,categoriesList);
-            orderBinding.recyclerCategories.setAdapter(categoriesAdapater);
-
-        }
+    serviceViewModel.getServices().observe((LifecycleOwner) this, serviceResponse ->  {
+     if (serviceResponse != null && serviceResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+       categoriesAdapater=new CategoriesAdapater(this, serviceResponse.getServices().get(pos).getCategory());
+       orderBinding.recyclerCategories.setAdapter(categoriesAdapater);
+       fetchItems(0);
+       categoriesAdapater.setItemClickListener((view, position1) -> {
+        fetchItems(position1);
+       });
+     }
     });
+
 }
+
 
 }

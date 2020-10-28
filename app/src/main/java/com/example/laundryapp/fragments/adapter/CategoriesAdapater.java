@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.LayoutCategoryBinding;
 import com.example.laundryapp.fragments.pojo.Categories;
+import com.example.laundryapp.user.pojo.ServiceResponse;
 
 import java.util.List;
 
@@ -19,12 +20,12 @@ import static android.view.LayoutInflater.from;
 
 public class CategoriesAdapater extends RecyclerView.Adapter<CategoriesAdapater.CategoriesViewHolder> {
     public Context  context;
-    public List<Categories> categoriesList;
+    public List<ServiceResponse.OurServices.Categorise> categoriesList;
     public LayoutCategoryBinding categoryBinding;
     private int row_index = 0;
     private ItemClickListener clickListener;
 
-    public CategoriesAdapater(Context context, List<Categories> categoriesList) {
+    public CategoriesAdapater(Context context, List<ServiceResponse.OurServices.Categorise> categoriesList) {
         this.context = context;
         this.categoriesList = categoriesList;
     }
@@ -38,7 +39,7 @@ public class CategoriesAdapater extends RecyclerView.Adapter<CategoriesAdapater.
 
     @Override
     public void onBindViewHolder(@NonNull CategoriesViewHolder holder, int position) {
-        Categories categories=categoriesList.get(position);
+        ServiceResponse.OurServices.Categorise categories=categoriesList.get(position);
         holder.categoryBinding.setCategories(categories);
 
 

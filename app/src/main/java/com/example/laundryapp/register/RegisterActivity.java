@@ -5,7 +5,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.WindowManager;
 
@@ -97,10 +99,15 @@ public ActivityRegisterBinding registerBinding;
             registerViewModel.registerUser(userName,phone,email,password).observe(this,commonResponse -> {
                 progressDialog.dismiss();
                 if (commonResponse != null && commonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                    SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedpreferences.edit();
+                    editor.putBoolean(Constants.IsUserLogIn, true);
+                    //editor.putInt(Constants.USER_ID,loginResponse.getUser().get(po));
+                    editor.commit();
                   startActivity(new Intent(RegisterActivity.this,HomeActivity.class));
                 }
                 else {
-                    showSnackBar(this,commonResponse.getMessage());
+                    //showSnackBar(this,commonResponse.getStatus());
                 }
             });
 

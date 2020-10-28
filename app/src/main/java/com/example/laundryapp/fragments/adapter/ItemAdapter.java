@@ -14,6 +14,7 @@ import com.example.laundryapp.fragments.pojo.Items;
 import com.example.laundryapp.fragments.pojo.Plans;
 import com.example.laundryapp.user.OrderActivity;
 import com.example.laundryapp.user.interfaces.AddCartCallBack;
+import com.example.laundryapp.user.pojo.ServiceResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +28,12 @@ import static android.view.LayoutInflater.from;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemsViewViewHolder> implements Filterable {
     public Context context;
-    public List<Items> itemsList;
-    List<Items> mStringFilterList;
+    public List<ServiceResponse.OurServices.Categorise.Item> itemsList;
+    List<ServiceResponse.OurServices.Categorise.Item> mStringFilterList;
     public int price,quantity,total;
     public ValueFilter valueFilter;
 
-    public ItemAdapter(Context context, List<Items> itemsList) {
+    public ItemAdapter(Context context, List<ServiceResponse.OurServices.Categorise.Item> itemsList) {
         this.context = context;
         this.itemsList = itemsList;
         this.mStringFilterList=itemsList;
@@ -47,19 +48,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemsViewViewH
 
     @Override
     public void onBindViewHolder(@NonNull ItemsViewViewHolder holder, int position) {
-        Items items=itemsList.get(position);
-        holder.itemsBinding.setItems(items);
+        ServiceResponse.OurServices.Categorise.Item item=itemsList.get(position);
+        holder.itemsBinding.setItems(item);
+
 
         //calculate price value
-
-
 
         holder.itemsBinding.elegantCount.setOnValueChangeListener((view, oldValue, newValue) -> {
             Toast.makeText(context.getApplicationContext(),"Total",Toast.LENGTH_LONG).show();
             //getTotal();
                 String quantity=holder.itemsBinding.elegantCount.getNumber();
                 int count=Integer.parseInt(quantity);
-                price=itemsList.get(position).getProduct_price();
+                price=Integer.parseInt(itemsList.get(position).getPrice());
                 total=total+price*count;
                 holder.itemsBinding.textPrice.setText(String.valueOf(calculatePrice(price,count)));
 
@@ -110,8 +110,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemsViewViewH
             if (constraint != null && constraint.length() > 0) {
                 List<Items> filterList = new ArrayList<>();
                 for (int i = 0; i < mStringFilterList.size(); i++) {
-                    if ((mStringFilterList.get(i).product_name.toUpperCase()).contains(constraint.toString().toUpperCase())) {
-                        filterList.add(mStringFilterList.get(i));
+                    if ((mStringFilterList.get(i).getItem_name().toUpperCase()).contains(constraint.toString().toUpperCase())) {
+                       // filterList.add(mStringFilterList.get(i));
                     }
                 }
                 results.count = filterList.size();
@@ -125,7 +125,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemsViewViewH
 
             @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-                itemsList = (List<Items>) results.values;
+                itemsList = (List<ServiceResponse.OurServices.Categorise.Item>) results.values;
                 notifyDataSetChanged();
         }
     }

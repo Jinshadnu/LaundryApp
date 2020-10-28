@@ -3,7 +3,7 @@
     <data>
         <variable
             name="categories"
-            type="com.example.laundryapp.fragments.pojo.Categories" />
+            type="com.example.laundryapp.user.pojo.ServiceResponse.OurServices.Categorise" />
     </data>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/relativeLayout"
@@ -32,7 +32,7 @@
                     android:id="@+id/text_category"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{categories.cat_name}"
+                    android:text="@{categories.category_name}"
                     android:textColor="@color/colorDarkstateBlue"
                     android:textSize="@dimen/size_20dp"
                     android:textStyle="bold"

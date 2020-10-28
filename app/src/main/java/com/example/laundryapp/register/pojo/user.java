@@ -1,14 +1,18 @@
 package com.example.laundryapp.register.pojo;
 
-public class user {
-    public int user_id;
-    public String name;
-    public String phone;
-    public String email;
+import com.google.gson.annotations.SerializedName;
 
-    public int getUser_id() {
-        return user_id;
-    }
+public class user {
+    @SerializedName("name")
+    public String name;
+    @SerializedName("phone")
+    public String phone;
+    @SerializedName("email")
+    public String email;
+    @SerializedName("password")
+    public String password;
+
+
 
     public String getName() {
         return name;
@@ -26,6 +30,6 @@ public class user {
         return password;
     }
 
-    public String password;
+
 
 }

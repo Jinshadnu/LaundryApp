@@ -2,6 +2,7 @@ package com.example.laundryapp.fragments.viewmodel;
 
 import com.example.laundryapp.fragments.pojo.Services;
 import com.example.laundryapp.fragments.repository.ServiceRepository;
+import com.example.laundryapp.user.pojo.ServiceResponse;
 
 import java.util.List;
 
@@ -15,8 +16,8 @@ public ServiceRepository serviceRepository;
     }
 
 
-    public LiveData<List<Services>> getServices(){
-        return serviceRepository.getServices();
+    public LiveData<ServiceResponse> getServices(){
+        return serviceRepository.fetchService();
     }
 
 

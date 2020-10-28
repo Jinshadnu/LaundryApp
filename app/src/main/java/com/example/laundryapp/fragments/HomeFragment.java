@@ -46,6 +46,8 @@ import com.example.laundryapp.fragments.viewmodel.PlansViewModel;
 import com.example.laundryapp.fragments.viewmodel.ServiceViewModel;
 import com.example.laundryapp.user.DetailsActivity;
 import com.example.laundryapp.user.ServiceDetails;
+import com.example.laundryapp.user.pojo.ServiceResponse;
+import com.example.laundryapp.utilities.Constants;
 import com.example.laundryapp.utilities.GetAddressIntentService;
 import com.example.laundryapp.utilities.GridSpacingItemDecoration;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -198,13 +200,12 @@ public class HomeFragment extends Fragment {
 
     //Get services
     private void getServices() {
-        serviceViewModel.getServices().observe((LifecycleOwner) this.getActivity(), new Observer<List<Services>>() {
-            @Override
-            public void onChanged(List<Services> services) {
-                serviceAdapter=new ServiceAdapter(getActivity(),services);
-                homeBinding.recyclerService.setAdapter(serviceAdapter);
-            }
-        });
+     serviceViewModel.getServices().observe(getActivity(),serviceResponse -> {
+       if (serviceResponse != null && serviceResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+        serviceAdapter=new ServiceAdapter(getActivity(), serviceResponse.getServices());
+        homeBinding.recyclerService.setAdapter(serviceAdapter);
+       }
+     });
     }
 
 
@@ -354,6 +355,10 @@ public class HomeFragment extends Fragment {
         homeBinding.recyclerService.setLayoutAnimation(controller);
 //        itemAdapter.notifyDataSetChanged();
         homeBinding.recyclerService.scheduleLayoutAnimation();
+
+    }
+
+    public void fetchService(){
 
     }
 
