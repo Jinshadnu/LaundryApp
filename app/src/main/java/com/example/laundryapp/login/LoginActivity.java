@@ -29,10 +29,12 @@ import static android.text.TextUtils.isEmpty;
 import static java.util.Objects.requireNonNull;
 
 public class LoginActivity extends BaseActivity {
+
 public ActivityLoginBinding loginBinding;
 public String username,password;
 public LoginViewModel loginViewModel;
 public ProgressDialog progressDialog;
+public int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +89,13 @@ public ProgressDialog progressDialog;
                     SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor=sharedpreferences.edit();
                     editor.putBoolean(Constants.IsUserLogIn, true);
-                    //editor.putInt(Constants.USER_ID,loginResponse.getUser().get(po));
+                    editor.putString(Constants.USER_ID,loginResponse.getUser().get(position).getUser_id());
                     editor.commit();
                     startActivity(new Intent(LoginActivity.this,HomeActivity.class));
                     finish();
-                }if (loginResponse.getStatus().equals(Constants.SERVER_RESPONSE_ERROR)){
-                    showErrorSnackBar(this,"Invalid Username or Password");
+                }
+                else {
+                    showSnackBar(this,"Invalid username or password");
                 }
 
             });

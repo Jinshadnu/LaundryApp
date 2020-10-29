@@ -4,6 +4,7 @@ import com.example.laundryapp.login.pojo.LoginResponse;
 import com.example.laundryapp.user.pojo.ServiceResponse;
 import com.example.laundryapp.user.response.AddressResponse;
 import com.example.laundryapp.user.response.CartResponse;
+import com.example.laundryapp.user.response.ComonResponse;
 import com.example.laundryapp.user.response.OrderResponse;
 import com.example.laundryapp.utilities.CommonResponse;
 
@@ -28,17 +29,19 @@ public interface NetworkAPI {
     Call<ServiceResponse> getServices();
 
     @FormUrlEncoded
+    @POST("change_password")
+    Call<ComonResponse> changePassword(@Field("user_id") String id, @Field("old_password") String oldPassword, @Field("new_password")String newPassword);
+
+
+    @FormUrlEncoded
     @POST("Api_1.php?apicall=forgot")
     Call<CommonResponse> forgetPassword(@Field("email") String email);
 
-    @FormUrlEncoded
-    @POST("Api_1.php?apicall=change_password")
-    Call<CommonResponse> forgetPassword(@Field("id") int id,@Field("oldPassword") String oldPassword,@Field("newPassword")String newPassword);
 
 
     @FormUrlEncoded
-    @POST("addToCart")
-    Call<CommonResponse> addToCart(@Field("user_id")int id,@Field("service_name")String service_name,@Field("item_id")int item_id,@Field("quantity")int quantity,@Field("price") int price);
+    @POST("add_to_cart")
+    Call<ComonResponse> addToCart(@Field("user_id")String id,@Field("service_name")String service_name,@Field("item_id")String item_id,@Field("quantity")String quantity,@Field("price") String price);
 
     @FormUrlEncoded
     @POST("addaddress")

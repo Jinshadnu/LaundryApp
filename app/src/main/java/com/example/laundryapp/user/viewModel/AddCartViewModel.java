@@ -2,6 +2,7 @@ package com.example.laundryapp.user.viewModel;
 
 import com.example.laundryapp.user.repository.AddCartRepository;
 import com.example.laundryapp.user.response.CartResponse;
+import com.example.laundryapp.user.response.ComonResponse;
 import com.example.laundryapp.utilities.CommonResponse;
 
 import androidx.lifecycle.LiveData;
@@ -14,7 +15,7 @@ public class AddCartViewModel extends ViewModel {
         this.addCartRepository=new AddCartRepository();
     }
 
-    public LiveData<CommonResponse> addToCart(int user_id,String service_name,int item_id,int quantity,int price){
+    public LiveData<ComonResponse> addToCart(String user_id, String service_name, String item_id, String quantity, String price){
         return addCartRepository.addToCart(user_id, service_name, item_id, quantity, price);
     }
 

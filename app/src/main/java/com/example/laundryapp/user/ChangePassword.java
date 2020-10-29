@@ -26,7 +26,7 @@ public class ChangePassword extends BaseActivity {
     public String oldPassword,newPassword,confirmPassword;
 
 
-    public int id;
+    public String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class ChangePassword extends BaseActivity {
 
         SharedPreferences sharedPreferences=getSharedPreferences(Constants.MyPREFERENCES,MODE_PRIVATE);
 
-        id=sharedPreferences.getInt(Constants.USER_ID,0);
+        id=sharedPreferences.getString(Constants.USER_ID,null);
 
 
 
@@ -75,10 +75,6 @@ public class ChangePassword extends BaseActivity {
             return false;
         }
 
-        if (newPassword != confirmPassword){
-            changePasswordBinding.editTextConfirmPassword.setError("please confirm your new password");
-            return false;
-        }
 
         return true;
     }
@@ -92,7 +88,7 @@ public class ChangePassword extends BaseActivity {
                 progressDialog.dismiss();
 
                 if (commonResponse != null && commonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                    openSuccessDialog(commonResponse.getError_message());
+                    openSuccessDialog(commonResponse.getMessage());
                 }
             });
         }

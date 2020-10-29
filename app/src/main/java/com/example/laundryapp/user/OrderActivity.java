@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,12 +33,15 @@ import com.example.laundryapp.fragments.pojo.Cart;
 import com.example.laundryapp.fragments.pojo.Categories;
 import com.example.laundryapp.fragments.pojo.Items;
 import com.example.laundryapp.fragments.pojo.Orders;
+import com.example.laundryapp.fragments.viewmodel.CartViewModel;
 import com.example.laundryapp.fragments.viewmodel.CategoriesViewModel;
 import com.example.laundryapp.fragments.viewmodel.ItemsViewModel;
 import com.example.laundryapp.fragments.viewmodel.OrderViewModel;
 import com.example.laundryapp.fragments.viewmodel.ServiceViewModel;
 import com.example.laundryapp.user.interfaces.AddCartCallBack;
 import com.example.laundryapp.user.pojo.ServiceResponse;
+import com.example.laundryapp.user.viewModel.AddCartViewModel;
+import com.example.laundryapp.utilities.BaseActivity;
 import com.example.laundryapp.utilities.Constants;
 import com.example.laundryapp.utilities.GridSpacingItemDecoration;
 
@@ -46,15 +50,17 @@ import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-public class OrderActivity extends AppCompatActivity implements AddCartCallBack,CategoriesAdapater.ItemClickListener {
+public class OrderActivity extends BaseActivity implements AddCartCallBack,CategoriesAdapater.ItemClickListener {
 public ItemsViewModel itemsViewModel;
 public static ActivityOrderBinding orderBinding;
+public AddCartViewModel cartViewModel;
 public CategoriesAdapater categoriesAdapater;
 public ItemAdapter itemAdapter;
 public ServiceViewModel serviceViewModel;
 public int pos;
     private static int cart_count=0;
     public int position;
+    public String user_id,service_name;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -66,6 +72,11 @@ public int pos;
         orderBinding.layoutBase.textTitle.setText("Items");
 
         pos=Integer.parseInt(getIntent().getStringExtra("position"));
+        service_name=getIntent().getStringExtra("service_name");
+
+
+        SharedPreferences sharedPreferences=getSharedPreferences(Constants.MyPREFERENCES,MODE_PRIVATE);
+        user_id=sharedPreferences.getString(Constants.USER_ID,null);
 
         orderBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
 
@@ -93,6 +104,9 @@ public int pos;
 
 
         itemsViewModel= ViewModelProviders.of(this).get(ItemsViewModel.class);
+
+        cartViewModel=ViewModelProviders.of(this).get(AddCartViewModel.class);
+
 
         fetchCategories();
 
@@ -150,6 +164,16 @@ public int pos;
     public void onRemoveProduct() {
 
     }
+
+    @Override
+    public void addToCart(String item_id,String quantity,String price) {
+        cartViewModel.addToCart(user_id,service_name,item_id,quantity,price).observe(this,comonResponse -> {
+            if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                showSnackBar(this,comonResponse.getMessage());
+            }
+        });
+    }
+
 
     @Override
     public void onClick(View view, int position) {

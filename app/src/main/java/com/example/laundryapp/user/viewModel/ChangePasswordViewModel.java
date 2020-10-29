@@ -1,6 +1,7 @@
 package com.example.laundryapp.user.viewModel;
 
 import com.example.laundryapp.user.repository.ChangePasswordRepository;
+import com.example.laundryapp.user.response.ComonResponse;
 import com.example.laundryapp.utilities.CommonResponse;
 
 import androidx.lifecycle.LiveData;
@@ -13,7 +14,7 @@ public class ChangePasswordViewModel extends ViewModel {
         this.changePasswordRepository=new ChangePasswordRepository();
     }
 
-    public LiveData<CommonResponse> changePassword(int id,String oldPassword,String newPassword){
+    public LiveData<ComonResponse> changePassword(String id, String oldPassword, String newPassword){
         return changePasswordRepository.changePassword(id,oldPassword,newPassword);
     }
 }

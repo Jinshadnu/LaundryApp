@@ -17,12 +17,12 @@ public NetworkAPI networkAPI;
 
     }
 
-    public LiveData<LoginResponse> checkLogin(String email,String password){
+    public LiveData<LoginResponse> checkLogin(String phone,String password){
         MutableLiveData mutableLiveData=new MutableLiveData();
 
         networkAPI= NetworkService.getRetrofitInstance().create(NetworkAPI.class);
 
-        Call<LoginResponse> responseCall=networkAPI.userLogin(email,password);
+        Call<LoginResponse> responseCall=networkAPI.userLogin(phone,password);
 
         responseCall.enqueue(new Callback<LoginResponse>() {
             @Override

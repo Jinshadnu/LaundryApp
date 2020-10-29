@@ -2,6 +2,7 @@ package com.example.laundryapp.user.repository;
 
 import com.example.laundryapp.core.NetworkAPI;
 import com.example.laundryapp.core.NetworkService;
+import com.example.laundryapp.user.response.ComonResponse;
 import com.example.laundryapp.utilities.CommonResponse;
 
 import androidx.lifecycle.LiveData;
@@ -16,16 +17,16 @@ public class ChangePasswordRepository {
     public ChangePasswordRepository() {
     }
 
-    public LiveData<CommonResponse> changePassword(int id,String oldPassword,String newPassword){
+    public LiveData<ComonResponse> changePassword(String id,String oldPassword,String newPassword){
         MutableLiveData mutableLiveData=new MutableLiveData();
 
         networkAPI= NetworkService.getRetrofitInstance().create(NetworkAPI.class);
-        Call<CommonResponse> responseCall=networkAPI.forgetPassword(id,oldPassword,newPassword);
+        Call<ComonResponse> responseCall=networkAPI.changePassword(id,oldPassword,newPassword);
 
-        responseCall.enqueue(new Callback<CommonResponse>() {
+        responseCall.enqueue(new Callback<ComonResponse>() {
             @Override
-            public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
-                CommonResponse commonResponse=response.body();
+            public void onResponse(Call<ComonResponse> call, Response<ComonResponse> response) {
+                ComonResponse commonResponse=response.body();
 
                 if (commonResponse != null){
                     mutableLiveData.postValue(commonResponse);
@@ -34,7 +35,7 @@ public class ChangePasswordRepository {
             }
 
             @Override
-            public void onFailure(Call<CommonResponse> call, Throwable t) {
+            public void onFailure(Call<ComonResponse> call, Throwable t) {
              mutableLiveData.postValue(null);
             }
         });

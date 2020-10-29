@@ -67,8 +67,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemsViewViewH
         });
 
         holder.itemsBinding.buttonAddCart.setOnClickListener(v -> {
+            String item_id=itemsList.get(position).getItem_id();
+            String price=itemsList.get(position).getPrice();
+            String quantity=itemsList.get(position).getQuantity();
          if (context instanceof OrderActivity){
              ((AddCartCallBack)context).onAddProduct();
+             ((AddCartCallBack) context).addToCart(item_id,quantity,price);
          }
         });
 

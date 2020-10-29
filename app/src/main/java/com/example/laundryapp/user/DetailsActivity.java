@@ -29,7 +29,7 @@ public class DetailsActivity extends AppCompatActivity {
     public Toolbar toolbar;
     public TextView textView,textView_description;
     public Button button_order;
-    public String description,pos;
+    public String description,pos,service_name;
     public int position;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -42,6 +42,7 @@ public class DetailsActivity extends AppCompatActivity {
         textView=(TextView) findViewById(R.id.text_title);
         textView_description=(TextView)findViewById(R.id.textView_description);
         description=getIntent().getStringExtra("description");
+        service_name=getIntent().getStringExtra("service_name");
         textView_description.setText(description);
         pos=getIntent().getStringExtra("position");
 
@@ -77,6 +78,7 @@ public class DetailsActivity extends AppCompatActivity {
         button_order.setOnClickListener(v -> {
             Intent intent=new Intent(DetailsActivity.this,OrderActivity.class);
             intent.putExtra("position",pos);
+            intent.putExtra("service_name",service_name);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         });

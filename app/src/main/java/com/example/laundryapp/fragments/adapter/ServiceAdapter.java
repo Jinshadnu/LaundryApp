@@ -47,9 +47,11 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
         holder.serviceBinding.cardViewServices.setOnClickListener(v -> {
             Intent intent = new Intent(context.getApplicationContext(), DetailsActivity.class);
             String description=servicesList.get(position).getService_description();
+            String service_name=servicesList.get(position).getService_name();
             int pos=holder.getAdapterPosition();
             intent.putExtra("description",description);
             intent.putExtra("position",String.valueOf(pos));
+            intent.putExtra("service_name",service_name);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         });
