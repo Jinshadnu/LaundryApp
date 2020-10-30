@@ -1,6 +1,7 @@
 package com.example.laundryapp.core;
 
 import com.example.laundryapp.login.pojo.LoginResponse;
+import com.example.laundryapp.register.pojo.RegisterResponse;
 import com.example.laundryapp.user.pojo.ServiceResponse;
 import com.example.laundryapp.user.response.AddressResponse;
 import com.example.laundryapp.user.response.CartResponse;
@@ -19,7 +20,7 @@ public interface NetworkAPI {
 
     @FormUrlEncoded
     @POST("register")
-    Call<CommonResponse> userRegistration(@Field("name") String name,@Field("phone")String phone,@Field("email")String email,@Field("password")String password);
+    Call<RegisterResponse> userRegistration(@Field("name") String name, @Field("phone")String phone, @Field("email")String email, @Field("password")String password);
 
     @FormUrlEncoded
     @POST("login")
@@ -38,27 +39,32 @@ public interface NetworkAPI {
     Call<CommonResponse> forgetPassword(@Field("email") String email);
 
 
-
     @FormUrlEncoded
     @POST("add_to_cart")
     Call<ComonResponse> addToCart(@Field("user_id")String id,@Field("service_name")String service_name,@Field("item_id")String item_id,@Field("quantity")String quantity,@Field("price") String price);
 
-    @FormUrlEncoded
-    @POST("addaddress")
-    Call<CommonResponse> addAddress(@Field("user_id")int id,@Field("building_number")String number,@Field("street_adress") String address,@Field("zone_number")int zone);
+    @GET("get_cart")
+    Call<CartResponse> getCartItems(@Query("user_id") String user_id);
 
-    @GET("getCart")
-    Call<CartResponse> getCartItems(@Query("user_id") int user_id);
+    @FormUrlEncoded
+    @POST("add_address")
+    Call<ComonResponse> addAddress(@Field("user_id")String id,@Field("building_number")String number,@Field("street_address") String address,@Field("zone_number")String zone);
+
 
     @FormUrlEncoded
     @POST("addOrder")
     Call<CommonResponse> addOrder(@Field("user_id") int user_id,@Field("service_name")String service_name,@Field("item_name")String item_name,@Field("total_price")int total_price,@Field("address") String address);
 
-    @GET("getaddress")
-    Call<AddressResponse> getAddress(@Query("user_id")int user_id);
+    @GET("get_address")
+    Call<AddressResponse> getAddress(@Query("user_id")String user_id);
 
     @GET("getOrders")
     Call<OrderResponse> getOrders(@Query("user_id")int user_id);
+
+    @FormUrlEncoded
+    @POST("delete_cart_item")
+    Call<ComonResponse> deleteCartItem(@Field("user_id")String user_id,@Field("item_id")String item_id);
+
 
 
 

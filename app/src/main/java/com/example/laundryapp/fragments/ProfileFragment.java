@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.FragmentProfileBinding;
 import com.example.laundryapp.login.LoginActivity;
+import com.example.laundryapp.user.AddAddressActivity;
 import com.example.laundryapp.user.AddressActivity;
 import com.example.laundryapp.user.ChangePassword;
 import com.example.laundryapp.user.HistoryActivity;
@@ -77,7 +78,7 @@ public FragmentProfileBinding profileBinding;
         });
 
         profileBinding.textViewAddress.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), AddressActivity.class));
+            startActivity(new Intent(getActivity(), AddAddressActivity.class));
         });
 
         profileBinding.textViewHistory.setOnClickListener(v -> {

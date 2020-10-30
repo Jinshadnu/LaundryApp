@@ -12,6 +12,7 @@ import com.example.laundryapp.databinding.LayoutCartBinding;
 import com.example.laundryapp.databinding.LayoutItemsBinding;
 import com.example.laundryapp.fragments.pojo.Cart;
 import com.example.laundryapp.fragments.pojo.Items;
+import com.example.laundryapp.user.response.CartResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +26,8 @@ import static com.example.laundryapp.fragments.CartFragment.getTotal;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel> implements Filterable {
     public Context context;
-    public List<Cart> cartList;
-    public List<Cart> cartListFiltered;
+    public List<CartResponse.Carts> cartList;
+    public List<CartResponse.Carts> cartListFiltered;
     public static List <Cart> selecteditems;
     public static int total=0;
     public int price,quantity,totals;
@@ -35,7 +36,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
 
 
 
-    public CartAdapter(Context context, List<Cart> cartList) {
+    public CartAdapter(Context context, List<CartResponse.Carts> cartList) {
         this.context = context;
         this.cartList = cartList;
         this.cartListFiltered=cartList;
@@ -51,7 +52,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
 
     @Override
     public void onBindViewHolder(@NonNull CartViewModel holder, int position) {
-        Cart cart=cartList.get(position);
+        CartResponse.Carts cart=cartList.get(position);
         holder.cartBinding.setCarts(cart);
         int i=0;
         total=0;
@@ -60,7 +61,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
             //getTotal();
             String quantity=holder.cartBinding.elegantCount.getNumber();
             int count=Integer.parseInt(quantity);
-            price=cartList.get(position).getPrice();
+            price=Integer.parseInt(cartList.get(position).getPrice());
             totals=totals+price*count;
             holder.cartBinding.textPrice.setText(String.valueOf(calculatePrice(price,count)));
 
@@ -85,7 +86,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
         notifyItemRemoved(position);
     }
 
-    public void restoreItem(Cart item, int position) {
+    public void restoreItem(CartResponse.Carts item, int position) {
         cartList.add(position, item);
         // notify item added by position
         notifyItemInserted(position);
@@ -105,7 +106,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
             if (constraint != null && constraint.length() > 0) {
-                List<Cart> filterList = new ArrayList<>();
+                List<CartResponse.Carts> filterList = new ArrayList<>();
                 for (int i = 0; i < cartListFiltered.size(); i++) {
                     if ((cartListFiltered.get(i).getItem_name().toUpperCase()).contains(constraint.toString().toUpperCase())) {
                         filterList.add(cartListFiltered.get(i));
@@ -122,7 +123,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            cartList = (List<Cart>) results.values;
+            cartList = (List<CartResponse.Carts>) results.values;
             notifyDataSetChanged();
         }
     }

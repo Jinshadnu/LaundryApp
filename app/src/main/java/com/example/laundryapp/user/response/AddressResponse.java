@@ -1,10 +1,17 @@
 package com.example.laundryapp.user.response;
 
-public class AddressResponse {
-    private Addres address;
-    private String status;
+import com.google.gson.annotations.SerializedName;
 
-    public Addres getAddress() {
+import java.util.ArrayList;
+
+public class AddressResponse {
+
+    @SerializedName("address")
+    public ArrayList<Addres> address;
+    @SerializedName("status")
+    public String status;
+
+    public ArrayList<Addres> getAddress() {
         return address;
     }
 
@@ -14,14 +21,18 @@ public class AddressResponse {
 
 
 
-    private class Addres {
-        private String user_id;
+    public class Addres {
+        @SerializedName("user_id")
+        public String user_id;
 
-        private String street_address;
+        @SerializedName("street_address")
+        public String street_address;
 
-        private String zone_no;
+        @SerializedName("zone_number")
+        public String zone_no;
 
-        private String building_number;
+        @SerializedName("building_number")
+        public String building_number;
 
         public String getUser_id() {
             return user_id;

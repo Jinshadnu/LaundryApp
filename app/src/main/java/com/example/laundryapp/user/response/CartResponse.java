@@ -1,13 +1,23 @@
 package com.example.laundryapp.user.response;
 
+import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.laundryapp.fragments.pojo.Cart;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
 public class CartResponse {
-    private ArrayList<Carts> cart;
 
+    @SerializedName("status")
     private String status;
+
+    @SerializedName("cart")
+    public ArrayList<Carts> cart;
 
     public ArrayList<Carts> getCart() {
         return cart;
@@ -28,17 +38,23 @@ public class CartResponse {
         return "ClassPojo [cart = "+cart+", status = "+status+"]";
     }
 
-    private class Carts {
+    public class Carts {
+        @SerializedName("quantity")
         private String quantity;
 
+        @SerializedName("item_id")
         private String item_id;
 
+        @SerializedName("service_name")
         private String service_name;
 
+        @SerializedName("price")
         private String price;
 
+        @SerializedName("item_image")
         private String item_image;
 
+        @SerializedName("item_name")
         private String item_name;
 
 
@@ -68,5 +84,12 @@ public class CartResponse {
 
 
 
+    }
+
+    @BindingAdapter({"cartitem_image"})
+    public static void loadItemImage(ImageView view, String imageUrl) {
+        Glide.with(view.getContext())
+                .load(imageUrl).apply(new RequestOptions().circleCrop())
+                .into(view);
     }
 }

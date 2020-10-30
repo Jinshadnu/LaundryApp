@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="address"
+            type="com.example.laundryapp.user.response.AddressResponse.Addres" />
+    </data>
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginRight="@dimen/size_16dp"
+        android:padding="@dimen/size_5dp"
+        app:cardBackgroundColor="@color/mdtp_white"
+        app:cardCornerRadius="@dimen/size_5dp"
+        android:layout_marginTop="@dimen/padd_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView_buildingnumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_16dp"
+                android:textColor="@color/colorDarkstateBlue"
+                android:text="Building Number :"
+                android:padding="@dimen/size_5dp"
+                android:layout_marginLeft="@dimen/size_16dp"/>
+
+            <TextView
+                android:id="@+id/building_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_16dp"
+                android:textColor="@color/colorDarkstateBlue"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/padd_10"
+                android:text="@{address.building_number}"
+                android:padding="@dimen/size_5dp"
+                android:layout_marginLeft="@dimen/size_16dp"/>
+
+            <TextView
+                android:id="@+id/textView_streetNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_16dp"
+                android:textColor="@color/colorDarkstateBlue"
+                android:text="Street Number :"
+                android:layout_marginTop="@dimen/size_8dp"
+                android:layout_below="@id/textView_buildingnumber"
+                android:padding="@dimen/size_5dp"
+                android:layout_marginLeft="@dimen/size_16dp"/>
+
+            <TextView
+                android:id="@+id/steet_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_16dp"
+                android:textColor="@color/colorDarkstateBlue"
+                android:layout_below="@id/textView_buildingnumber"
+                android:layout_marginTop="@dimen/size_8dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/padd_10"
+                android:text="@{address.street_address}"
+                android:padding="@dimen/size_5dp"
+                android:layout_marginLeft="@dimen/size_16dp"/>
+
+            <TextView
+                android:id="@+id/textView_zoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_16dp"
+                android:textColor="@color/colorDarkstateBlue"
+                android:text="Zone Number :"
+                android:layout_marginTop="@dimen/size_8dp"
+                android:layout_below="@id/textView_streetNumber"
+                android:padding="@dimen/size_5dp"
+                android:layout_marginLeft="@dimen/size_16dp"/>
+
+            <TextView
+                android:id="@+id/zone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_16dp"
+                android:textColor="@color/colorDarkstateBlue"
+                android:layout_below="@id/textView_streetNumber"
+                android:layout_marginTop="@dimen/size_8dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/padd_10"
+                android:text="@{address.zone_no}"
+                android:padding="@dimen/size_5dp"
+                android:layout_marginLeft="@dimen/size_16dp"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

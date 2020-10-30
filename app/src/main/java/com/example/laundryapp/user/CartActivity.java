@@ -8,7 +8,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
@@ -18,13 +20,17 @@ import com.example.laundryapp.databinding.ActivityCartBinding;
 import com.example.laundryapp.fragments.adapter.CartAdapter;
 import com.example.laundryapp.fragments.pojo.Cart;
 import com.example.laundryapp.fragments.viewmodel.CartViewModel;
+import com.example.laundryapp.user.viewModel.AddCartViewModel;
+import com.example.laundryapp.utilities.Constants;
 
 import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
 public static ActivityCartBinding cartBinding;
 public CartViewModel cartViewModel;
+public AddCartViewModel addCartViewModel;
 public CartAdapter cartAdapter;
+    public String user_id;
     public int totalAmount=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +47,11 @@ public CartAdapter cartAdapter;
             this.onBackPressed();
         });
 
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
+        user_id=sharedPreferences.getString(Constants.USER_ID,null);
 
 
-        cartViewModel = ViewModelProviders.of(this).get(CartViewModel.class);
+        addCartViewModel=ViewModelProviders.of((FragmentActivity) this).get(AddCartViewModel.class);
 
         cartBinding.orederLayout.buttonOrder.setOnClickListener(v -> {
             startActivity(new Intent(this, PriceDetailsActivity.class));
@@ -54,9 +62,11 @@ public CartAdapter cartAdapter;
 
 
 
-        getcartItems();
+        //getcartItems();
 
         runAnimationAgain();
+
+        fetchCart();
 
       // calculateTotal();
 
@@ -65,15 +75,15 @@ public CartAdapter cartAdapter;
 
     }
 
-    private void getcartItems() {
-        cartViewModel.getcartItems().observe((LifecycleOwner) this, new Observer<List<Cart>>() {
-            @Override
-            public void onChanged(List<Cart> cartList) {
-                cartAdapter=new CartAdapter(CartActivity.this,cartList);
-                cartBinding.recyclerCart.setAdapter(cartAdapter);
-            }
-        });
-    }
+//    private void getcartItems() {
+//        cartViewModel.getcartItems().observe((LifecycleOwner) this, new Observer<List<Cart>>() {
+//            @Override
+//            public void onChanged(List<Cart> cartList) {
+//                cartAdapter=new CartAdapter(CartActivity.this,cartList);
+//                cartBinding.recyclerCart.setAdapter(cartAdapter);
+//            }
+//        });
+//    }
 
     private void runAnimationAgain() {
 
@@ -91,22 +101,29 @@ public CartAdapter cartAdapter;
         cartBinding.orederLayout.total.setText(String.valueOf(total));
     }
 
-    private void calculateTotal() {
-        for (int i = 0; i < cartAdapter.cartList.size(); i++) {
-
-            int quantity=cartAdapter.cartList.get(i).getQuantity();
-            int price=cartAdapter.cartList.get(i).getPrice();
-            price=price*quantity;
-            totalAmount=totalAmount + price;
-
-
-
+//    private void calculateTotal() {
+//        for (int i = 0; i < cartAdapter.cartList.size(); i++) {
+//
+//            int quantity=cartAdapter.cartList.get(i).getQuantity();
+//            int price=cartAdapter.cartList.get(i).getPrice();
+//            price=price*quantity;
+//            totalAmount=totalAmount + price;
+//
+//
+//
+//        }
+//
+//        cartBinding.orederLayout.total.setText(String.valueOf(totalAmount));
+//
+//
+//    }
+public void fetchCart(){
+    addCartViewModel.getCartItems(user_id).observe(this,cartResponse -> {
+        if (cartResponse != null && cartResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+            cartAdapter=new CartAdapter(this,cartResponse.getCart());
+            cartBinding.recyclerCart.setAdapter(cartAdapter);
         }
-
-        cartBinding.orederLayout.total.setText(String.valueOf(totalAmount));
-
-
-    }
-
+    });
+}
 
 }

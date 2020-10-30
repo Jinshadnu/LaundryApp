@@ -3,6 +3,7 @@ package com.example.laundryapp.user.repository;
 import com.example.laundryapp.core.NetworkAPI;
 import com.example.laundryapp.core.NetworkService;
 import com.example.laundryapp.user.response.AddressResponse;
+import com.example.laundryapp.user.response.ComonResponse;
 import com.example.laundryapp.utilities.CommonResponse;
 
 import androidx.lifecycle.LiveData;
@@ -17,29 +18,29 @@ public class AddressRepository {
     public AddressRepository() {
     }
 
-    public LiveData<CommonResponse> addAddress(int id,String building_number,String address,int zone){
+    public LiveData<ComonResponse> addAddress(String id,String building_number,String address,String zone){
         MutableLiveData mutableLiveData=new MutableLiveData();
 
         networkAPI= NetworkService.getRetrofitInstance().create(NetworkAPI.class);
-        Call<CommonResponse> responseCall=networkAPI.addAddress(id,building_number,address,zone);
-        responseCall.enqueue(new Callback<CommonResponse>() {
+        Call<ComonResponse> responseCall=networkAPI.addAddress(id,building_number,address,zone);
+        responseCall.enqueue(new Callback<ComonResponse>() {
             @Override
-            public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
-                CommonResponse commonResponse=response.body();
+            public void onResponse(Call<ComonResponse> call, Response<ComonResponse> response) {
+                ComonResponse commonResponse=response.body();
                 if (commonResponse != null){
                     mutableLiveData.postValue(commonResponse);
                 }
             }
 
             @Override
-            public void onFailure(Call<CommonResponse> call, Throwable t) {
+            public void onFailure(Call<ComonResponse> call, Throwable t) {
              mutableLiveData.postValue(null);
             }
         });
         return mutableLiveData;
     }
 
-    public LiveData<AddressResponse> getAddress(int user_id){
+    public LiveData<AddressResponse> getAddress(String user_id){
         MutableLiveData mutableLiveData=new MutableLiveData();
 
         networkAPI=NetworkService.getRetrofitInstance().create(NetworkAPI.class);

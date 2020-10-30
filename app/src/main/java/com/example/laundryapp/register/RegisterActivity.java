@@ -29,6 +29,7 @@ public ActivityRegisterBinding registerBinding;
    public ProgressDialog progressDialog;
    public String userName,password,phone,email,confirm_password;
    public RegisterViewModel registerViewModel;
+   public int position;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,13 +97,13 @@ public ActivityRegisterBinding registerBinding;
             progressDialog.setMessage("Please wait");
             progressDialog.show();
 
-            registerViewModel.registerUser(userName,phone,email,password).observe(this,commonResponse -> {
+            registerViewModel.registerUser(userName,phone,email,password).observe(this,registerResponse -> {
                 progressDialog.dismiss();
-                if (commonResponse != null && commonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                if (registerResponse != null && registerResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
                     SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor=sharedpreferences.edit();
                     editor.putBoolean(Constants.IsUserLogIn, true);
-                    //editor.putInt(Constants.USER_ID,loginResponse.getUser().get(po));
+                    editor.putString(Constants.USER_ID,registerResponse.getUser().get(position).getUser_id());
                     editor.commit();
                   startActivity(new Intent(RegisterActivity.this,HomeActivity.class));
                 }

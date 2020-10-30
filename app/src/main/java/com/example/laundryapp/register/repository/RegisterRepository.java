@@ -2,6 +2,7 @@ package com.example.laundryapp.register.repository;
 
 import com.example.laundryapp.core.NetworkAPI;
 import com.example.laundryapp.core.NetworkService;
+import com.example.laundryapp.register.pojo.RegisterResponse;
 import com.example.laundryapp.register.pojo.user;
 import com.example.laundryapp.utilities.CommonResponse;
 
@@ -19,22 +20,22 @@ public class RegisterRepository {
     public RegisterRepository() {
     }
 
-    public LiveData<CommonResponse> userRegistration(String name,String phone,String email,String password){
+    public LiveData<RegisterResponse> userRegistration(String name, String phone, String email, String password){
         MutableLiveData mutableLiveData=new MutableLiveData();
 
         networkAPI= NetworkService.getRetrofitInstance().create(NetworkAPI.class);
-        Call<CommonResponse> responseCall=networkAPI.userRegistration(name, phone, email, password);
-        responseCall.enqueue(new Callback<CommonResponse>() {
+        Call<RegisterResponse> responseCall=networkAPI.userRegistration(name, phone, email, password);
+        responseCall.enqueue(new Callback<RegisterResponse>() {
             @Override
-            public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
-                CommonResponse commonResponse=response.body();
-                if (commonResponse != null){
-                    mutableLiveData.postValue(commonResponse);
+            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+                RegisterResponse registerResponse=response.body();
+                if (registerResponse != null){
+                    mutableLiveData.postValue(registerResponse);
                 }
             }
 
             @Override
-            public void onFailure(Call<CommonResponse> call, Throwable t) {
+            public void onFailure(Call<RegisterResponse> call, Throwable t) {
                 mutableLiveData.postValue(null);
             }
         });

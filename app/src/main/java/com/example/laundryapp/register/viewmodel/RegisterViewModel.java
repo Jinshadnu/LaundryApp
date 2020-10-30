@@ -1,5 +1,6 @@
 package com.example.laundryapp.register.viewmodel;
 
+import com.example.laundryapp.register.pojo.RegisterResponse;
 import com.example.laundryapp.register.repository.RegisterRepository;
 import com.example.laundryapp.utilities.CommonResponse;
 
@@ -12,7 +13,7 @@ public class RegisterViewModel extends ViewModel {
     public RegisterViewModel() {
         registerRepository=new RegisterRepository();
     }
-    public LiveData<CommonResponse> registerUser(String name,String phone,String email,String password){
+    public LiveData<RegisterResponse> registerUser(String name, String phone, String email, String password){
         return registerRepository.userRegistration(name, phone, email, password);
     }
 }

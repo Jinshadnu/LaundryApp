@@ -3,6 +3,7 @@ package com.example.laundryapp.fragments;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 
@@ -35,6 +36,10 @@ import com.example.laundryapp.fragments.viewmodel.CartViewModel;
 import com.example.laundryapp.fragments.viewmodel.OrderViewModel;
 import com.example.laundryapp.user.AddressActivity;
 import com.example.laundryapp.user.PriceDetailsActivity;
+import com.example.laundryapp.user.response.CartResponse;
+import com.example.laundryapp.user.viewModel.AddCartViewModel;
+import com.example.laundryapp.utilities.BaseActivity;
+import com.example.laundryapp.utilities.Constants;
 import com.example.laundryapp.utilities.RecyclerItemTouchHelper;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -48,12 +53,15 @@ import java.util.List;
  */
 public class CartFragment extends Fragment implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
     public CartViewModel cartViewModel;
+    public AddCartViewModel addCartViewModel;
     public CartAdapter cartAdapter;
     public static FragmentCartBinding cartBinding;
     public static int total = 0;
     public Context context;
     public int totalAmount = 0;
-    public List<Cart> cartList;
+    private BaseActivity baseActivity;
+    public List<CartResponse.Carts> cartList;
+    public String user_id;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -95,6 +103,7 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
         }
 
         cartViewModel = ViewModelProviders.of((FragmentActivity) this.getActivity()).get(CartViewModel.class);
+        addCartViewModel=ViewModelProviders.of((FragmentActivity) this.getActivity()).get(AddCartViewModel.class);
     }
 
     @Override
@@ -105,6 +114,14 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
 
         cartBinding.layoutBase.textTitle.setText("My Cart");
 
+
+
+
+
+        cartList=new ArrayList<>();
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
+        user_id=sharedPreferences.getString(Constants.USER_ID,null);
 
         cartBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
         cartBinding.layoutBase.toolbar.setNavigationOnClickListener(v -> {
@@ -121,7 +138,7 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
         cartBinding.recyclerCart.setHasFixedSize(true);
 
 
-        getcartItems();
+
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(cartBinding.recyclerCart);
 
@@ -130,51 +147,75 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
 
         runAnimationAgain();
 
+        fetchCart();
 
         calculateTotal();
+
+        //grandTotal(cartList);
 
 
         return cartBinding.getRoot();
     }
 
-    private void calculateTotal() {
+    public void calculateTotal() {
 
-        for (int i = 0; i < cartAdapter.cartList.size(); i++) {
+        for (int i = 0; i < cartList.size(); i++) {
 
-            int quantity = cartAdapter.cartList.get(i).getQuantity();
-            int price = cartAdapter.cartList.get(i).getPrice();
+            int quantity = Integer.parseInt(cartAdapter.cartList.get(i).getQuantity());
+            int price = Integer.parseInt(cartAdapter.cartList.get(i).getPrice());
             price = price * quantity;
-            totalAmount = totalAmount + price;
+           totalAmount = totalAmount + price;
         }
 
         cartBinding.orederLayout.total.setText(String.valueOf(totalAmount));
 
 
     }
+      private int grandTotal(List<CartResponse.Carts> items){
 
+        int totalPrice = 0;
+        for(int i = 0 ; i < items.size(); i++) {
+            totalPrice += Integer.parseInt(items.get(i).getPrice());
+        }
 
-    private void getcartItems() {
-        cartViewModel.getcartItems().observe((LifecycleOwner) this.getActivity(), new Observer<List<Cart>>() {
-            @Override
-            public void onChanged(List<Cart> cartList) {
-                cartAdapter = new CartAdapter(getActivity(), cartList);
+        cartBinding.orederLayout.total.setText(String.valueOf(totalPrice));
+
+        return totalPrice;
+    }
+
+//    private void getcartItems() {
+//        cartViewModel.getcartItems().observe((LifecycleOwner) this.getActivity(), new Observer<List<Cart>>() {
+//            @Override
+//            public void onChanged(List<Cart> cartList) {
+//                cartAdapter = new CartAdapter(getActivity(), cartList);
+//                cartBinding.recyclerCart.setAdapter(cartAdapter);
+//
+//                cartBinding.searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//                    @Override
+//                    public boolean onQueryTextSubmit(String query) {
+//                        return false;
+//                    }
+//
+//                    @Override
+//                    public boolean onQueryTextChange(String newText) {
+//                        cartAdapter.getFilter().filter(newText);
+//                        return false;
+//                    }
+//                });
+//            }
+//        });
+//    }
+
+    public void fetchCart(){
+        addCartViewModel.getCartItems(user_id).observe(getActivity(),cartResponse -> {
+            if (cartResponse != null && cartResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                cartAdapter=new CartAdapter(getActivity(),cartResponse.getCart());
                 cartBinding.recyclerCart.setAdapter(cartAdapter);
-
-                cartBinding.searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String query) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onQueryTextChange(String newText) {
-                        cartAdapter.getFilter().filter(newText);
-                        return false;
-                    }
-                });
             }
         });
     }
+
+
 
     private void runAnimationAgain() {
 
@@ -198,13 +239,24 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
         if (viewHolder instanceof CartAdapter.CartViewModel) {
             // get the removed item name to display it in snack bar
             //  String name = cartList.get(viewHolder.getAdapterPosition()).getItem_name();
+            position= viewHolder.getAdapterPosition();
 
+            String item_id=cartAdapter.cartList.get(position).getItem_id();
+
+            cartAdapter.removeItem(viewHolder.getAdapterPosition());
             // backup of removed item for undo purpose
 //            final Cart deletedItem = cartList.get(viewHolder.getAdapterPosition());
 //            final int deletedIndex = viewHolder.getAdapterPosition();
 
             // remove the item from recycler view
-            cartAdapter.removeItem(viewHolder.getAdapterPosition());
+            //cartAdapter.removeItem(viewHolder.getAdapterPosition());
+
+            addCartViewModel.deletecartItem(user_id,item_id).observe(this,comonResponse -> {
+                if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                 baseActivity.openSuccessDialog(comonResponse.getMessage());
+                }
+            });
+
 
             calculateTotal();
 
@@ -234,5 +286,7 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
             totalAmount = totalAmount + price;
         }
     }
+
+
 
 }

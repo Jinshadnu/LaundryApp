@@ -19,9 +19,12 @@ public class AddCartViewModel extends ViewModel {
         return addCartRepository.addToCart(user_id, service_name, item_id, quantity, price);
     }
 
-    public LiveData<CartResponse> getCartItems(int user_id){
+    public LiveData<CartResponse> getCartItems(String user_id){
         return addCartRepository.getCartItems(user_id);
     }
 
+    public LiveData<ComonResponse> deletecartItem(String user_id,String item_id){
+        return addCartRepository.deletecartItem(user_id,item_id);
+    }
 
  }

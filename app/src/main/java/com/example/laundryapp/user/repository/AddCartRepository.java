@@ -41,7 +41,7 @@ public class AddCartRepository {
         return mutableLiveData;
     }
 
-    public LiveData<CartResponse> getCartItems(int cart_id){
+    public LiveData<CartResponse> getCartItems(String cart_id){
         MutableLiveData mutableLiveData=new MutableLiveData();
 
         networkAPI=NetworkService.getRetrofitInstance().create(NetworkAPI.class);
@@ -58,6 +58,28 @@ public class AddCartRepository {
             @Override
             public void onFailure(Call<CartResponse> call, Throwable t) {
              mutableLiveData.setValue(null);
+            }
+        });
+        return mutableLiveData;
+    }
+
+    public LiveData<ComonResponse> deletecartItem(String user_id,String item_id){
+        MutableLiveData mutableLiveData=new MutableLiveData();
+
+        networkAPI=NetworkService.getRetrofitInstance().create(NetworkAPI.class);
+        Call<ComonResponse> responseCall=networkAPI.deleteCartItem(user_id,item_id);
+        responseCall.enqueue(new Callback<ComonResponse>() {
+            @Override
+            public void onResponse(Call<ComonResponse> call, Response<ComonResponse> response) {
+                ComonResponse comonResponse=response.body();
+                if (comonResponse != null){
+                    mutableLiveData.postValue(comonResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ComonResponse> call, Throwable t) {
+             mutableLiveData.postValue(null);
             }
         });
         return mutableLiveData;
