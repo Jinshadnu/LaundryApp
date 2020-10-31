@@ -4,6 +4,7 @@ import com.example.laundryapp.core.NetworkAPI;
 import com.example.laundryapp.core.NetworkService;
 import com.example.laundryapp.user.response.CartResponse;
 import com.example.laundryapp.user.response.ComonResponse;
+import com.example.laundryapp.user.response.UpdateResponse;
 import com.example.laundryapp.utilities.CommonResponse;
 
 import androidx.lifecycle.LiveData;
@@ -18,11 +19,11 @@ public class AddCartRepository {
     public AddCartRepository() {
     }
 
-    public LiveData<ComonResponse> addToCart(String user_id, String service_name, String item_id, String quantity, String price){
+    public LiveData<ComonResponse> addToCart(String user_id, String service_name, String item_id, String quantity){
         MutableLiveData mutableLiveData=new MutableLiveData();
 
         networkAPI= NetworkService.getRetrofitInstance().create(NetworkAPI.class);
-        Call<ComonResponse> responseCall=networkAPI.addToCart(user_id,service_name,item_id,quantity,price);
+        Call<ComonResponse> responseCall=networkAPI.addToCart(user_id,service_name,item_id,quantity);
 
         responseCall.enqueue(new Callback<ComonResponse>() {
             @Override
@@ -84,4 +85,28 @@ public class AddCartRepository {
         });
         return mutableLiveData;
     }
+
+    public LiveData<UpdateResponse> updateCartItem(String item_id,String user_id,String quantity){
+        MutableLiveData mutableLiveData=new MutableLiveData();
+
+        networkAPI=NetworkService.getRetrofitInstance().create(NetworkAPI.class);
+        Call<UpdateResponse> responseCall=networkAPI.updateCartItem(item_id,user_id,quantity);
+        responseCall.enqueue(new Callback<UpdateResponse>() {
+            @Override
+            public void onResponse(Call<UpdateResponse> call, Response<UpdateResponse> response) {
+                UpdateResponse updateResponse=response.body();
+                if (updateResponse != null){
+                    mutableLiveData.postValue(updateResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UpdateResponse> call, Throwable t) {
+            mutableLiveData.postValue(null);
+            }
+        });
+
+        return  mutableLiveData;
+    }
+
 }

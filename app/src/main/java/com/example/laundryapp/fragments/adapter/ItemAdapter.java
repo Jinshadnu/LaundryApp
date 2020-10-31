@@ -54,17 +54,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemsViewViewH
 
         //calculate price value
 
-        holder.itemsBinding.elegantCount.setOnValueChangeListener((view, oldValue, newValue) -> {
-            Toast.makeText(context.getApplicationContext(),"Total",Toast.LENGTH_LONG).show();
-            //getTotal();
-                String quantity=holder.itemsBinding.elegantCount.getNumber();
-                int count=Integer.parseInt(quantity);
-                price=Integer.parseInt(itemsList.get(position).getPrice());
-                total=total+price*count;
-                holder.itemsBinding.textPrice.setText(String.valueOf(calculatePrice(price,count)));
-
-            //getTotal(total);
-        });
+//        holder.itemsBinding.elegantCount.setOnValueChangeListener((view, oldValue, newValue) -> {
+//            Toast.makeText(context.getApplicationContext(),"Total",Toast.LENGTH_LONG).show();
+//            //getTotal();
+//                String quantity=holder.itemsBinding.elegantCount.getNumber();
+//                int count=Integer.parseInt(quantity);
+//                price=Integer.parseInt(itemsList.get(position).getPrice());
+//                total=total+price*count;
+//                holder.itemsBinding.textPrice.setText(String.valueOf(calculatePrice(price,count)));
+//
+//            //getTotal(total);
+//        });
 
         holder.itemsBinding.buttonAddCart.setOnClickListener(v -> {
             String item_id=itemsList.get(position).getItem_id();
@@ -72,7 +72,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemsViewViewH
             String quantity=itemsList.get(position).getQuantity();
          if (context instanceof OrderActivity){
              ((AddCartCallBack)context).onAddProduct();
-             ((AddCartCallBack) context).addToCart(item_id,quantity,price);
+             ((AddCartCallBack) context).addToCart(item_id,quantity);
          }
         });
 

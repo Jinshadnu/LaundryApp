@@ -30,9 +30,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
     public List<CartResponse.Carts> cartListFiltered;
     public static List <Cart> selecteditems;
     public static int total=0;
+    public setOnActionListener listener;
     public int price,quantity,totals;
     public ValueFilter valueFilter;
     public static LayoutCartBinding cartBinding;
+    public String user_id;
 
 
 
@@ -60,13 +62,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
         holder.cartBinding.elegantCount.setOnValueChangeListener((view, oldValue, newValue) -> {
             //getTotal();
             String quantity=holder.cartBinding.elegantCount.getNumber();
+            String item_id=cartList.get(position).getItem_id();
             int count=Integer.parseInt(quantity);
             price=Integer.parseInt(cartList.get(position).getPrice());
             totals=totals+price*count;
             holder.cartBinding.textPrice.setText(String.valueOf(calculatePrice(price,count)));
-
             //getTotal(total);
+            listener.onActionPerformed(item_id,quantity);
         });
+
+
     }
 
     private int  calculatePrice(int priceValue, int quantity) {
@@ -138,5 +143,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
         }
     }
 
+    public interface setOnActionListener{
+      void onActionPerformed(String item_id,String quantity);
+    }
 
+    public void setActionListener(setOnActionListener listener)
+    {
+        this.listener=listener;
+    }
 }

@@ -57,11 +57,11 @@ public String email;
             progressDialog.setMessage("Loading...");
             progressDialog.show();
 
-            forgotViewModel.forgotPassword(email).observe(this,commonResponse -> {
+            forgotViewModel.forgotPassword(email).observe(this,comonResponse -> {
                 progressDialog.dismiss();
 
-                if(commonResponse != null && commonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                    openSuccessDialog(commonResponse.getError_message());
+                if(comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                    openSuccessDialog(comonResponse.getMessage());
                 }
             });
 

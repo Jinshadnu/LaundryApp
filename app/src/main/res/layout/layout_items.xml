@@ -64,7 +64,7 @@
                         android:id="@+id/textView36"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="$"
+                        android:text="QAR :"
                         android:padding="1dp"
                         android:layout_marginLeft="@dimen/size_10dp"
                         android:textColor="@color/colorPrimaryDark"
@@ -87,16 +87,6 @@
                         app:layout_constraintTop_toTopOf="@+id/textView36"
                         app:layout_constraintVertical_bias="0.476" />
 
-                    <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
-                        android:id="@+id/elegant_count"
-                        android:layout_width="@dimen/size_80dp"
-                        android:layout_height="@dimen/size_30dp"
-                        android:layout_gravity="end"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView36"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/padd_10"
-                        tools:ignore="MissingConstraints" />
 
 
                 </RelativeLayout>

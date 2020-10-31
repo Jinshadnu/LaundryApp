@@ -90,7 +90,7 @@
         android:textSize="@dimen/size_25dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textview_service_name" />
 
     <TextView
         android:id="@+id/textView_description"
@@ -103,6 +103,7 @@
         android:layout_marginRight="16dp"
         android:drawablePadding="@dimen/size_10dp"
         android:paddingLeft="@dimen/size_16dp"
+        android:fontFamily="@font/amaranth"
         android:text=""
         android:textColor="@color/colorblack"
         app:layout_constraintEnd_toEndOf="parent"
@@ -110,7 +111,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textview_service_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

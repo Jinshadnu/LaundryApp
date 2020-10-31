@@ -27,7 +27,7 @@ public class DetailsActivity extends AppCompatActivity {
     private ViewPager productImageViewPager;
     private TabLayout viewpagerIndicator;
     public Toolbar toolbar;
-    public TextView textView,textView_description;
+    public TextView textView,textView_description,textView_serviceName;
     public Button button_order;
     public String description,pos,service_name;
     public int position;
@@ -41,9 +41,11 @@ public class DetailsActivity extends AppCompatActivity {
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         textView=(TextView) findViewById(R.id.text_title);
         textView_description=(TextView)findViewById(R.id.textView_description);
+        textView_serviceName=(TextView)findViewById(R.id.textview_service_name);
         description=getIntent().getStringExtra("description");
         service_name=getIntent().getStringExtra("service_name");
         textView_description.setText(description);
+        textView_serviceName.setText(service_name);
         pos=getIntent().getStringExtra("position");
 
 

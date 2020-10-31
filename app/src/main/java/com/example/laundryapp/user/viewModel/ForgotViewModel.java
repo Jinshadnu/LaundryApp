@@ -1,6 +1,7 @@
 package com.example.laundryapp.user.viewModel;
 
 import com.example.laundryapp.user.repository.ForgetPasswordRepository;
+import com.example.laundryapp.user.response.ComonResponse;
 import com.example.laundryapp.utilities.CommonResponse;
 
 import androidx.lifecycle.LiveData;
@@ -13,7 +14,7 @@ public class ForgotViewModel extends ViewModel {
         this.forgetPasswordRepository=new ForgetPasswordRepository();
     }
 
-    public LiveData<CommonResponse> forgotPassword(String email){
+    public LiveData<ComonResponse> forgotPassword(String email){
         return forgetPasswordRepository.forgetPassword(email);
     }
 }

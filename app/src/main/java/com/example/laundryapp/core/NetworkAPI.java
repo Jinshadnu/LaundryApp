@@ -7,6 +7,7 @@ import com.example.laundryapp.user.response.AddressResponse;
 import com.example.laundryapp.user.response.CartResponse;
 import com.example.laundryapp.user.response.ComonResponse;
 import com.example.laundryapp.user.response.OrderResponse;
+import com.example.laundryapp.user.response.UpdateResponse;
 import com.example.laundryapp.utilities.CommonResponse;
 
 import retrofit2.Call;
@@ -35,13 +36,13 @@ public interface NetworkAPI {
 
 
     @FormUrlEncoded
-    @POST("Api_1.php?apicall=forgot")
-    Call<CommonResponse> forgetPassword(@Field("email") String email);
+    @POST("forgot_password")
+    Call<ComonResponse> forgetPassword(@Field("email") String email);
 
 
     @FormUrlEncoded
     @POST("add_to_cart")
-    Call<ComonResponse> addToCart(@Field("user_id")String id,@Field("service_name")String service_name,@Field("item_id")String item_id,@Field("quantity")String quantity,@Field("price") String price);
+    Call<ComonResponse> addToCart(@Field("user_id")String id,@Field("service_name")String service_name,@Field("item_id")String item_id,@Field("quantity")String quantity);
 
     @GET("get_cart")
     Call<CartResponse> getCartItems(@Query("user_id") String user_id);
@@ -64,6 +65,10 @@ public interface NetworkAPI {
     @FormUrlEncoded
     @POST("delete_cart_item")
     Call<ComonResponse> deleteCartItem(@Field("user_id")String user_id,@Field("item_id")String item_id);
+
+    @FormUrlEncoded
+    @POST("update_count")
+    Call<UpdateResponse> updateCartItem(@Field("item_id")String item_id, @Field("user_id")String user_id, @Field("quantity")String quantity);
 
 
 

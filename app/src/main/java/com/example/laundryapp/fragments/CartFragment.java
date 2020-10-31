@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.Toast;
 
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.FragmentCartBinding;
@@ -46,12 +47,14 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.CallAdapter;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link CartFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CartFragment extends Fragment implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
+public class CartFragment extends Fragment implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener, CartAdapter.setOnActionListener {
     public CartViewModel cartViewModel;
     public AddCartViewModel addCartViewModel;
     public CartAdapter cartAdapter;
@@ -62,6 +65,8 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
     private BaseActivity baseActivity;
     public List<CartResponse.Carts> cartList;
     public String user_id;
+    public String item_id,quantity;
+    public String count;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -116,7 +121,7 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
 
 
 
-
+//        baseActivity = (BaseActivity) getActivity();
 
         cartList=new ArrayList<>();
 
@@ -128,9 +133,6 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
             getActivity().onBackPressed();
         });
 
-        cartBinding.orederLayout.buttonOrder.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), PriceDetailsActivity.class));
-        });
 
         // cartBinding.orederLayout.textTotal.
 
@@ -149,7 +151,14 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
 
         fetchCart();
 
-        calculateTotal();
+
+        cartBinding.orederLayout.buttonOrder.setOnClickListener(v -> {
+            count=String.valueOf(cartAdapter.cartList.size());
+           startActivity(new Intent(getActivity(), PriceDetailsActivity.class));
+        });
+
+
+        //calculateTotal();
 
         //grandTotal(cartList);
 
@@ -157,25 +166,12 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
         return cartBinding.getRoot();
     }
 
-    public void calculateTotal() {
 
-        for (int i = 0; i < cartList.size(); i++) {
-
-            int quantity = Integer.parseInt(cartAdapter.cartList.get(i).getQuantity());
-            int price = Integer.parseInt(cartAdapter.cartList.get(i).getPrice());
-            price = price * quantity;
-           totalAmount = totalAmount + price;
-        }
-
-        cartBinding.orederLayout.total.setText(String.valueOf(totalAmount));
-
-
-    }
-      private int grandTotal(List<CartResponse.Carts> items){
-
+      private int grandTotal(){
+        //cartList=new ArrayList<>();
         int totalPrice = 0;
-        for(int i = 0 ; i < items.size(); i++) {
-            totalPrice += Integer.parseInt(items.get(i).getPrice());
+        for(int i = 0 ; i < cartAdapter.cartList.size(); i++) {
+            totalPrice += Integer.parseInt(cartAdapter.cartList.get(i).getPrice());
         }
 
         cartBinding.orederLayout.total.setText(String.valueOf(totalPrice));
@@ -211,11 +207,27 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
             if (cartResponse != null && cartResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
                 cartAdapter=new CartAdapter(getActivity(),cartResponse.getCart());
                 cartBinding.recyclerCart.setAdapter(cartAdapter);
+                cartAdapter.setActionListener(this);
+               // count=String.valueOf(cartAdapter.cartList.size());
+               grandTotal();
             }
         });
     }
 
+    public void calculateTotal() {
 
+        for (int i = 0; i < cartAdapter.cartList.size(); i++) {
+
+            int quantity = Integer.parseInt(cartAdapter.cartList.get(i).getQuantity());
+            int price = Integer.parseInt(cartAdapter.cartList.get(i).getPrice());
+            price = price * quantity;
+            totalAmount = totalAmount + price;
+        }
+
+        cartBinding.orederLayout.total.setText(String.valueOf(totalAmount));
+
+
+    }
 
     private void runAnimationAgain() {
 
@@ -253,26 +265,14 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
 
             addCartViewModel.deletecartItem(user_id,item_id).observe(this,comonResponse -> {
                 if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                 baseActivity.openSuccessDialog(comonResponse.getMessage());
+                 //baseActivity.openSuccessDialog(comonResponse.getMessage());
+                    Toast.makeText(getActivity(),comonResponse.getMessage(),Toast.LENGTH_LONG).show();
                 }
             });
 
 
-            calculateTotal();
+           fetchCart();
 
-            // showing snack bar with Undo option
-//            Snackbar snackbar = Snackbar
-//                    .make(coordinatorLayout, name + " removed from cart!", Snackbar.LENGTH_LONG);
-//            snackbar.setAction("UNDO", new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//
-//                    // undo is selected, restore the deleted item
-//                    mAdapter.restoreItem(deletedItem, deletedIndex);
-//                }
-//            });
-//            snackbar.setActionTextColor(Color.YELLOW);
-//            snackbar.show();
         }
     }
 
@@ -287,6 +287,27 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
         }
     }
 
+
+    @Override
+    public void onActionPerformed(String item_id, String quantity) {
+        this.item_id=item_id;
+        this.quantity=quantity;
+        updateCartItem();
+    }
+
+    public void updateCartItem(){
+        addCartViewModel.updateCartItem(item_id,user_id,quantity).observe(getActivity(),updateResponse -> {
+            if (updateResponse != null && updateResponse.getStatus().equals("Success")){
+                int totalPrice = 0;
+                for(int i = 0 ; i < cartAdapter.cartList.size(); i++) {
+                    totalPrice += Integer.parseInt(cartAdapter.cartList.get(i).getPrice());
+                }
+
+                cartBinding.orederLayout.total.setText(String.valueOf(totalPrice));
+
+            }
+        });
+    }
 
 
 }
