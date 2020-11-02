@@ -2,13 +2,11 @@ package com.example.laundryapp.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
@@ -16,15 +14,18 @@ import android.view.animation.LayoutAnimationController;
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.ActivityHistoryBinding;
 import com.example.laundryapp.fragments.adapter.OrderAdapter;
-import com.example.laundryapp.fragments.pojo.Orders;
-import com.example.laundryapp.fragments.viewmodel.OrderViewModel;
+import com.example.laundryapp.login.LoginActivity;
+import com.example.laundryapp.user.viewModel.OrderViewModel;
+import com.example.laundryapp.utilities.BaseActivity;
+import com.example.laundryapp.utilities.Constants;
+import com.example.laundryapp.utilities.NetworkUtilities;
 
-import java.util.List;
-
-public class HistoryActivity extends AppCompatActivity {
+public class HistoryActivity extends BaseActivity {
 public ActivityHistoryBinding historyBinding;
     public OrderViewModel orderViewModel;
     public OrderAdapter orderAdapter;
+    public ProgressDialog progressDialog;
+    public String user_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +39,9 @@ public ActivityHistoryBinding historyBinding;
             onBackPressed();
         });
 
+
+        SharedPreferences sharedPreferences=getSharedPreferences(Constants.MyPREFERENCES,MODE_PRIVATE);
+        user_id=sharedPreferences.getString(Constants.USER_ID,null);
         historyBinding.recyclerOrders.setLayoutManager(new GridLayoutManager(this,1));
         historyBinding.recyclerOrders.setHasFixedSize(true);
 
@@ -49,13 +53,25 @@ public ActivityHistoryBinding historyBinding;
     }
 
     private void fetchOrders() {
-        orderViewModel.fetchOrders().observe((LifecycleOwner) this, new Observer<List<Orders>>() {
-            @Override
-            public void onChanged(List<Orders> orders) {
-                orderAdapter=new OrderAdapter(HistoryActivity.this,orders);
-                historyBinding.recyclerOrders.setAdapter(orderAdapter);
-            }
-        });
+        if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
+            progressDialog = new ProgressDialog(HistoryActivity.this);
+            progressDialog.setMessage("Loading.....");
+            progressDialog.show();
+
+            orderViewModel.getOrders(user_id).observe(this,orderResponse -> {
+                progressDialog.dismiss();
+
+                if (orderResponse != null && orderResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                    orderAdapter=new OrderAdapter(this,orderResponse.getOrders());
+                    historyBinding.recyclerOrders.setAdapter(orderAdapter);
+                }
+
+            });
+        }
+        else {
+            showSnackBar(this,"No internet connection");
+        }
+
     }
 
     private void runAnimationAgain() {

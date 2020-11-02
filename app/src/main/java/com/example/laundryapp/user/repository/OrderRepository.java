@@ -2,6 +2,7 @@ package com.example.laundryapp.user.repository;
 
 import com.example.laundryapp.core.NetworkAPI;
 import com.example.laundryapp.core.NetworkService;
+import com.example.laundryapp.user.response.ComonResponse;
 import com.example.laundryapp.user.response.OrderResponse;
 import com.example.laundryapp.utilities.CommonResponse;
 
@@ -17,23 +18,23 @@ public class OrderRepository {
     public OrderRepository() {
     }
 
-    public LiveData<CommonResponse> addOrder(int user_id,String service_name,String item_name,int total_price,String address){
+    public LiveData<ComonResponse> addOrder(String user_id, String building_number, String street_number, String zone){
         MutableLiveData mutableLiveData=new MutableLiveData();
 
         networkAPI= NetworkService.getRetrofitInstance().create(NetworkAPI.class);
 
-        Call<CommonResponse> responseCall=networkAPI.addOrder(user_id,service_name,item_name,total_price,address);
-        responseCall.enqueue(new Callback<CommonResponse>() {
+        Call<ComonResponse> responseCall=networkAPI.addOrder(user_id,building_number,street_number,zone);
+        responseCall.enqueue(new Callback<ComonResponse>() {
             @Override
-            public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
-                CommonResponse commonResponse=response.body();
+            public void onResponse(Call<ComonResponse> call, Response<ComonResponse> response) {
+                ComonResponse commonResponse=response.body();
                 if (commonResponse != null){
                     mutableLiveData.postValue(commonResponse);
                 }
             }
 
             @Override
-            public void onFailure(Call<CommonResponse> call, Throwable t) {
+            public void onFailure(Call<ComonResponse> call, Throwable t) {
              mutableLiveData.postValue(null);
             }
         });
@@ -41,7 +42,7 @@ public class OrderRepository {
         return mutableLiveData;
     }
 
-    public LiveData<OrderResponse> getOrders(int user_id){
+    public LiveData<OrderResponse> getOrders(String user_id){
         MutableLiveData mutableLiveData=new MutableLiveData();
 
         networkAPI= NetworkService.getRetrofitInstance().create(NetworkAPI.class);

@@ -7,17 +7,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -30,24 +25,17 @@ import android.widget.Toast;
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.FragmentCartBinding;
 import com.example.laundryapp.fragments.adapter.CartAdapter;
-import com.example.laundryapp.fragments.adapter.OrderAdapter;
 import com.example.laundryapp.fragments.pojo.Cart;
-import com.example.laundryapp.fragments.pojo.Orders;
 import com.example.laundryapp.fragments.viewmodel.CartViewModel;
-import com.example.laundryapp.fragments.viewmodel.OrderViewModel;
-import com.example.laundryapp.user.AddressActivity;
 import com.example.laundryapp.user.PriceDetailsActivity;
 import com.example.laundryapp.user.response.CartResponse;
 import com.example.laundryapp.user.viewModel.AddCartViewModel;
 import com.example.laundryapp.utilities.BaseActivity;
 import com.example.laundryapp.utilities.Constants;
 import com.example.laundryapp.utilities.RecyclerItemTouchHelper;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.CallAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,8 +53,9 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
     private BaseActivity baseActivity;
     public List<CartResponse.Carts> cartList;
     public String user_id;
-    public String item_id,quantity;
+    public String item_id,quantity,price;
     public String count;
+    public int totalvalue;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -289,21 +278,21 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
 
 
     @Override
-    public void onActionPerformed(String item_id, String quantity) {
+    public void onActionPerformed(String item_id, String quantity,String price) {
         this.item_id=item_id;
         this.quantity=quantity;
+        this.price=price;
         updateCartItem();
+        //cartBinding.orederLayout.textTotal.setVisibility(View.GONE);
+        for (int i=1;i<cartAdapter.cartList.size();i++){
+            totalvalue +=Integer.parseInt(cartAdapter.cartList.get(i).getPrice());
+        }
+         cartBinding.orederLayout.total.setText(String.valueOf(totalvalue));
     }
 
     public void updateCartItem(){
-        addCartViewModel.updateCartItem(item_id,user_id,quantity).observe(getActivity(),updateResponse -> {
-            if (updateResponse != null && updateResponse.getStatus().equals("Success")){
-                int totalPrice = 0;
-                for(int i = 0 ; i < cartAdapter.cartList.size(); i++) {
-                    totalPrice += Integer.parseInt(cartAdapter.cartList.get(i).getPrice());
-                }
-
-                cartBinding.orederLayout.total.setText(String.valueOf(totalPrice));
+        addCartViewModel.updateCartItem(item_id,user_id,quantity,price).observe(getActivity(),updateResponse -> {
+            if (updateResponse != null && updateResponse.getStatus().equals("true")){
 
             }
         });

@@ -1,12 +1,8 @@
 package com.example.laundryapp.user;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,32 +17,18 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
-import android.widget.LinearLayout;
 
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.ActivityOrderBinding;
-import com.example.laundryapp.fragments.adapter.CartAdapter;
 import com.example.laundryapp.fragments.adapter.CategoriesAdapater;
 import com.example.laundryapp.fragments.adapter.ItemAdapter;
-import com.example.laundryapp.fragments.adapter.OrderAdapter;
-import com.example.laundryapp.fragments.pojo.Cart;
-import com.example.laundryapp.fragments.pojo.Categories;
-import com.example.laundryapp.fragments.pojo.Items;
-import com.example.laundryapp.fragments.pojo.Orders;
-import com.example.laundryapp.fragments.viewmodel.CartViewModel;
-import com.example.laundryapp.fragments.viewmodel.CategoriesViewModel;
 import com.example.laundryapp.fragments.viewmodel.ItemsViewModel;
-import com.example.laundryapp.fragments.viewmodel.OrderViewModel;
 import com.example.laundryapp.fragments.viewmodel.ServiceViewModel;
 import com.example.laundryapp.user.interfaces.AddCartCallBack;
-import com.example.laundryapp.user.pojo.ServiceResponse;
 import com.example.laundryapp.user.viewModel.AddCartViewModel;
 import com.example.laundryapp.utilities.BaseActivity;
 import com.example.laundryapp.utilities.Constants;
 import com.example.laundryapp.utilities.GridSpacingItemDecoration;
-
-import java.lang.invoke.MethodHandles;
-import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 

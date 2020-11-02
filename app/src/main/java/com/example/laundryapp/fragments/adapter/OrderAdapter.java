@@ -9,6 +9,7 @@ import com.example.laundryapp.databinding.LayoutOredersBinding;
 import com.example.laundryapp.databinding.LayoutPlansBinding;
 import com.example.laundryapp.fragments.pojo.Orders;
 import com.example.laundryapp.fragments.pojo.Plans;
+import com.example.laundryapp.user.response.OrderResponse;
 
 import java.util.List;
 
@@ -20,9 +21,9 @@ import static android.view.LayoutInflater.from;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
     public Context context;
-    public List<Orders> ordersList;
+    public List<OrderResponse.Order> ordersList;
 
-    public OrderAdapter(Context context, List<Orders> ordersList) {
+    public OrderAdapter(Context context, List<OrderResponse.Order> ordersList) {
         this.context = context;
         this.ordersList = ordersList;
     }
@@ -38,7 +39,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
-        Orders orders=ordersList.get(position);
+        OrderResponse.Order orders=ordersList.get(position);
         holder.oredersBinding.setOrder(orders);
     }
 

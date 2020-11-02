@@ -53,14 +53,14 @@ public interface NetworkAPI {
 
 
     @FormUrlEncoded
-    @POST("addOrder")
-    Call<CommonResponse> addOrder(@Field("user_id") int user_id,@Field("service_name")String service_name,@Field("item_name")String item_name,@Field("total_price")int total_price,@Field("address") String address);
+    @POST("add_order")
+    Call<ComonResponse> addOrder(@Field("user_id") String user_id,@Field("building_number")String buliding_number,@Field("street_number") String street_number,@Field("zone")String zone);
 
     @GET("get_address")
     Call<AddressResponse> getAddress(@Query("user_id")String user_id);
 
-    @GET("getOrders")
-    Call<OrderResponse> getOrders(@Query("user_id")int user_id);
+    @GET("get_orders")
+    Call<OrderResponse> getOrders(@Query("user_id")String user_id);
 
     @FormUrlEncoded
     @POST("delete_cart_item")
@@ -68,7 +68,7 @@ public interface NetworkAPI {
 
     @FormUrlEncoded
     @POST("update_count")
-    Call<UpdateResponse> updateCartItem(@Field("item_id")String item_id, @Field("user_id")String user_id, @Field("quantity")String quantity);
+    Call<UpdateResponse> updateCartItem(@Field("item_id")String item_id, @Field("user_id")String user_id, @Field("quantity")String quantity,@Field("price")String price);
 
 
 

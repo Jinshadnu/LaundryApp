@@ -4,7 +4,7 @@
 
         <variable
             name="order"
-            type="com.example.laundryapp.fragments.pojo.Orders" />
+            type="com.example.laundryapp.user.response.OrderResponse.Order" />
 
     </data>
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,7 +17,7 @@
         android:layout_marginLeft="@dimen/size_16dp"
         android:layout_marginRight="@dimen/size_16dp"
         android:layout_marginBottom="@dimen/size_8dp"
-        android:layout_height="@dimen/size_200dp">
+        android:layout_height="@dimen/size_170dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -38,16 +38,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/size_16dp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View More"
-                    android:textSize="@dimen/size_18dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/size_16dp"
-                    android:textColor="@color/colorwhite"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/size_16dp"/>
 
             </RelativeLayout>
 
@@ -67,7 +57,7 @@
                 android:id="@+id/oreder_Id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{order.oreder_id}"
+                android:text="@{order.order_id}"
                 android:textColor="#ff471a"
                 android:layout_below="@id/relativeLayout"
                 android:layout_alignParentRight="true"
@@ -78,11 +68,12 @@
 
 
 
+
             <TextView
-                android:id="@+id/text_oreder_receipient"
+                android:id="@+id/text_oreder_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Reciepient  :"
+                android:text="Date  :"
                 android:textColor="@color/colorblack"
                 android:layout_below="@id/text_oreder_Id"
                 android:layout_marginTop="@dimen/size_10dp"
@@ -90,41 +81,18 @@
                 android:textSize="@dimen/size_16dp"/>
 
             <TextView
-                android:id="@+id/oreder_receipient"
+                android:id="@+id/oreder_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{order.recipient_name}"
+                android:text="@{order.date}"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/size_16dp"
                 android:textColor="@color/colorblack"
                 android:layout_below="@id/text_oreder_Id"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/size_16dp"
                 android:layout_marginTop="@dimen/size_10dp"
                 android:layout_marginLeft="@dimen/size_16dp"
                 android:textSize="@dimen/size_16dp"/>
 
-            <TextView
-                android:id="@+id/text_oreder_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Phone  :"
-                android:textColor="@color/colorblack"
-                android:layout_below="@id/text_oreder_receipient"
-                android:layout_marginTop="@dimen/size_10dp"
-                android:layout_marginLeft="@dimen/size_16dp"
-                android:textSize="@dimen/size_16dp"/>
-
-            <TextView
-                android:id="@+id/oreder_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{order.phone}"
-                android:textColor="@color/colorblack"
-                android:layout_below="@id/text_oreder_receipient"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/size_16dp"
-                android:layout_marginTop="@dimen/size_10dp"
-                android:layout_marginLeft="@dimen/size_16dp"
-                android:textSize="@dimen/size_16dp"/>
 
             <TextView
                 android:id="@+id/text_oreder_status"
@@ -132,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:text="Status  :"
                 android:textColor="@color/colorblack"
-                android:layout_below="@id/text_oreder_phone"
+                android:layout_below="@id/text_oreder_date"
                 android:layout_marginTop="@dimen/size_10dp"
                 android:layout_marginLeft="@dimen/size_16dp"
                 android:textSize="@dimen/size_16dp"/>
@@ -141,11 +109,11 @@
                 android:id="@+id/oreder_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{order.status}"
+                android:text="@{order.order_status}"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/size_16dp"
                 android:textColor="@color/colorblack"
-                android:layout_below="@id/text_oreder_phone"
+                android:layout_below="@id/text_oreder_date"
                 android:layout_marginTop="@dimen/size_10dp"
                 android:layout_marginLeft="@dimen/size_16dp"
                 android:textSize="@dimen/size_16dp"/>

@@ -59,6 +59,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
         int i=0;
         total=0;
 
+        holder.cartBinding.elegantCount.setNumber(cartList.get(position).getQuantity());
         holder.cartBinding.elegantCount.setOnValueChangeListener((view, oldValue, newValue) -> {
             //getTotal();
             String quantity=holder.cartBinding.elegantCount.getNumber();
@@ -66,11 +67,25 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
             int count=Integer.parseInt(quantity);
             price=Integer.parseInt(cartList.get(position).getPrice());
             totals=totals+price*count;
+            String amount=String.valueOf(totals);
             holder.cartBinding.textPrice.setText(String.valueOf(calculatePrice(price,count)));
             //getTotal(total);
-            listener.onActionPerformed(item_id,quantity);
+            listener.onActionPerformed(item_id,quantity,amount);
         });
 
+//        holder.cartBinding.icAdd.setOnClickListener(v -> {
+//            int quantity=Integer.parseInt(cartList.get(position).getQuantity());
+//            quantity++;
+//            cartList.
+////            String item_id=cartList.get(position).getItem_id();
+////            holder.cartBinding.productCount.setText(String.valueOf(quantity));
+////            price=Integer.parseInt(cartList.get(position).getPrice());
+////            totals=totals+price*quantity;
+////            holder.cartBinding.textPrice.setText(String.valueOf(calculatePrice(price,quantity)));
+////
+////            //getTotal(total);
+////            listener.onActionPerformed(item_id,String.valueOf(quantity));
+//        });
 
     }
 
@@ -144,7 +159,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
     }
 
     public interface setOnActionListener{
-      void onActionPerformed(String item_id,String quantity);
+      void onActionPerformed(String item_id,String quantity,String price);
     }
 
     public void setActionListener(setOnActionListener listener)

@@ -9,19 +9,15 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.WindowManager;
 
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.ActivityHomeBinding;
 import com.example.laundryapp.fragments.CartFragment;
-import com.example.laundryapp.fragments.HelpFragment;
 import com.example.laundryapp.fragments.HomeFragment;
 import com.example.laundryapp.fragments.ProfileFragment;
-import com.example.laundryapp.fragments.RequestFragment;
 import com.example.laundryapp.fragments.SettingsFragment;
 import com.example.laundryapp.utilities.Constants;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 public ActivityHomeBinding homeBinding;

@@ -108,7 +108,6 @@ public class BaseActivity extends AppCompatActivity {
         FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) view.getLayoutParams();
         view.setLayoutParams(layoutParams);
         view.setBackgroundColor(context.getResources().getColor(R.color.colorDarkstateBlue));
-
         snackbar.show();
     }
 

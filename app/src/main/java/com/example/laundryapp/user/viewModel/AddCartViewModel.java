@@ -28,8 +28,8 @@ public class AddCartViewModel extends ViewModel {
         return addCartRepository.deletecartItem(user_id,item_id);
     }
 
-    public LiveData<UpdateResponse> updateCartItem(String item_id,String user_id,String quantity){
-        return addCartRepository.updateCartItem(item_id,user_id,quantity);
+    public LiveData<UpdateResponse> updateCartItem(String item_id,String user_id,String quantity,String price){
+        return addCartRepository.updateCartItem(item_id,user_id,quantity,price);
     }
 
  }

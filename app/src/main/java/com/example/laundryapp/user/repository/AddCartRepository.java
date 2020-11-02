@@ -86,11 +86,11 @@ public class AddCartRepository {
         return mutableLiveData;
     }
 
-    public LiveData<UpdateResponse> updateCartItem(String item_id,String user_id,String quantity){
+    public LiveData<UpdateResponse> updateCartItem(String item_id,String user_id,String quantity,String price){
         MutableLiveData mutableLiveData=new MutableLiveData();
 
         networkAPI=NetworkService.getRetrofitInstance().create(NetworkAPI.class);
-        Call<UpdateResponse> responseCall=networkAPI.updateCartItem(item_id,user_id,quantity);
+        Call<UpdateResponse> responseCall=networkAPI.updateCartItem(item_id,user_id,quantity,price);
         responseCall.enqueue(new Callback<UpdateResponse>() {
             @Override
             public void onResponse(Call<UpdateResponse> call, Response<UpdateResponse> response) {

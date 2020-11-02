@@ -35,7 +35,7 @@ public static ActivityCartBinding cartBinding;
 public CartViewModel cartViewModel;
 public AddCartViewModel addCartViewModel;
 public CartAdapter cartAdapter;
-public String item_id,quantity;
+public String item_id,quantity,price;
     public String user_id;
     public int totalAmount=0;
     @Override
@@ -182,16 +182,17 @@ public void fetchCart(){
     }
 
     @Override
-    public void onActionPerformed(String item_id, String quantity) {
+    public void onActionPerformed(String item_id, String quantity,String price) {
         this.item_id=item_id;
         this.quantity=quantity;
+        this.price=price;
         updateCartItem();
        cartBinding.orederLayout.textTotal.setVisibility(View.INVISIBLE);
 
     }
     public void updateCartItem(){
-        addCartViewModel.updateCartItem(item_id,user_id,quantity).observe(this,updateResponse -> {
-            if (updateResponse != null && updateResponse.getStatus().equals("Success")) {
+        addCartViewModel.updateCartItem(item_id,user_id,quantity,price).observe(this,updateResponse -> {
+            if (updateResponse != null && updateResponse.getStatus().equals("true")) {
              // fetchCart();
             }
         });

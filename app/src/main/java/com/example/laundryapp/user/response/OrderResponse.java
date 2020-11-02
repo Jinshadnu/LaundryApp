@@ -22,21 +22,19 @@ public class OrderResponse {
 
 
 
-    private class Order {
-        @SerializedName("date")
-        private String date;
-
-        @SerializedName("order_status")
-        private String order_status;
-
-        @SerializedName("service_name")
-        private String service_name;
+    public class Order {
 
         @SerializedName("order_id")
-        private String order_id;
+        public String order_id;
+
+        @SerializedName("Date")
+        public String date;
+
+        @SerializedName("order_status")
+        public String order_status;
 
         @SerializedName("items")
-        private ArrayList<Itemss> items;
+        public ArrayList<Itemss> items;
 
         public String getDate() {
             return date;
@@ -44,10 +42,6 @@ public class OrderResponse {
 
         public String getOrder_status() {
             return order_status;
-        }
-
-        public String getService_name() {
-            return service_name;
         }
 
         public String getOrder_id() {
@@ -60,7 +54,7 @@ public class OrderResponse {
 
 
 
-        private class Itemss {
+        public class Itemss {
             @SerializedName("quantity")
             private String quantity;
 
