@@ -148,8 +148,8 @@ public int pos;
     }
 
     @Override
-    public void addToCart(String item_id,String quantity) {
-        cartViewModel.addToCart(user_id,service_name,item_id,quantity).observe(this,comonResponse -> {
+    public void addToCart(String item_id,String quantity,String price) {
+        cartViewModel.addToCart(user_id,service_name,item_id,quantity,price).observe(this,comonResponse -> {
             if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
                 showSnackBar(this,comonResponse.getMessage());
             }

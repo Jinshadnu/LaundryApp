@@ -71,10 +71,20 @@ public class ChangePassword extends BaseActivity {
         }
 
         if (isEmpty(confirmPassword)){
-            changePasswordBinding.editTextConfirmPassword.setError("please enter your new password");
+            changePasswordBinding.editTextConfirmPassword.setError("please confirm your password");
             return false;
         }
 
+
+        if (newPassword.length() < 6){
+            changePasswordBinding.edittextNewPassword.setError("Password must be atleast 6 characters");
+            return false;
+        }
+
+        if(!newPassword.equals(confirmPassword)){
+            changePasswordBinding.editTextConfirmPassword.setError("Password not matching");
+            return false;
+        }
 
         return true;
     }

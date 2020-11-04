@@ -11,6 +11,11 @@ public class Constants {
     public static final String USER_ID="userId";
     public static final String SERVER_RESPONSE_SUCCESS="success";
     public static final String SERVER_RESPONSE_ERROR="failed";
+    public static final String USER_NAME="userName";
+    public static final String PHONE="phone";
+    public static final String EMAIL="email";
+
+
 
 
 }

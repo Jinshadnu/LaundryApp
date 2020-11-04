@@ -28,14 +28,38 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/search_background"
+                    android:layout_below="@id/layoutBase"
+                    app:queryHint="Search Here"
+                    android:autofillHints="Search Here"
+                    app:defaultQueryHint="Search"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:layout_marginRight="@dimen/size_16dp"
+                    android:layout_marginTop="@dimen/size_16dp"/>
+
+
                 <com.example.laundryapp.utilities.CustomGridRecyclerView
                     android:id="@+id/recycler_cart"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/layoutBase" />
+                    android:layout_below="@id/searchview" />
 
 
-
+                <TextView
+                    android:id="@+id/text_nodata"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No cart Items"
+                    android:layout_marginTop="@dimen/size_25dp"
+                    android:textColor="@color/md_grey_300"
+                    android:textSize="@dimen/size_25dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:gravity="center"/>
 
                 <include
                     android:id="@+id/oreder_layout"

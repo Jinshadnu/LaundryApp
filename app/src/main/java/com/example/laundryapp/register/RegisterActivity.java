@@ -59,6 +59,7 @@ public ActivityRegisterBinding registerBinding;
         email = requireNonNull(registerBinding.editextEmail.getText()).toString().trim();
         password = requireNonNull(registerBinding.editextPassword.getText()).toString().trim();
         confirm_password=requireNonNull(registerBinding.edittextConfirm.getText()).toString().trim();
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
 
 
@@ -83,8 +84,28 @@ public ActivityRegisterBinding registerBinding;
             return false;
         }
 
+        if (password.length() < 6){
+            registerBinding.editextPassword.setError("Password Must be atleast characters");
+            return false;
+        }
+
         if (isEmpty(confirm_password)) {
             registerBinding.edittextConfirm.setError("Please enter password");
+            return false;
+        }
+
+        if(!password.equals(confirm_password)){
+            registerBinding.edittextConfirm.setError("Password not matching");
+            return false;
+        }
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() && email.length() < 5){
+            registerBinding.editextEmail.setError("Invalid email address");
+            return false;
+        }
+
+        if(phone.length() < 8){
+            registerBinding.edittextPhone.setError("Invalid phone number");
             return false;
         }
 
@@ -104,8 +125,12 @@ public ActivityRegisterBinding registerBinding;
                     SharedPreferences.Editor editor=sharedpreferences.edit();
                     editor.putBoolean(Constants.IsUserLogIn, true);
                     editor.putString(Constants.USER_ID,registerResponse.getUser().get(position).getUser_id());
+                    editor.putString(Constants.USER_NAME,registerResponse.getUser().get(position).getUsername());
+                    editor.putString(Constants.PHONE,registerResponse.getUser().get(position).getPhone());
+                    editor.putString(Constants.EMAIL,registerResponse.getUser().get(position).getEmail());
                     editor.commit();
                   startActivity(new Intent(RegisterActivity.this,HomeActivity.class));
+                  finish();
                 }
                 else {
                     //showSnackBar(this,commonResponse.getStatus());

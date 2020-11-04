@@ -5,7 +5,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".user.AddressActivity">
+        tools:context=".user.AddAddressActivity">
 
         <include
             android:id="@+id/layoutBase"
@@ -15,26 +15,44 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Add Address"
+            android:textColor="@color/colorDarkstateBlue"
+            android:textSize="@dimen/size_20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.459"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutBase"
+            tools:ignore="MissingConstraints" />
+
         <EditText
-            android:id="@+id/editText_buildingNumber"
+            android:id="@+id/editText_buildingAddress"
             android:layout_width="0dp"
             android:layout_height="@dimen/size_50dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="32dp"
+            android:paddingLeft="@dimen/size_5dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
+            android:padding="@dimen/size_10dp"
+            android:drawablePadding="@dimen/size_5dp"
             android:background="@drawable/edittext_background"
             android:ems="10"
             android:hint="Building Address or Bilding Number"
             android:inputType="textPersonName"
-            android:padding="@dimen/size_10dp"
+            android:text=""
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
         <EditText
-            android:id="@+id/editText_streetNumber"
+            android:id="@+id/editText_streetnumber"
             android:layout_width="0dp"
             android:layout_height="@dimen/size_50dp"
             android:layout_marginStart="16dp"
@@ -47,9 +65,11 @@
             android:ems="10"
             android:hint="Street Address,Landmark, etc"
             android:inputType="textPersonName"
+            android:text=""
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText_buildingNumber" />
+            app:layout_constraintTop_toBottomOf="@+id/editText_buildingAddress" />
 
         <Spinner
             android:id="@+id/spinner_zone"
@@ -60,47 +80,14 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:gravity="left"
             android:background="@drawable/edittext_background"
+            android:gravity="left"
             android:textColorHint="#CFD8DC"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editText_streetNumber"
-            app:met_floatingLabel="normal"
+            app:layout_constraintTop_toBottomOf="@+id/editText_streetnumber"
             tools:ignore="MissingConstraints" />
-
-
-
-        <TextView
-            android:id="@+id/textView23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/open_sans"
-            android:text="Select Pick up and Delivery Address"
-            android:textColor="@color/colorblack"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView22" />
-
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp"
-            android:fontFamily="@font/open_sans_semibold"
-            android:text="Select Adress"
-            android:textColor="@color/colorblack"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layoutBase"
-            tools:ignore="MissingConstraints" />
-
 
         <Button
             android:id="@+id/buttonsubmit"
@@ -129,7 +116,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonsubmit" />
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

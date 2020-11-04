@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.LayoutAddressBinding;
+import com.example.laundryapp.fragments.adapter.CartAdapter;
 import com.example.laundryapp.fragments.adapter.CategoriesAdapater;
 import com.example.laundryapp.user.response.AddressResponse;
 
@@ -21,7 +22,7 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
     public Context context;
     public List<AddressResponse.Addres> addresList;
     public LayoutAddressBinding addressBinding;
-
+    public setOnAddressListener listener;
     public AddressAdapter(Context context, List<AddressResponse.Addres> addresList) {
         this.context = context;
         this.addresList = addresList;
@@ -37,6 +38,13 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
     @Override
     public void onBindViewHolder(@NonNull AddressViewHolder holder, int position) {
        AddressResponse.Addres addres=addresList.get(position);
+
+       holder.addressBinding.buttonOrder.setOnClickListener(v -> {
+           String bulding_address=addresList.get(position).getBuilding_number();
+           String street_address=addresList.get(position).getStreet_address();
+           String zone=addresList.get(position).getZone_no();
+           listener.onActionPerformed(bulding_address,street_address,zone);
+       });
        holder.addressBinding.setAddress(addres);
     }
 
@@ -52,4 +60,14 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.AddressV
             this.addressBinding=addressBinding;
         }
     }
+
+    public interface setOnAddressListener{
+        void onActionPerformed(String building_number,String street_address,String zone);
+    }
+
+    public void setActionListener(AddressAdapter.setOnAddressListener listener)
+    {
+        this.listener=listener;
+    }
+
 }

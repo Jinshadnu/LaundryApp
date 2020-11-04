@@ -2,13 +2,16 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-    android:layout_height="match_parent"
+        android:layout_height="match_parent"
         android:background="#F5F5F5"
-    tools:context=".fragments.ProfileFragment">
+        tools:context=".fragments.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
 
             <RelativeLayout
                 android:id="@+id/relativeLayout"
@@ -24,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="200dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_centerVertical="true"
@@ -42,7 +45,7 @@
 
 
                     <TextView
-                        android:id="@+id/textView9"
+                        android:id="@+id/textView_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -56,7 +59,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView10"
+                        android:id="@+id/textView_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -67,7 +70,7 @@
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@+id/imageView2"
-                        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView_name" />
 
                     <TextView
                         android:id="@+id/textView_changePassword"
@@ -84,7 +87,7 @@
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView_phone" />
 
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -98,22 +101,22 @@
                         app:layout_constraintTop_toTopOf="parent"
                         android:src="@drawable/profile_round" />
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/textView18"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="32dp"-->
-<!--                        android:layout_marginLeft="32dp"-->
-<!--                        android:drawablePadding="8dp"-->
-<!--                        android:drawableLeft="@drawable/ic_baseline_credit_card_24"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:padding="5dp"-->
-<!--                        android:text="@string/payment"-->
-<!--                        android:textColor="@color/md_grey_800"-->
-<!--                        android:textSize="18sp"-->
-<!--                        android:textStyle="bold"-->
-<!--                        app:layout_constraintStart_toStartOf="parent"-->
-<!--                        app:layout_constraintTop_toBottomOf="@+id/textView_changePassword" />-->
+                    <!--                    <TextView-->
+                    <!--                        android:id="@+id/textView18"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginStart="32dp"-->
+                    <!--                        android:layout_marginLeft="32dp"-->
+                    <!--                        android:drawablePadding="8dp"-->
+                    <!--                        android:drawableLeft="@drawable/ic_baseline_credit_card_24"-->
+                    <!--                        android:layout_marginTop="8dp"-->
+                    <!--                        android:padding="5dp"-->
+                    <!--                        android:text="@string/payment"-->
+                    <!--                        android:textColor="@color/md_grey_800"-->
+                    <!--                        android:textSize="18sp"-->
+                    <!--                        android:textStyle="bold"-->
+                    <!--                        app:layout_constraintStart_toStartOf="parent"-->
+                    <!--                        app:layout_constraintTop_toBottomOf="@+id/textView_changePassword" />-->
 
                     <TextView
                         android:id="@+id/textView_history"
@@ -208,6 +211,12 @@
 
 
         </RelativeLayout>
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+
+        </ScrollView>
 
 
 

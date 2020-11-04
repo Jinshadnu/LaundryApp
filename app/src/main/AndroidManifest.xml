@@ -17,26 +17,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".user.AddAddressActivity"></activity>
-        <activity android:name=".user.OrderStatusActivity" />
-        <activity android:name=".user.NotificationActivity" />
-        <activity android:name=".user.AboutUsActivity" />
-        <activity android:name=".user.PriceDetailsActivity" />
-        <activity android:name=".user.CartActivity" />
-        <activity android:name=".utilities.BaseActivity" />
-        <activity android:name=".user.ForgetPasswordActivity" />
-        <activity android:name=".user.SuccessActivity" />
-        <activity android:name=".user.OrderActivity" />
-        <activity android:name=".user.PaymentActivity" />
-        <activity android:name=".user.HistoryActivity" />
-        <activity android:name=".user.AddressActivity" />
-        <activity android:name=".user.DetailsActivity" />
-        <activity android:name=".user.ChangePassword" />
+        <activity android:name=".user.AddAddressActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".user.OrderStatusActivity" android:screenOrientation="portrait" />
+        <activity android:name=".user.NotificationActivity" android:screenOrientation="portrait" />
+        <activity android:name=".user.AboutUsActivity" android:screenOrientation="portrait" />
+        <activity android:name=".user.PriceDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".user.CartActivity" android:screenOrientation="portrait" />
+        <activity android:name=".utilities.BaseActivity" android:screenOrientation="portrait" />
+        <activity android:name=".user.ForgetPasswordActivity" android:screenOrientation="portrait" />
+        <activity android:name=".user.SuccessActivity" android:screenOrientation="portrait" />
+        <activity android:name=".user.OrderActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".user.PaymentActivity" android:screenOrientation="portrait" />
+        <activity android:name=".user.HistoryActivity" android:screenOrientation="portrait" />
+        <activity android:name=".user.AddressActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".user.DetailsActivity"  />
+        <activity android:name=".user.ChangePassword" android:screenOrientation="portrait"/>
         <activity android:name=".user.ServiceDetails" />
-        <activity android:name=".user.HomeActivity" />
-        <activity android:name=".register.RegisterActivity" />
-        <activity android:name=".login.LoginActivity" />
-        <activity android:name=".welcome.WelcomeActivity" />
+        <activity android:name=".user.HomeActivity" android:screenOrientation="portrait" />
+        <activity android:name=".register.RegisterActivity" android:screenOrientation="portrait" />
+        <activity android:name=".login.LoginActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".welcome.WelcomeActivity" android:screenOrientation="portrait" />
         <activity android:name=".MainActivity" />
         <activity android:name=".splash.SplashActivity">
             <intent-filter>

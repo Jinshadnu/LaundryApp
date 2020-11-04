@@ -54,12 +54,14 @@
                     android:textSize="@dimen/size_18dp" />
 
                 <TextView
+                    android:id="@+id/text_todayDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/text_date"
                     android:padding="@dimen/size_8dp"
                     android:text="28-09-2020"
                     android:textColor="@color/colorwhite"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/size_15dp"
                     android:textSize="@dimen/size_18dp"
                     android:textStyle="bold" />
 
@@ -76,6 +78,7 @@
                     android:textSize="18sp" />
 
                 <TextView
+                    android:id="@+id/text_order_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text_date"
@@ -88,92 +91,7 @@
                     android:textSize="@dimen/size_18dp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/text_charge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Delivery Charge :"
-                    android:textColor="@color/colorwhite"
-                    android:textSize="@dimen/size_18dp"
-                    android:textStyle="normal"
-                    android:layout_below="@id/textView_total"
-                    android:layout_marginLeft="@dimen/size_16dp"
-                    android:padding="@dimen/size_8dp"/>
 
-                <TextView
-                    android:id="@+id/charge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="4 QAR"
-                    android:textColor="@color/colorwhite"
-                    android:textSize="@dimen/size_18dp"
-                    android:textStyle="bold"
-                    android:layout_below="@id/textView_total"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/size_16dp"
-                    android:padding="@dimen/size_8dp"/>
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/text_charge"
-                    android:background="@color/colorblack"
-                    android:layout_marginLeft="@dimen/size_16dp"
-                    android:layout_marginRight="@dimen/size_16dp"
-                    android:layout_marginTop="@dimen/size_5dp"
-                    android:padding="@dimen/size_3dp"/>
-
-                <TextView
-                    android:id="@+id/text_subtotal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/view"
-                    android:layout_marginLeft="@dimen/size_16dp"
-                    android:textStyle="normal"
-                    android:textColor="@color/colorwhite"
-                    android:text="Sub Total  :"
-                    android:padding="@dimen/size_8dp"
-                    android:textSize="@dimen/size_18dp"
-                    android:layout_marginTop="@dimen/size_5dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/view"
-                    android:layout_marginRight="@dimen/size_16dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorwhite"
-                    android:text="154 QAR"
-                    android:padding="@dimen/size_8dp"
-                    android:layout_alignParentRight="true"
-                    android:textSize="@dimen/size_18dp"
-                    android:layout_marginTop="@dimen/size_5dp"/>
-
-                <TextView
-                    android:id="@+id/text__amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/text_subtotal"
-                    android:layout_marginLeft="@dimen/size_16dp"
-                    android:textStyle="normal"
-                    android:textColor="@color/colorwhite"
-                    android:text="Amount Payable  :"
-                    android:padding="@dimen/size_8dp"
-                    android:textSize="@dimen/size_18dp"
-                    android:layout_marginTop="@dimen/size_5dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/text_subtotal"
-                    android:layout_marginRight="@dimen/size_16dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorwhite"
-                    android:text="154 QAR"
-                    android:padding="@dimen/size_8dp"
-                    android:layout_alignParentRight="true"
-                    android:textSize="@dimen/size_18dp"
-                    android:layout_marginTop="@dimen/size_5dp"/>
 
             </RelativeLayout>
 
@@ -207,6 +125,7 @@
                     android:textColor="@color/colorwhite"/>
 
                 <TextView
+                    android:id="@+id/text_itemscount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5"
@@ -229,6 +148,7 @@
                     android:textColor="@color/colorwhite"/>
 
                 <TextView
+                    android:id="@+id/text_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="154 QAR"

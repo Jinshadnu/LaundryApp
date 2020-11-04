@@ -31,10 +31,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
     public static List <Cart> selecteditems;
     public static int total=0;
     public setOnActionListener listener;
-    public int price,quantity,totals;
+    public int quantity;
     public ValueFilter valueFilter;
     public static LayoutCartBinding cartBinding;
     public String user_id;
+    public Double price;
+    public double totals=0.00;
 
 
 
@@ -65,7 +67,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
             String quantity=holder.cartBinding.elegantCount.getNumber();
             String item_id=cartList.get(position).getItem_id();
             int count=Integer.parseInt(quantity);
-            price=Integer.parseInt(cartList.get(position).getPrice());
+            price=Double.parseDouble(cartList.get(position).getPrice());
             totals=totals+price*count;
             String amount=String.valueOf(totals);
             holder.cartBinding.textPrice.setText(String.valueOf(calculatePrice(price,count)));
@@ -89,7 +91,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
 
     }
 
-    private int  calculatePrice(int priceValue, int quantity) {
+    private double  calculatePrice(double priceValue, int quantity)
+    {
         return priceValue * quantity;
     }
 

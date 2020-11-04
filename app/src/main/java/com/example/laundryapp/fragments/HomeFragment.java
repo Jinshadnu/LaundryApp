@@ -3,6 +3,7 @@ package com.example.laundryapp.fragments;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Geocoder;
@@ -78,6 +79,7 @@ public class HomeFragment extends Fragment {
     public double longitude;
     public Location currentLocation;
     public Context context;
+    public String user_id;
 
     private FusedLocationProviderClient fusedLocationClient;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
@@ -124,6 +126,7 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+
         serviceViewModel = ViewModelProviders.of((FragmentActivity) this.getActivity()).get(ServiceViewModel.class);
         plansViewModel = ViewModelProviders.of((FragmentActivity) this.getActivity()).get(PlansViewModel.class);
 
@@ -137,9 +140,15 @@ public class HomeFragment extends Fragment {
         homeBinding.layoutBase.toolbar.setTitle("Home");
         homeBinding.layoutBase.textTitle.setText("Home");
 
+        SharedPreferences sharedpreferences = getActivity().getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        user_id = sharedpreferences.getString(Constants.USER_ID, null);
+
+
         ///homeBinding.recyclerService.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         homeBinding.recyclerService.setLayoutManager(new GridLayoutManager(getActivity(),2));
-        homeBinding.recyclerService.setHasFixedSize(true);
+        homeBinding.recyclerService.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+
 
         homeBinding.recyclerPlans.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         homeBinding.recyclerPlans.setHasFixedSize(true);
@@ -157,15 +166,15 @@ public class HomeFragment extends Fragment {
         addressResultReceiver = new LocationAddressResultReceiver(new Handler());
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
 
-        locationCallback=new LocationCallback(){
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                currentLocation = locationResult.getLocations().get(0);
-                getAddress();
-            }
-
-
-        };
+//        locationCallback=new LocationCallback(){
+//            @Override
+//            public void onLocationResult(LocationResult locationResult) {
+//                currentLocation = locationResult.getLocations().get(0);
+//                getAddress();
+//            }
+//
+//
+//        };
 
         startLocationUpdates();
 
@@ -264,7 +273,7 @@ public class HomeFragment extends Fragment {
             locationRequest.setInterval(2000);
             locationRequest.setFastestInterval(1000);
             locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+//            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
         }
     }
 
@@ -278,7 +287,7 @@ public class HomeFragment extends Fragment {
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             if (resultCode == 0) {
                 Log.d("Address", "Location null retrying");
-                getAddress();
+                ///getAddress();
             }
             if (resultCode == 1) {
                 Toast.makeText(getActivity(), "Address not found, ", Toast.LENGTH_SHORT).show();
@@ -289,30 +298,30 @@ public class HomeFragment extends Fragment {
     }
 
     @SuppressWarnings("MissingPermission")
-    private void getAddress() {
-        if (!Geocoder.isPresent()) {
-            Toast.makeText(getActivity(), "Can't find current address, ",
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Intent intent = new Intent(getActivity(), GetAddressIntentService.class);
-        intent.putExtra("add_receiver", addressResultReceiver);
-        intent.putExtra("add_location", currentLocation);
-        getActivity().startService(intent);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                startLocationUpdates();
-            }
-            else {
-                Toast.makeText(getActivity(), "Location permission not granted, " + "restart the app if you want the feature", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
+//    private void getAddress() {
+//        if (!Geocoder.isPresent()) {
+//            Toast.makeText(getActivity(), "Can't find current address, ",
+//                    Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//        Intent intent = new Intent(getActivity(), GetAddressIntentService.class);
+//        intent.putExtra("add_receiver", addressResultReceiver);
+//        intent.putExtra("add_location", currentLocation);
+//        getActivity().startService(intent);
+//    }
+//
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                startLocationUpdates();
+//            }
+//            else {
+//                Toast.makeText(getActivity(), "Location permission not granted, " + "restart the app if you want the feature", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//    }
 
     //    public void getMyLocation() {
 //        // create class object

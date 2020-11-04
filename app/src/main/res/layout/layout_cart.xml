@@ -89,7 +89,7 @@
                 android:fontFamily="@font/amaranth"
                 android:text="@{carts.service_name}"
                 android:textColor="@color/colorDarkstateBlue"
-                android:textSize="@dimen/size_20dp"
+                android:textSize="@dimen/size_12dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -203,7 +203,7 @@
                 android:layout_centerVertical="true"
                 app:initialNumber="1"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/size_16dp"/>
+                android:layout_marginRight="@dimen/size_5dp"/>
 
 
         </RelativeLayout>

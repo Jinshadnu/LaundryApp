@@ -72,7 +72,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemsViewViewH
             String quantity=itemsList.get(position).getQuantity();
          if (context instanceof OrderActivity){
              ((AddCartCallBack)context).onAddProduct();
-             ((AddCartCallBack) context).addToCart(item_id,quantity);
+             ((AddCartCallBack) context).addToCart(item_id,quantity,price);
          }
         });
 

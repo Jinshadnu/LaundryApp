@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.ActivityAddAddressBinding;
 import com.example.laundryapp.fragments.viewmodel.ServiceViewModel;
+import com.example.laundryapp.user.adapter.AddAddressAdapter;
 import com.example.laundryapp.user.adapter.AddressAdapter;
 import com.example.laundryapp.user.viewModel.AddressViewModel;
 import com.example.laundryapp.utilities.BaseActivity;
@@ -32,14 +33,14 @@ public class AddAddressActivity extends BaseActivity {
 public ActivityAddAddressBinding addAddressBinding;
 public AddressViewModel addressViewModel;
 public String building_address,street_number,zone,user_id;
-public AddressAdapter addressAdapter;
+public AddAddressAdapter addressAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_add_address);
         addAddressBinding= DataBindingUtil.setContentView(this,R.layout.activity_add_address);
 
-       //addAddressBinding.layoutBase.te.setText("Address Details");
+       addAddressBinding.layoutBase.textTitle.setText("Address Details");
 
         addAddressBinding.recyclerAddress.setLayoutManager(new LinearLayoutManager(this));
         addAddressBinding.recyclerAddress.setHasFixedSize(true);
@@ -89,13 +90,15 @@ public AddressAdapter addressAdapter;
         };
         spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
         addAddressBinding.spinnerZone.setAdapter(spinnerArrayAdapter);
-         zone=addAddressBinding.spinnerZone.getSelectedItem().toString();
+
 
         addressViewModel= ViewModelProviders.of(this).get(AddressViewModel.class);
 
         addAddressBinding.buttonsubmit.setOnClickListener(v -> {
+            zone=addAddressBinding.spinnerZone.getSelectedItem().toString();
+
             if (validatefields()){
-                addAddress();
+               addAddress();
             }
         });
 
@@ -103,11 +106,11 @@ public AddressAdapter addressAdapter;
 
          getAddress();
 
-//        addAddressBinding.layoutBase.toolbar.setNavigationOnClickListener(v -> {
-//            onBackPressed();
-//        });
-//
-//        addAddressBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+        addAddressBinding.layoutBase.toolbar.setNavigationOnClickListener(v -> {
+            onBackPressed();
+        });
+
+        addAddressBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
 
 
     }
@@ -129,6 +132,11 @@ public AddressAdapter addressAdapter;
             return false;
         }
 
+        if (addAddressBinding.spinnerZone.getSelectedItem().equals("Select your zone")){
+            showSnackBar(this,"Please select your zone");
+            return false;
+        }
+
 
 
         return true;
@@ -145,7 +153,7 @@ public AddressAdapter addressAdapter;
     public void getAddress(){
         addressViewModel.getAddress(user_id).observe(this,addressResponse -> {
             if (addressResponse != null && addressResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                addressAdapter=new AddressAdapter(this,addressResponse.getAddress());
+                addressAdapter=new AddAddressAdapter(this,addressResponse.getAddress());
                 addAddressBinding.recyclerAddress.setAdapter(addressAdapter);
             }
         });

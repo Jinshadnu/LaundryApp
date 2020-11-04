@@ -102,6 +102,7 @@
                     android:background="@drawable/edittext_background"
                     android:ems="10"
                     android:textStyle="bold"
+                    android:maxLength="8"
                     android:textColor="@color/colorblack"
                     android:textSize="@dimen/size_18dp"
                     android:hint="Phone"

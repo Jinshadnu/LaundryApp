@@ -9,6 +9,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -36,8 +37,10 @@ import android.widget.Toast;
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.ActivityAddressBinding;
 import com.example.laundryapp.databinding.ActivityOrderBinding;
+import com.example.laundryapp.user.adapter.AddressAdapter;
 import com.example.laundryapp.user.viewModel.AddressViewModel;
 import com.example.laundryapp.user.viewModel.OrderViewModel;
+import com.example.laundryapp.utilities.BaseActivity;
 import com.example.laundryapp.utilities.Constants;
 
 import java.util.ArrayList;
@@ -47,12 +50,16 @@ import java.util.List;
 import static android.text.TextUtils.isEmpty;
 import static java.util.Objects.requireNonNull;
 
-public class AddressActivity extends AppCompatActivity {
+public class AddressActivity extends BaseActivity implements AddressAdapter.setOnAddressListener {
 public ActivityAddressBinding addressBinding;
     private NotificationManager mNotificationManager;
     public static final int MY_PERMISSIONS_REQUEST_SEND_SMS=0;
     public OrderViewModel orderViewModel;
+    public AddressViewModel addressViewModel;
     public String building_address,street_number,zone;
+    public AddressAdapter addressAdapter;
+    public String building,street,zone_no;
+
 
     public String user_id;
 
@@ -69,8 +76,14 @@ public ActivityAddressBinding addressBinding;
 
         addressBinding.layoutBase.textTitle.setText("Address Details");
 
+
+
         SharedPreferences sharedPreferences=getSharedPreferences(Constants.MyPREFERENCES,MODE_PRIVATE);
         user_id=sharedPreferences.getString(Constants.USER_ID,null);
+
+
+        addressBinding.recyclerAddress.setLayoutManager(new LinearLayoutManager(this));
+        addressBinding.recyclerAddress.setHasFixedSize(true);
 
         String[] ZONES = new String[]{
                 "Select your zone",
@@ -94,6 +107,7 @@ public ActivityAddressBinding addressBinding;
                 }
                 else
                 {
+
                     return true;
                 }
             }
@@ -125,6 +139,7 @@ public ActivityAddressBinding addressBinding;
         orderViewModel= ViewModelProviders.of(this).get(OrderViewModel.class);
 
 
+        addressViewModel= ViewModelProviders.of(this).get(AddressViewModel.class);
 
         addressBinding.buttonsubmit.setOnClickListener(v -> {
 
@@ -136,36 +151,14 @@ public ActivityAddressBinding addressBinding;
 //                    catch (Exception e){
 //                        Toast.makeText(this, "SMS Failed to Send, Please try again", Toast.LENGTH_SHORT).show();
 //                    }
+            zone=addressBinding.spinnerZone.getSelectedItem().toString().trim();
             if (validatefields()){
                 addOrder();
             }
         });
 
-        addressBinding.cardViewHome.setOnClickListener(v -> {
-            addressBinding.cardViewHome.setBackground(requireNonNull(this)
-                    .getDrawable(R.color.colorDarkstateBlue));
-            addressBinding.cardViewOffice.setBackground(requireNonNull(this)
-                    .getDrawable(R.color.colorwhite));
-            addressBinding.textHome.setTextColor(getResources().getColor(R.color.colorwhite));
-            addressBinding.textOffice.setTextColor(getResources().getColor(R.color.colorblack));
-            addressBinding.imageViewHome.setBackground(requireNonNull(this)
-                    .getDrawable(R.color.colorwhite));
-            addressBinding.imageViewHome.setBackground(requireNonNull(this)
-                    .getDrawable(R.color.colorDarkstateBlue));
-        });
+        getAddress();
 
-        addressBinding.cardViewOffice.setOnClickListener(v -> {
-            addressBinding.cardViewHome.setBackground(requireNonNull(this)
-                    .getDrawable(R.color.colorwhite));
-            addressBinding.cardViewOffice.setBackground(requireNonNull(this)
-                    .getDrawable(R.color.colorDarkstateBlue));
-            addressBinding.textHome.setTextColor(getResources().getColor(R.color.colorblack));
-            addressBinding.textOffice.setTextColor(getResources().getColor(R.color.colorwhite));
-            addressBinding.imageViewOffice.setBackground(requireNonNull(this)
-                    .getDrawable(R.color.colorwhite));
-            addressBinding.imageViewHome.setBackground(requireNonNull(this)
-                    .getDrawable(R.color.colorDarkstateBlue));
-        });
 
 
     }
@@ -194,7 +187,7 @@ public ActivityAddressBinding addressBinding;
     public boolean validatefields(){
         building_address= requireNonNull(addressBinding.editTextBuildingNumber.getText().toString().trim());
         street_number= requireNonNull(addressBinding.editTextStreetNumber.getText().toString().trim());
-        zone=addressBinding.spinnerZone.getSelectedItem().toString().trim();
+
 
 
         if (isEmpty(building_address)){
@@ -204,6 +197,11 @@ public ActivityAddressBinding addressBinding;
 
         if (isEmpty(street_number)){
             addressBinding.editTextStreetNumber.setError("please enter street number");
+            return false;
+        }
+
+        if (addressBinding.spinnerZone.getSelectedItem().equals("Select your zone")){
+            showSnackBar(this,"Please select your zone");
             return false;
         }
 
@@ -290,5 +288,74 @@ public ActivityAddressBinding addressBinding;
             }
         });
     }
+
+    public void getAddress(){
+        addressViewModel.getAddress(user_id).observe(this,addressResponse -> {
+            if (addressResponse != null && addressResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                addressAdapter=new AddressAdapter(this,addressResponse.getAddress());
+                addressBinding.recyclerAddress.setAdapter(addressAdapter);
+                addressAdapter.setActionListener(this);
+            }
+            if(addressAdapter.getItemCount() == 0){
+                addressBinding.recyclerAddress.setVisibility(View.GONE);
+                //addressBinding.button3.setVisibility(View.GONE);
+            }
+        });
+    }
+
+
+
+
+    @Override
+    public void onActionPerformed(String building_number, String street_address, String zone) {
+     this.building=building_number;
+     this.street=street_address;
+     this.zone_no=zone;
+
+     adOrder();
+    }
+
+    public void adOrder(){
+        orderViewModel.addOrder(user_id,building,street,zone_no).observe(this,comonResponse -> {
+            if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(this, "notify_001");
+                Intent ii = new Intent(this, HistoryActivity.class);
+                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, ii, 0);
+
+                NotificationCompat.BigTextStyle bigText = new NotificationCompat.BigTextStyle();
+                //   bigText.bigText(verseurl);
+                bigText.setBigContentTitle("Order Status");
+                bigText.setSummaryText("Order Status");
+
+                mBuilder.setContentIntent(pendingIntent);
+                mBuilder.setSmallIcon(R.mipmap.ic_launcher_round);
+                mBuilder.setContentTitle("Your Title");
+                mBuilder.setContentText(comonResponse.getMessage());
+                mBuilder.setPriority(Notification.PRIORITY_MAX);
+                mBuilder.setStyle(bigText);
+
+                mNotificationManager =
+                        (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+// === Removed some obsoletes
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                {
+                    String channelId = "Your_channel_id";
+                    NotificationChannel channel = new NotificationChannel(
+                            channelId,
+                            "Channel human readable title",
+                            NotificationManager.IMPORTANCE_HIGH);
+                    mNotificationManager.createNotificationChannel(channel);
+                    mBuilder.setChannelId(channelId);
+                }
+
+                mNotificationManager.notify(0, mBuilder.build());
+                startActivity(new Intent(AddressActivity.this,SuccessActivity.class));
+            }
+        });
+    }
+
+
 }
 

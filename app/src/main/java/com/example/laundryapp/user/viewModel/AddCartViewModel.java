@@ -16,8 +16,8 @@ public class AddCartViewModel extends ViewModel {
         this.addCartRepository=new AddCartRepository();
     }
 
-    public LiveData<ComonResponse> addToCart(String user_id, String service_name, String item_id, String quantity){
-        return addCartRepository.addToCart(user_id, service_name, item_id, quantity);
+    public LiveData<ComonResponse> addToCart(String user_id, String service_name, String item_id, String quantity,String price){
+        return addCartRepository.addToCart(user_id, service_name, item_id, quantity,price);
     }
 
     public LiveData<CartResponse> getCartItems(String user_id){

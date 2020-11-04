@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <data>
         <variable
             name="address"
@@ -81,6 +80,7 @@
                 android:textSize="@dimen/size_16dp"
                 android:textColor="@color/colorDarkstateBlue"
                 android:text="Zone Number :"
+                android:layout_marginBottom="@dimen/size_8dp"
                 android:layout_marginTop="@dimen/size_8dp"
                 android:layout_below="@id/textView_streetNumber"
                 android:padding="@dimen/size_5dp"
@@ -94,24 +94,14 @@
                 android:textColor="@color/colorDarkstateBlue"
                 android:layout_below="@id/textView_streetNumber"
                 android:layout_marginTop="@dimen/size_8dp"
+                android:layout_marginBottom="@dimen/size_8dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/padd_10"
                 android:text="@{address.zone_no}"
                 android:padding="@dimen/size_5dp"
                 android:layout_marginLeft="@dimen/size_16dp"/>
 
-            <Button
-                android:id="@+id/button_order"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorDarkstateBlue"
-                android:layout_below="@id/zone_number"
-                android:layout_marginBottom="@dimen/size_8dp"
-                android:layout_marginLeft="@dimen/size_15dp"
-                android:layout_marginRight="@dimen/size_15dp"
-                android:text="Use this address"
-                android:textColor="@color/mdtp_white"
-                android:layout_marginTop="@dimen/size_5dp"/>
+
 
 
         </RelativeLayout>

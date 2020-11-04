@@ -1,6 +1,8 @@
 package com.example.laundryapp.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -17,6 +19,7 @@ import com.example.laundryapp.user.AddAddressActivity;
 import com.example.laundryapp.user.AddressActivity;
 import com.example.laundryapp.user.ChangePassword;
 import com.example.laundryapp.user.HistoryActivity;
+import com.example.laundryapp.utilities.Constants;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +28,7 @@ import com.example.laundryapp.user.HistoryActivity;
  */
 public class ProfileFragment extends Fragment {
 public FragmentProfileBinding profileBinding;
+public String username,phone,email;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -71,6 +75,13 @@ public FragmentProfileBinding profileBinding;
         // Inflate the layout for this fragment
         profileBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
 
+        SharedPreferences sharedpreferences = getContext().getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
+        username=sharedpreferences.getString(Constants.USER_NAME,null);
+        phone=sharedpreferences.getString(Constants.PHONE,null);
+        email=sharedpreferences.getString(Constants.EMAIL,null);
+
+        profileBinding.textViewName.setText(username);
+        profileBinding.textViewPhone.setText(phone);
 
 
         profileBinding.textViewChangePassword.setOnClickListener(v -> {

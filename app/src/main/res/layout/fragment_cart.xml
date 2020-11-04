@@ -58,7 +58,21 @@
                     layout="@layout/layout_price"
                     />
 
+                <TextView
+                    android:id="@+id/text_nodata"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No cart Items"
+                    android:layout_marginTop="@dimen/size_25dp"
+                    android:textColor="@color/md_grey_300"
+                    android:textSize="@dimen/size_25dp"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    android:gravity="center"/>
+
             </LinearLayout>
+
+
 
 
         </ScrollView>

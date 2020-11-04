@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -21,18 +23,32 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 public ActivityHomeBinding homeBinding;
+public String user_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         homeBinding= DataBindingUtil.setContentView(this,R.layout.activity_home);
 
+        SharedPreferences sharedpreferences = getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        user_id = sharedpreferences.getString(Constants.USER_ID, null);
+
+        if(sharedpreferences.getBoolean(Constants.IsUserLogIn, false)){
+            editor.putBoolean(Constants.IsUserLogIn, false);
+        }
 
         openFragment(new HomeFragment(), Constants.HOME_FRAGMENT_TAG);
 
         homeBinding.bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        openFragment(new HomeFragment(), Constants.HOME_FRAGMENT_TAG);
     }
 
     @Override

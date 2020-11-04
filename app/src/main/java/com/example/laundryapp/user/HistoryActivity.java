@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 
@@ -64,6 +65,11 @@ public ActivityHistoryBinding historyBinding;
                 if (orderResponse != null && orderResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
                     orderAdapter=new OrderAdapter(this,orderResponse.getOrders());
                     historyBinding.recyclerOrders.setAdapter(orderAdapter);
+                }
+
+                if(orderAdapter.getItemCount() == 0){
+                    historyBinding.textNodata.setVisibility(View.VISIBLE);
+                    historyBinding.recyclerOrders.setVisibility(View.GONE);
                 }
 
             });

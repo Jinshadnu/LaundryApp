@@ -33,8 +33,8 @@ public class Plans {
         this.id = id;
     }
 
-    @BindingAdapter("banners")
-    public static void loadImage(ImageView imageView, int image){
-        imageView.setImageResource(image);
-    }
+//    @BindingAdapter("banners")
+//    public static void loadImage(ImageView imageView, int image){
+//        imageView.setImageResource(image);
+//    }
 }

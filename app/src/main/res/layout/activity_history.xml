@@ -39,5 +39,18 @@
             android:layout_below="@id/searchview"
 
             />
+
+        <TextView
+            android:id="@+id/text_nodata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No orders"
+            android:layout_marginTop="@dimen/size_25dp"
+            android:textColor="@color/md_grey_300"
+            android:textSize="@dimen/size_25dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            />
+
     </RelativeLayout>
 </layout>
