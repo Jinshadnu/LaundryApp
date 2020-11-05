@@ -20,13 +20,13 @@ public class ItemsRepository {
 
         List<Items> itemsList=new ArrayList<>();
         itemsList.add(new Items("T-shirt",5, R.drawable.t_shirt));
-        itemsList.add(new Items("Shirt",10, R.drawable.shirt));
-        itemsList.add(new Items("Pant",15, R.drawable.pant));
-        itemsList.add(new Items("Shorts",5, R.drawable.shorts));
-        itemsList.add(new Items("T-shirt",5, R.drawable.t_shirt));
-        itemsList.add(new Items("Shirt",10, R.drawable.shirt));
-        itemsList.add(new Items("Pant",15, R.drawable.pant));
-        itemsList.add(new Items("Shorts",5, R.drawable.shorts));
+//        itemsList.add(new Items("Shirt",10, R.drawable.shirt));
+//        itemsList.add(new Items("Pant",15, R.drawable.pant));
+//        itemsList.add(new Items("Shorts",5, R.drawable.shorts));
+//        itemsList.add(new Items("T-shirt",5, R.drawable.t_shirt));
+//        itemsList.add(new Items("Shirt",10, R.drawable.shirt));
+//        itemsList.add(new Items("Pant",15, R.drawable.pant));
+//        itemsList.add(new Items("Shorts",5, R.drawable.shorts));
 
         mutableLiveData.setValue(itemsList);
 

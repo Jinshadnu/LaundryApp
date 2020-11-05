@@ -37,6 +37,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
     public String user_id;
     public Double price;
     public double totals=0.00;
+    public double price_value;
 
 
 
@@ -61,6 +62,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
         int i=0;
         total=0;
 
+        price_value=Double.parseDouble(cartList.get(position).getPrice());
+
+
+
         holder.cartBinding.elegantCount.setNumber(cartList.get(position).getQuantity());
         holder.cartBinding.elegantCount.setOnValueChangeListener((view, oldValue, newValue) -> {
             //getTotal();
@@ -68,11 +73,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
             String item_id=cartList.get(position).getItem_id();
             int count=Integer.parseInt(quantity);
             price=Double.parseDouble(cartList.get(position).getPrice());
-            totals=totals+price*count;
-            String amount=String.valueOf(totals);
+           // totals=totals+price_value*count;
+
             holder.cartBinding.textPrice.setText(String.valueOf(calculatePrice(price,count)));
+            String amount=String.valueOf(price);
             //getTotal(total);
             listener.onActionPerformed(item_id,quantity,amount);
+
+
         });
 
 //        holder.cartBinding.icAdd.setOnClickListener(v -> {
@@ -165,6 +173,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
       void onActionPerformed(String item_id,String quantity,String price);
     }
 
+//    public interface UpdatePayableAmount {
+//        void updatePayableAmount(List<CartResponse.Carts> shoppingCart);
+//    }
     public void setActionListener(setOnActionListener listener)
     {
         this.listener=listener;

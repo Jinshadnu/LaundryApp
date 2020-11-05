@@ -294,7 +294,7 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
         updateCartItem();
 
 
-        fetchCart();
+        //fetchCart();
 
         //cartBinding.orederLayout.textTotal.setVisibility(View.GONE);
 
@@ -304,7 +304,8 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
     public void updateCartItem(){
         addCartViewModel.updateCartItem(item_id,user_id,quantity,price).observe(getActivity(),updateResponse -> {
             if (updateResponse != null && updateResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-
+              String cart_total=String.valueOf(updateResponse.getOrder_total());
+              cartBinding.orederLayout.total.setText(cart_total);
             }
         });
     }

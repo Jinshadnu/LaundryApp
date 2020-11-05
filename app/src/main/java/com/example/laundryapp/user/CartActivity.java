@@ -23,6 +23,7 @@ import com.example.laundryapp.databinding.ActivityCartBinding;
 import com.example.laundryapp.fragments.adapter.CartAdapter;
 import com.example.laundryapp.fragments.pojo.Cart;
 import com.example.laundryapp.fragments.viewmodel.CartViewModel;
+import com.example.laundryapp.user.response.CartResponse;
 import com.example.laundryapp.user.viewModel.AddCartViewModel;
 import com.example.laundryapp.utilities.BaseActivity;
 import com.example.laundryapp.utilities.Constants;
@@ -36,6 +37,7 @@ public CartViewModel cartViewModel;
 public AddCartViewModel addCartViewModel;
 public CartAdapter cartAdapter;
 public String item_id,quantity,price;
+    public String count;
     public String user_id;
     public int totalAmount=0;
     @Override
@@ -60,7 +62,12 @@ public String item_id,quantity,price;
         addCartViewModel=ViewModelProviders.of((FragmentActivity) this).get(AddCartViewModel.class);
 
         cartBinding.orederLayout.buttonOrder.setOnClickListener(v -> {
-            startActivity(new Intent(this, PriceDetailsActivity.class));
+            Intent intent=new Intent(CartActivity.this,PriceDetailsActivity.class);
+            count=String.valueOf(cartAdapter.cartList.size());
+            String totalPrice=cartBinding.orederLayout.total.getText().toString();
+            intent.putExtra("qauntity",count);
+            intent.putExtra("price",totalPrice);
+            startActivity(intent);
         });
 
         cartBinding.recyclerCart.setLayoutManager(new GridLayoutManager(this,1));
@@ -193,17 +200,37 @@ public void fetchCart(){
         this.quantity=quantity;
         this.price=price;
         updateCartItem();
-       //cartBinding.orederLayout.textTotal.setVisibility(View.INVISIBLE);
 
-        fetchCart();
+
 
     }
     public void updateCartItem(){
         addCartViewModel.updateCartItem(item_id,user_id,quantity,price).observe(this,updateResponse -> {
             if (updateResponse != null && updateResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)) {
              // fetchCart();
+                String cart_total=String.valueOf(updateResponse.getOrder_total());
+                cartBinding.orederLayout.total.setText(cart_total);
             }
         });
     }
 
-}
+
+//    @Override
+//    public void updatePayableAmount(List<CartResponse.Carts> shoppingCart) {
+//        setPayableAmount(shoppingCart);
+//    }
+//
+//    private void setPayableAmount(List<CartResponse.Carts> shoppingCart) {
+//        Double totalAmount = 0.0;
+//        for (int i = 0; i < shoppingCart.size(); i++) {
+//            int itemQuantity = Integer.parseInt(shoppingCart.get(i).getQuantity());
+//            Double price = Double.valueOf(shoppingCart.get(i).getPrice());
+//            //price = price * itemQuantity;
+//            totalAmount = totalAmount + price;
+//        }
+//
+//        cartBinding.orederLayout.total.setText(String.valueOf(totalAmount));
+//
+//
+//    }
+    }

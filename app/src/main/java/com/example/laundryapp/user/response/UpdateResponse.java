@@ -7,8 +7,18 @@ public class UpdateResponse {
     @SerializedName("status")
     public String status;
 
+
+    @SerializedName("order_total")
+    private int order_total;
+
+
+
     public String getStatus() {
         return status;
+    }
+
+    public int getOrder_total() {
+        return order_total;
     }
 
 

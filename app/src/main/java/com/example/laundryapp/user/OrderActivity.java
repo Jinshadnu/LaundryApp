@@ -153,6 +153,9 @@ public int pos;
             if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
                 showSnackBar(this,comonResponse.getMessage());
             }
+            if(comonResponse != null && comonResponse.getStatus().equals("failed")){
+                showSnackBar(this,comonResponse.getMessage());
+            }
         });
     }
 
@@ -167,6 +170,7 @@ public int pos;
 //    orderBinding.textPrice.setText(String.valueOf(total));
 //}
 private void fetchCategories() {
+
     serviceViewModel.getServices().observe((LifecycleOwner) this, serviceResponse ->  {
      if (serviceResponse != null && serviceResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
        categoriesAdapater=new CategoriesAdapater(this, serviceResponse.getServices().get(pos).getCategory());

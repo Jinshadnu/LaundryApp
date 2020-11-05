@@ -27,13 +27,13 @@ public class CartRepostory {
         MutableLiveData mutableLiveData=new MutableLiveData();
 
         List<Cart> cartList=new ArrayList<>();
-        cartList.add(new Cart("T-shirt",R.drawable.t_shirt,5,1));
-        cartList.add(new Cart("Shirt", R.drawable.shirt,7,1));
-        cartList.add(new Cart("Pant", R.drawable.pant,10,1));
-        cartList.add(new Cart("Shorts",R.drawable.shorts,4,1));
-        cartList.add(new Cart("Shirt", R.drawable.shirt,7,1));
-        cartList.add(new Cart("T-shirt",R.drawable.t_shirt,5,1));
-        cartList.add(new Cart("Shorts",R.drawable.shorts,4,1));
+//        cartList.add(new Cart("T-shirt",R.drawable.t_shirt,5,1));
+//        cartList.add(new Cart("Shirt", R.drawable.shirt,7,1));
+//        cartList.add(new Cart("Pant", R.drawable.pant,10,1));
+//        cartList.add(new Cart("Shorts",R.drawable.shorts,4,1));
+//        cartList.add(new Cart("Shirt", R.drawable.shirt,7,1));
+//        cartList.add(new Cart("T-shirt",R.drawable.t_shirt,5,1));
+//        cartList.add(new Cart("Shorts",R.drawable.shorts,4,1));
 
         mutableLiveData.setValue(cartList);
 

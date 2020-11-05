@@ -296,10 +296,10 @@ public ActivityAddressBinding addressBinding;
                 addressBinding.recyclerAddress.setAdapter(addressAdapter);
                 addressAdapter.setActionListener(this);
             }
-            if(addressAdapter.getItemCount() == 0){
-                addressBinding.recyclerAddress.setVisibility(View.GONE);
-                //addressBinding.button3.setVisibility(View.GONE);
-            }
+//            if(addressAdapter.getItemCount() == 0){
+//                addressBinding.recyclerAddress.setVisibility(View.GONE);
+//                //addressBinding.button3.setVisibility(View.GONE);
+//            }
         });
     }
 

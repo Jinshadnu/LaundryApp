@@ -97,9 +97,11 @@ public int position;
                     startActivity(new Intent(LoginActivity.this,HomeActivity.class));
                     finish();
                 }
-                else {
+
+                if(loginResponse != null && loginResponse.getStatus().equals("false")){
                     showSnackBar(this,"Invalid username or password");
                 }
+
 
             });
 
