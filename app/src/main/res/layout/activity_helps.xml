@@ -27,7 +27,7 @@
                 android:id="@+id/text_help"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="How It Works"
+                android:text="How It Works ?"
                 android:textColor="@color/colorDarkstateBlue"
                 android:textSize="@dimen/size_20dp"
                 android:textStyle="bold"

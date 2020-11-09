@@ -63,7 +63,7 @@
             android:layout_below="@id/text_location"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/size_8dp"
-            android:text="Al Khor, Dohan-Qatar"/>
+            android:text="Al Khor, Doha-Qatar"/>
 
         <TextView
             android:id="@+id/text_openMap"

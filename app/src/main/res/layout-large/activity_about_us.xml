@@ -1,123 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F5F5F5"
-    tools:context=".user.AboutUsActivity">
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F5F5F5"
+        tools:context=".user.AboutUsActivity">
 
 
 
-    <include
-        android:id="@+id/layoutBase"
-        layout="@layout/root_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <include
+            android:id="@+id/layoutBase"
+            layout="@layout/root_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorDarkstateBlue"
-        android:fontFamily="@font/amaranth"
-        android:layout_below="@id/layoutBase"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/size_20dp"
-        android:textStyle="bold"
-        android:textSize="@dimen/size_20dp"
-        android:text="Contact us" />
-
-
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorDarkstateBlue"
+            android:fontFamily="@font/amaranth"
+            android:layout_below="@id/layoutBase"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:textStyle="bold"
+            android:textSize="@dimen/size_20dp"
+            android:text="Contact us" />
 
 
-    <ImageView
-        android:id="@+id/imageView_location"
-        android:layout_width="@dimen/size_60dp"
-        android:layout_height="@dimen/size_60dp"
-        android:src="@drawable/ic_baseline_location_on_24"
-        android:layout_below="@id/textView14"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/size_20dp"/>
-
-    <TextView
-        android:id="@+id/text_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/size_18dp"
-        android:textStyle="normal"
-        android:textColor="@color/colorDarkstateBlue"
-        android:layout_below="@id/imageView_location"
-        android:layout_centerHorizontal="true"
-        android:text="CR NO: 134925"/>
-
-    <TextView
-        android:id="@+id/location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/size_18dp"
-        android:textStyle="normal"
-        android:textColor="@color/colorDarkstateBlue"
-        android:layout_below="@id/text_location"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/size_8dp"
-        android:text="Al Khor, Dohan-Qatar"/>
-
-    <TextView
-        android:id="@+id/text_openMap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/size_22dp"
-        android:textStyle="normal"
-        android:textColor="@color/colorPrimary"
-        android:layout_below="@id/location"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/size_8dp"
-        android:text="Open map"/>
 
 
-    <ImageView
-        android:id="@+id/imageView_phone"
-        android:layout_width="@dimen/size_50dp"
-        android:layout_height="@dimen/size_50dp"
-        android:src="@drawable/ic_baseline_phone_android_24"
-        android:layout_below="@id/text_openMap"
-        android:layout_marginTop="@dimen/size_5dp"
-        android:layout_centerHorizontal="true"/>
+        <ImageView
+            android:id="@+id/imageView_location"
+            android:layout_width="@dimen/size_60dp"
+            android:layout_height="@dimen/size_60dp"
+            android:src="@drawable/ic_baseline_location_on_24"
+            android:layout_below="@id/textView14"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/size_20dp"/>
 
-    <TextView
-        android:id="@+id/text_phone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/size_22dp"
-        android:textStyle="normal"
-        android:textColor="@color/colorDarkstateBlue"
-        android:layout_below="@id/imageView_phone"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/size_10dp"
-        android:text="77123465"/>
+        <TextView
+            android:id="@+id/text_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_18dp"
+            android:textStyle="normal"
+            android:textColor="@color/colorDarkstateBlue"
+            android:layout_below="@id/imageView_location"
+            android:layout_centerHorizontal="true"
+            android:text="CR NO: 134925"/>
 
-    <ImageView
-        android:id="@+id/imageView_whatsap"
-        android:layout_width="@dimen/size_50dp"
-        android:layout_height="@dimen/size_50dp"
-        android:src="@drawable/ic_whatsapp"
-        android:layout_below="@id/text_phone"
-        android:layout_marginTop="@dimen/size_10dp"
-        android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_18dp"
+            android:textStyle="normal"
+            android:textColor="@color/colorDarkstateBlue"
+            android:layout_below="@id/text_location"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/size_8dp"
+            android:text="Al Khor, Doha-Qatar"/>
 
-    <TextView
-        android:id="@+id/text_whatsapp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/size_22dp"
-        android:textStyle="normal"
-        android:textColor="@color/colorDarkstateBlue"
-        android:layout_below="@id/imageView_whatsap"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/size_10dp"
-        android:text="33903692"/>
+        <TextView
+            android:id="@+id/text_openMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_22dp"
+            android:textStyle="normal"
+            android:textColor="@color/colorPrimary"
+            android:layout_below="@id/location"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/size_8dp"
+            android:text="Open map"/>
 
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/imageView_phone"
+            android:layout_width="@dimen/size_50dp"
+            android:layout_height="@dimen/size_50dp"
+            android:src="@drawable/ic_baseline_phone_android_24"
+            android:layout_below="@id/text_openMap"
+            android:layout_marginTop="@dimen/size_5dp"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/text_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_22dp"
+            android:textStyle="normal"
+            android:textColor="@color/colorDarkstateBlue"
+            android:layout_below="@id/imageView_phone"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:text="77123465"/>
+
+        <ImageView
+            android:id="@+id/imageView_whatsap"
+            android:layout_width="@dimen/size_50dp"
+            android:layout_height="@dimen/size_50dp"
+            android:src="@drawable/ic_whatsapp"
+            android:layout_below="@id/text_phone"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/text_whatsapp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_22dp"
+            android:textStyle="normal"
+            android:textColor="@color/colorDarkstateBlue"
+            android:layout_below="@id/imageView_whatsap"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:text="33903692"/>
+
+
+    </RelativeLayout>
+</layout>
