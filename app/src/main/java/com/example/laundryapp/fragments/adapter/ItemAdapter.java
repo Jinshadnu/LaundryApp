@@ -29,7 +29,7 @@ import static android.view.LayoutInflater.from;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemsViewViewHolder> implements Filterable {
     public Context context;
     public List<ServiceResponse.OurServices.Categorise.Item> itemsList;
-    List<ServiceResponse.OurServices.Categorise.Item> mStringFilterList;
+    public List<ServiceResponse.OurServices.Categorise.Item> mStringFilterList;
     public int price,quantity,total;
     public ValueFilter valueFilter;
 
@@ -112,10 +112,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemsViewViewH
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
             if (constraint != null && constraint.length() > 0) {
-                List<Items> filterList = new ArrayList<>();
+                List<ServiceResponse.OurServices.Categorise.Item> filterList = new ArrayList<>();
                 for (int i = 0; i < mStringFilterList.size(); i++) {
                     if ((mStringFilterList.get(i).getItem_name().toUpperCase()).contains(constraint.toString().toUpperCase())) {
-                       // filterList.add(mStringFilterList.get(i));
+                        filterList.add(mStringFilterList.get(i));
                     }
                 }
                 results.count = filterList.size();

@@ -18,7 +18,9 @@ import com.example.laundryapp.login.LoginActivity;
 import com.example.laundryapp.user.AddAddressActivity;
 import com.example.laundryapp.user.AddressActivity;
 import com.example.laundryapp.user.ChangePassword;
+import com.example.laundryapp.user.HelpsActivity;
 import com.example.laundryapp.user.HistoryActivity;
+import com.example.laundryapp.user.TermsandConditions;
 import com.example.laundryapp.utilities.Constants;
 
 /**
@@ -101,6 +103,13 @@ public String username,phone,email;
             getActivity().finish();
         });
 
+        profileBinding.textViewTerms.setOnClickListener(view -> {
+            startActivity(new Intent(getActivity(), TermsandConditions.class));
+        });
+
+        profileBinding.textViewHelp.setOnClickListener(view -> {
+            startActivity(new Intent(getActivity(), HelpsActivity.class));
+        });
 
 
 

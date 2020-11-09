@@ -14,7 +14,22 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="terms">Please read the following terms and conditions carefully.</string>
 
+    <string name="termsdescription">Customers use of any of Company services indicates an agrement to be bound by the terms and conditions set forth below.Items which are given to the company for cleaning/repairing will termed as article in this agreement.This agreement is strictly beteween company and customer and does not in any way constitute or imply any relationship with any other parties.</string>
+    <string name="note1">1. Company will use reasonable efforts to try to ensure that washing,drying and folding services are maintained at a high level of quality.</string>
+    <string name="note2">2. Customers are requested to examine the articles at the time of delivery; we would not be held responsible for any damages that are found after delivery of processed articles.</string>
+    <string name="note3">3. Urgent delivery of articles would be charged 50% extra over the regular tariff.</string>
+    <string name="note4">5. If not satisfied with the quality of any service offered,customers should get in touch with the company within 24 hours for resolution.</string>
+    <string name="note5">4. We are not responible for fastness, colour bleeed, colour running, shrinkage, damages to establishments or embroidery work on the articles during processing.</string>
+    <string name="note6">6. Company reserves the right to refuse cleaning any garment.</string>
+    <string name="note7">7. Company accepts no liability for special care and delicate items that require special attention to be cleaned.</string>
+
+
+    <string name="place_order">1. Go to our laundry app and schedule your wash as per your convenience. We will take it from there. Hassel free, fast and simple!</string>
+    <string name="pick_up">2. Just be ready with your Laundry, we will be right there with our eco-friendly laundry cart. We will grab away all the dirty clothes from your home.</string>
+    <string name="washandiron">3. We take dirt very seriously. Our experts, with the help of our state of art machinery ensure that your clothes come back looking clean, tidier and fresh every time.</string>
+    <string name="delivery">4. Your clothes will be delivered at your doorstep on time and as fresh as daisy. Now getting your laundry done is that convenient.</string>
     //Bottom Navigation menu's
     <string name="home">Home</string>
     <string name="mycart">My Cart</string>

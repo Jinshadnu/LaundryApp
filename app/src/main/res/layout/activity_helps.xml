@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".user.HelpsActivity">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+            <include
+                android:id="@+id/layoutBase"
+                layout="@layout/root_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/text_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="How It Works"
+                android:textColor="@color/colorDarkstateBlue"
+                android:textSize="@dimen/size_20dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/amaranth"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:layout_below="@id/layoutBase"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:padding="@dimen/size_5dp"/>
+
+            <ImageView
+                android:id="@+id/imageView_placeOrder"
+                android:layout_width="@dimen/size_70dp"
+                android:layout_height="@dimen/size_70dp"
+                android:src="@drawable/place_order"
+                android:layout_below="@id/text_help"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/size_10dp"/>
+
+            <TextView
+                android:id="@+id/text_place_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/place_order"
+                android:textSize="@dimen/size_16dp"
+                android:layout_below="@id/imageView_placeOrder"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/amaranth"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:textColor="@color/colorblack"/>
+
+            <ImageView
+                android:id="@+id/imageView_pickup"
+                android:layout_width="@dimen/size_70dp"
+                android:layout_height="@dimen/size_70dp"
+                android:src="@drawable/pick_up"
+                android:layout_below="@id/text_place_order"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/size_10dp"/>
+
+            <TextView
+                android:id="@+id/text_pickup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pick_up"
+                android:textSize="@dimen/size_16dp"
+                android:layout_below="@id/imageView_pickup"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/amaranth"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:textColor="@color/colorblack"/>
+
+
+            <ImageView
+                android:id="@+id/imageView_washandiron"
+                android:layout_width="@dimen/size_70dp"
+                android:layout_height="@dimen/size_70dp"
+                android:src="@drawable/wash_iron"
+                android:layout_below="@id/text_pickup"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/size_10dp"/>
+
+            <TextView
+                android:id="@+id/text_washand_iron"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/washandiron"
+                android:textSize="@dimen/size_16dp"
+                android:layout_below="@id/imageView_washandiron"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/amaranth"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:textColor="@color/colorblack"/>
+
+            <ImageView
+                android:id="@+id/imageView_delivery"
+                android:layout_width="@dimen/size_70dp"
+                android:layout_height="@dimen/size_70dp"
+                android:src="@drawable/delivery_image"
+                android:layout_below="@id/text_washand_iron"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/size_10dp"/>
+
+            <TextView
+                android:id="@+id/text_delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delivery"
+                android:textSize="@dimen/size_16dp"
+                android:layout_below="@id/imageView_delivery"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/amaranth"
+                android:layout_marginBottom="@dimen/size_10dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:textColor="@color/colorblack"/>
+
+
+
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+</layout>

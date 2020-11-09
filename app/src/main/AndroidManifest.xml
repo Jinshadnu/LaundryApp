@@ -2,13 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.laundryapp">
 
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,26 +10,64 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".user.AddAddressActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".user.OrderStatusActivity" android:screenOrientation="portrait" />
-        <activity android:name=".user.NotificationActivity" android:screenOrientation="portrait" />
-        <activity android:name=".user.AboutUsActivity" android:screenOrientation="portrait" />
-        <activity android:name=".user.PriceDetailsActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".user.CartActivity" android:screenOrientation="portrait" />
-        <activity android:name=".utilities.BaseActivity" android:screenOrientation="portrait" />
-        <activity android:name=".user.ForgetPasswordActivity" android:screenOrientation="portrait" />
-        <activity android:name=".user.SuccessActivity" android:screenOrientation="portrait" />
-        <activity android:name=".user.OrderActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".user.PaymentActivity" android:screenOrientation="portrait" />
-        <activity android:name=".user.HistoryActivity" android:screenOrientation="portrait" />
-        <activity android:name=".user.AddressActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".user.DetailsActivity"  />
-        <activity android:name=".user.ChangePassword" android:screenOrientation="portrait"/>
+        <activity android:name=".user.HelpsActivity"></activity>
+        <activity android:name=".user.TermsandConditions" />
+        <activity
+            android:name=".user.AddAddressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".user.OrderStatusActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".user.NotificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".user.AboutUsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".user.PriceDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".user.CartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".utilities.BaseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".user.ForgetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".user.SuccessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".user.OrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".user.PaymentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".user.HistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".user.AddressActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".user.DetailsActivity" />
+        <activity
+            android:name=".user.ChangePassword"
+            android:screenOrientation="portrait" />
         <activity android:name=".user.ServiceDetails" />
-        <activity android:name=".user.HomeActivity" android:screenOrientation="portrait" />
-        <activity android:name=".register.RegisterActivity" android:screenOrientation="portrait" />
-        <activity android:name=".login.LoginActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".welcome.WelcomeActivity" android:screenOrientation="portrait" />
+        <activity
+            android:name=".user.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".register.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".login.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".welcome.WelcomeActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".MainActivity" />
         <activity android:name=".splash.SplashActivity">
             <intent-filter>
@@ -50,5 +81,12 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>
