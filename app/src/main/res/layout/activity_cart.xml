@@ -28,25 +28,25 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.SearchView
-                    android:id="@+id/searchview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/search_background"
-                    android:layout_below="@id/layoutBase"
-                    app:queryHint="Search Here"
-                    android:autofillHints="Search Here"
-                    app:defaultQueryHint="Search"
-                    android:layout_marginLeft="@dimen/size_16dp"
-                    android:layout_marginRight="@dimen/size_16dp"
-                    android:layout_marginTop="@dimen/size_16dp"/>
+<!--                <androidx.appcompat.widget.SearchView-->
+<!--                    android:id="@+id/searchview"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/search_background"-->
+<!--                    android:layout_below="@id/layoutBase"-->
+<!--                    app:queryHint="Search Here"-->
+<!--                    android:autofillHints="Search Here"-->
+<!--                    app:defaultQueryHint="Search"-->
+<!--                    android:layout_marginLeft="@dimen/size_16dp"-->
+<!--                    android:layout_marginRight="@dimen/size_16dp"-->
+<!--                    android:layout_marginTop="@dimen/size_16dp"/>-->
 
 
                 <com.example.laundryapp.utilities.CustomGridRecyclerView
                     android:id="@+id/recycler_cart"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/searchview" />
+                    android:layout_below="@id/layoutBase" />
 
 
                 <TextView

@@ -1,6 +1,7 @@
 package com.example.laundryapp.user;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
@@ -31,7 +32,7 @@ import com.example.laundryapp.utilities.RecyclerItemTouchHelper;
 
 import java.util.List;
 
-public class CartActivity extends BaseActivity implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener,CartAdapter.setOnActionListener{
+public class CartActivity extends BaseActivity implements  RecyclerItemTouchHelper.RecyclerItemTouchHelperListener,CartAdapter.setOnActionListener {
 public static ActivityCartBinding cartBinding;
 public CartViewModel cartViewModel;
 public AddCartViewModel addCartViewModel;
@@ -213,6 +214,8 @@ public void fetchCart(){
             }
         });
     }
+
+
 
 
 //    @Override

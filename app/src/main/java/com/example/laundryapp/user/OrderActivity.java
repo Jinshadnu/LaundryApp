@@ -1,12 +1,15 @@
 package com.example.laundryapp.user;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.SearchView.OnQueryTextListener;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,7 +35,7 @@ import com.example.laundryapp.utilities.GridSpacingItemDecoration;
 
 import static java.util.Objects.requireNonNull;
 
-public class OrderActivity extends BaseActivity implements AddCartCallBack,CategoriesAdapater.ItemClickListener {
+public class OrderActivity extends BaseActivity implements AddCartCallBack, CategoriesAdapater.ItemClickListener, OnQueryTextListener {
 public ItemsViewModel itemsViewModel;
 public static ActivityOrderBinding orderBinding;
 public AddCartViewModel cartViewModel;
@@ -88,6 +91,8 @@ public int pos;
         itemsViewModel= ViewModelProviders.of(this).get(ItemsViewModel.class);
 
         cartViewModel=ViewModelProviders.of(this).get(AddCartViewModel.class);
+
+        orderBinding.searchview.setOnQueryTextListener(this);
 
 
         fetchCategories();
@@ -183,6 +188,23 @@ private void fetchCategories() {
     });
 
 }
+
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        if (itemAdapter != null)
+            itemAdapter.filter(s);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        if (itemAdapter != null)
+            itemAdapter.filter(s);
+        return true;
+    }
+
+
 
 
 }

@@ -109,8 +109,7 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
         cartBinding.layoutBase.textTitle.setText("My Cart");
 
 
-
-//        baseActivity = (BaseActivity) getActivity();
+//      baseActivity = (BaseActivity) getActivity();
 
         cartList=new ArrayList<>();
 
@@ -295,7 +294,6 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
 
 
         //fetchCart();
-
         //cartBinding.orederLayout.textTotal.setVisibility(View.GONE);
 
 
