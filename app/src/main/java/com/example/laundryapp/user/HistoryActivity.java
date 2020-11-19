@@ -1,6 +1,7 @@
 package com.example.laundryapp.user;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -21,7 +22,7 @@ import com.example.laundryapp.utilities.BaseActivity;
 import com.example.laundryapp.utilities.Constants;
 import com.example.laundryapp.utilities.NetworkUtilities;
 
-public class HistoryActivity extends BaseActivity {
+public class HistoryActivity extends BaseActivity implements SearchView.OnQueryTextListener {
 public ActivityHistoryBinding historyBinding;
     public OrderViewModel orderViewModel;
     public OrderAdapter orderAdapter;
@@ -47,6 +48,8 @@ public ActivityHistoryBinding historyBinding;
         historyBinding.recyclerOrders.setHasFixedSize(true);
 
         orderViewModel = ViewModelProviders.of(this).get(OrderViewModel.class);
+
+        historyBinding.searchview.setOnQueryTextListener(this);
 
         fetchOrders();
         runAnimationAgain();
@@ -93,4 +96,17 @@ public ActivityHistoryBinding historyBinding;
     }
 
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        if (orderAdapter != null)
+            orderAdapter.filter(query);
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        if (orderAdapter != null)
+            orderAdapter.filter(newText);
+        return true;
+    }
 }

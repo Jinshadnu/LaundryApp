@@ -15,8 +15,9 @@ public class OrderViewModel extends ViewModel {
         this.orderRepository=new OrderRepository();
     }
 
-    public LiveData<ComonResponse> addOrder(String user_id, String building_number, String steet_number, String zone){
-        return orderRepository.addOrder(user_id, building_number, steet_number, zone);
+    public LiveData<ComonResponse> addOrder(String user_id, String building_number, String steet_number, String zone,String latitude,String longitude,String address){
+        return orderRepository.addOrder(user_id, building_number, steet_number, zone,latitude
+                ,longitude,address);
     }
 
     public LiveData<OrderResponse> getOrders(String user_id){

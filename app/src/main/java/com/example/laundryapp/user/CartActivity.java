@@ -38,6 +38,7 @@ public CartViewModel cartViewModel;
 public AddCartViewModel addCartViewModel;
 public CartAdapter cartAdapter;
 public String item_id,quantity,price;
+public  int quant;
     public String count;
     public String user_id;
     public int totalAmount=0;
@@ -118,14 +119,21 @@ public String item_id,quantity,price;
         cartBinding.orederLayout.total.setText(String.valueOf(total));
     }
 
-    private int grandTotal(){
+    private double grandTotal(){
         //cartList=new ArrayList<>();
-        int totalPrice = 0;
+        double totalPrice = 0.0;
+
         for(int i = 0 ; i < cartAdapter.cartList.size(); i++) {
-            totalPrice += Double.parseDouble(cartAdapter.cartList.get(i).getPrice());
+           // totalPrice += Double.parseDouble(cartAdapter.cartList.get(i).getPrice());
+            quant=Integer.parseInt(cartAdapter.cartList.get(i).getQuantity());
+            double price=Double.parseDouble(cartAdapter.cartList.get(i).getPrice());
+            price=price * quant;
+            totalPrice=totalPrice+ price;
+
+
         }
 
-        cartBinding.orederLayout.total.setText(String.valueOf(totalPrice));
+        cartBinding.orederLayout.total.setText("QAR " + String.valueOf(totalPrice));
 
         return totalPrice;
     }
@@ -162,6 +170,25 @@ public void fetchCart(){
     });
 }
 
+
+    public void getCart(){
+        addCartViewModel.getCartItems(user_id).observe(this,cartResponse -> {
+            if (cartResponse != null && cartResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                cartAdapter=new CartAdapter(this,cartResponse.getCart());
+                cartBinding.recyclerCart.setAdapter(cartAdapter);
+                cartAdapter.setActionListener(this);
+                //grandTotal();
+
+            }
+
+            if (cartAdapter.getItemCount() == 0){
+                cartBinding.textNodata.setVisibility(View.VISIBLE);
+                cartBinding.recyclerCart.setVisibility(View.GONE);
+                cartBinding.orederLayout.layoutPrice.setVisibility(View.GONE);
+            }
+        });
+    }
+
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
         if (viewHolder instanceof CartAdapter.CartViewModel) {
@@ -184,6 +211,7 @@ public void fetchCart(){
                     openSuccessDialog(comonResponse.getMessage());
 
                     fetchCart();
+
                 }
             });
 
@@ -210,7 +238,7 @@ public void fetchCart(){
             if (updateResponse != null && updateResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)) {
              // fetchCart();
                 String cart_total=String.valueOf(updateResponse.getOrder_total());
-                cartBinding.orederLayout.total.setText(cart_total);
+                cartBinding.orederLayout.total.setText("QAR: " +cart_total);
             }
         });
     }
@@ -237,3 +265,5 @@ public void fetchCart(){
 //
 //    }
     }
+
+    

@@ -48,6 +48,11 @@ public String email;
             forgetPasswordBinding.edittextEmail.setError("please enter your email");
             return false;
         }
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() && email.length() < 5){
+            forgetPasswordBinding.edittextEmail.setError("Invalid email address");
+            return false;
+        }
         return true;
     }
 
@@ -62,6 +67,7 @@ public String email;
 
                 if(comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
                     openSuccessDialog(comonResponse.getMessage());
+                    forgetPasswordBinding.edittextEmail.setText(" ");
                 }
             });
 

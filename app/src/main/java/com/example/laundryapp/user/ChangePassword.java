@@ -100,6 +100,9 @@ public class ChangePassword extends BaseActivity {
                 if (commonResponse != null && commonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
                     openSuccessDialog(commonResponse.getMessage());
                 }
+               else {
+                   showSnackBar(this,commonResponse.getMessage());
+                }
             });
         }
     }

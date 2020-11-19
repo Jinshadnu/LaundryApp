@@ -54,7 +54,7 @@ public interface NetworkAPI {
 
     @FormUrlEncoded
     @POST("add_order")
-    Call<ComonResponse> addOrder(@Field("user_id") String user_id,@Field("building_number")String buliding_number,@Field("street_number") String street_number,@Field("zone")String zone);
+    Call<ComonResponse> addOrder(@Field("user_id") String user_id,@Field("building_number")String buliding_number,@Field("street_number") String street_number,@Field("zone")String zone,@Field("latitude")String latitude,@Field("longitude")String longitude,@Field("address")String address);
 
     @GET("get_address")
     Call<AddressResponse> getAddress(@Query("user_id")String user_id);

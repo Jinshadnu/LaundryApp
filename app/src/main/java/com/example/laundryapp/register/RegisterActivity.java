@@ -85,7 +85,7 @@ public ActivityRegisterBinding registerBinding;
         }
 
         if (password.length() < 6){
-            registerBinding.editextPassword.setError("Password Must be atleast characters");
+            registerBinding.editextPassword.setError("Password Must be atleast 6 characters");
             return false;
         }
 
@@ -131,6 +131,9 @@ public ActivityRegisterBinding registerBinding;
                     editor.commit();
                   startActivity(new Intent(RegisterActivity.this,HomeActivity.class));
                   finish();
+                }
+                if (registerResponse != null && registerResponse.getStatus().equals(Constants.SERVER_RESPONSE_ERROR)){
+                    showSnackBar(this,"Email or phone already exsist");
                 }
                 else {
                     //showSnackBar(this,commonResponse.getStatus());

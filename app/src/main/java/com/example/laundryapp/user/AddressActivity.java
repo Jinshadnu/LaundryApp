@@ -13,20 +13,30 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Criteria;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -42,10 +52,16 @@ import com.example.laundryapp.user.viewModel.AddressViewModel;
 import com.example.laundryapp.user.viewModel.OrderViewModel;
 import com.example.laundryapp.utilities.BaseActivity;
 import com.example.laundryapp.utilities.Constants;
+import com.example.laundryapp.utilities.GPSTracker;
+import com.example.laundryapp.utilities.Utilities;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import static android.text.TextUtils.isEmpty;
 import static java.util.Objects.requireNonNull;
@@ -58,7 +74,14 @@ public ActivityAddressBinding addressBinding;
     public AddressViewModel addressViewModel;
     public String building_address,street_number,zone;
     public AddressAdapter addressAdapter;
-    public String building,street,zone_no;
+    public String building,street,zone_no,live_location,order_address,lati,longi;
+    int PLACE_PICKER_REQUEST = 1463;
+    double latitude, longitude;
+    Location mLocation;
+    private static final int REQUEST_CODE_PERMISSION = 2;
+    String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
+    GPSTracker gps;
+    private Geocoder geocoder;
 
 
     public String user_id;
@@ -82,8 +105,14 @@ public ActivityAddressBinding addressBinding;
         user_id=sharedPreferences.getString(Constants.USER_ID,null);
 
 
+
         addressBinding.recyclerAddress.setLayoutManager(new LinearLayoutManager(this));
         addressBinding.recyclerAddress.setHasFixedSize(true);
+
+
+
+
+
 
         String[] ZONES = new String[]{
                 "Select your zone",
@@ -141,26 +170,76 @@ public ActivityAddressBinding addressBinding;
 
         addressViewModel= ViewModelProviders.of(this).get(AddressViewModel.class);
 
+
+
         addressBinding.buttonsubmit.setOnClickListener(v -> {
 
-//                    try{
-//                        SmsManager smgr = SmsManager.getDefault();
-//                        smgr.sendTextMessage("8606356595",null,addressBinding.editTextaddress.getText().toString(),null,null);
-//                        Toast.makeText(this, "SMS Sent Successfully", Toast.LENGTH_SHORT).show();
-//                    }
-//                    catch (Exception e){
-//                        Toast.makeText(this, "SMS Failed to Send, Please try again", Toast.LENGTH_SHORT).show();
-//                    }
+
             zone=addressBinding.spinnerZone.getSelectedItem().toString().trim();
             if (validatefields()){
                 addOrder();
             }
+
+
+
         });
 
         getAddress();
 
 
 
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        gps = new GPSTracker(AddressActivity.this);
+
+        // check if GPS enabled
+        if(gps.canGetLocation()){
+
+             latitude = gps.getLatitude();
+             longitude = gps.getLongitude();
+
+
+
+            // \n is for new line
+            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
+                    + latitude + "\nLong: " + longitude + "https://www.google.com/maps/search/?api=1&query= " + String.valueOf(latitude) + "," +String.valueOf(longitude)  , Toast.LENGTH_LONG).show();
+
+            getTheAddress(latitude,longitude);
+        }else{
+            // can't get location
+            // GPS or Network is not enabled
+            // Ask user to enable GPS/network in settings
+         //   gps.showSettingsAlert();
+            askUserToOpenGPS();
+        }
+    }
+
+    private void startActivityForResult(int place_picker_request) {
+
+    }
+
+    public void askUserToOpenGPS() {
+        AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(this);
+
+        // Setting Dialog Title
+        mAlertDialog.setTitle("Location not available, Open GPS?")
+                .setMessage("Activate GPS to use use location services?")
+                .setPositiveButton("Open Settings", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                }).show();
     }
 
 //    @Override
@@ -183,7 +262,26 @@ public ActivityAddressBinding addressBinding;
 //            }
 //        }
 //    }
+private void getTheAddress(double latitude, double longitude) {
+    List<Address> addresses;
+    geocoder = new Geocoder(this, Locale.getDefault());
 
+    try {
+        addresses = geocoder.getFromLocation(latitude, longitude, 1);
+        order_address = addresses.get(0).getAddressLine(0);
+        String city = addresses.get(0).getLocality();
+        String state = addresses.get(0).getAdminArea();
+        String country = addresses.get(0).getCountryName();
+        String postalCode = addresses.get(0).getPostalCode();
+        String knownName = addresses.get(0).getFeatureName();
+        Log.d("neel", order_address);
+        addressBinding.editTextLocation.setText(order_address);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+
+}
     public boolean validatefields(){
         building_address= requireNonNull(addressBinding.editTextBuildingNumber.getText().toString().trim());
         street_number= requireNonNull(addressBinding.editTextStreetNumber.getText().toString().trim());
@@ -249,7 +347,7 @@ public ActivityAddressBinding addressBinding;
     }
 
     public void addOrder(){
-        orderViewModel.addOrder(user_id,building_address,street_number,zone).observe(this,comonResponse -> {
+        orderViewModel.addOrder(user_id,building_address,street_number,zone,String.valueOf(latitude),String.valueOf(longitude),order_address).observe(this,comonResponse -> {
             if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(this, "notify_001");
@@ -285,6 +383,9 @@ public ActivityAddressBinding addressBinding;
 
                 mNotificationManager.notify(0, mBuilder.build());
                 startActivity(new Intent(AddressActivity.this,SuccessActivity.class));
+            }
+            else {
+                showSnackBar(this,comonResponse.getMessage());
             }
         });
     }
@@ -316,7 +417,7 @@ public ActivityAddressBinding addressBinding;
     }
 
     public void adOrder(){
-        orderViewModel.addOrder(user_id,building,street,zone_no).observe(this,comonResponse -> {
+        orderViewModel.addOrder(user_id,building,street,zone_no,String.valueOf(latitude),String.valueOf(longitude),order_address).observe(this,comonResponse -> {
             if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(this, "notify_001");
@@ -354,6 +455,59 @@ public ActivityAddressBinding addressBinding;
                 startActivity(new Intent(AddressActivity.this,SuccessActivity.class));
             }
         });
+    }
+
+
+
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == PLACE_PICKER_REQUEST) {
+//            if (resultCode == RESULT_OK) {
+//                String lat = data.getStringExtra("lat");
+//                String lon = data.getStringExtra("lon");
+//                latitude = lat;
+//                longitude = lon;
+//                String address = Utilities.getCompleteAddressString(this,Double.parseDouble(latitude),Double.parseDouble(longitude));
+//                addressBinding.editTextLocation.setText(latitude + ", " + longitude);
+//               // input_address.setText(address);
+////                 place.getName();
+////                 place.getAddress();
+//            }
+//            else {
+//                Log.e("ShippingAddress","Error in data fetching");
+//                // Toast.makeText(getActivity(),   "Error in data fetching", Toast.LENGTH_SHORT).show();
+//            }
+//
+//        }
+//
+//    }
+
+    @SuppressLint("LongLogTag")
+    private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
+        String strAdd = "";
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
+            if (addresses != null) {
+                Address returnedAddress = addresses.get(0);
+                StringBuilder strReturnedAddress = new StringBuilder("");
+
+                for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
+                }
+                strAdd = strReturnedAddress.toString();
+                addressBinding.editTextLocation.setText(strAdd);
+                Log.w("My Current loction address", strReturnedAddress.toString());
+            } else {
+                Log.w("My Current loction address", "No Address returned!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.w("My Current loction address", "Canont get Address!");
+        }
+        return strAdd;
     }
 
 

@@ -157,6 +157,9 @@ public int pos;
         cartViewModel.addToCart(user_id,service_name,item_id,quantity,price).observe(this,comonResponse -> {
             if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
                 showSnackBar(this,comonResponse.getMessage());
+                cart_count++;
+                orderBinding.layoutBase.count.setVisibility(View.VISIBLE);
+                orderBinding.layoutBase.count.setText(String.valueOf(cart_count));
             }
             if(comonResponse != null && comonResponse.getStatus().equals("failed")){
                 showSnackBar(this,comonResponse.getMessage());

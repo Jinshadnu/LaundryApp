@@ -72,8 +72,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemsViewViewH
             String price = itemsList.get(position).getPrice();
             String quantity = itemsList.get(position).getQuantity();
             if (context instanceof OrderActivity) {
-                ((AddCartCallBack) context).onAddProduct();
                 ((AddCartCallBack) context).addToCart(item_id, quantity, price);
+                //((AddCartCallBack) context).onAddProduct();
             }
         });
 
