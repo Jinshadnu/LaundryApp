@@ -45,7 +45,7 @@
                     android:layout_marginTop="@dimen/padd_10"
                     android:text="@{services.service_name}"
                     android:layout_marginLeft="@dimen/size_10dp"
-                    android:textColor="@color/colorblack"
+                    android:textColor="@color/colorDarkstateBlue"
                     android:fontFamily="@font/amaranth"
                     android:textSize="18sp"
                     android:textStyle="bold"

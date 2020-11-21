@@ -32,6 +32,7 @@
                 android:layout_marginTop="@dimen/size_5dp"
                 android:textColor="@color/colorDarkstateBlue"
                 android:text="Building Number :"
+                android:fontFamily="@font/amaranth"
                 android:padding="@dimen/size_5dp"
                 android:layout_marginLeft="@dimen/size_16dp"/>
 
@@ -42,6 +43,7 @@
                 android:textSize="@dimen/size_16dp"
                 android:layout_marginTop="@dimen/size_5dp"
                 android:textColor="@color/colorDarkstateBlue"
+                android:fontFamily="@font/amaranth"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/padd_10"
                 android:text="@{address.building_number}"
@@ -55,6 +57,7 @@
                 android:textSize="@dimen/size_16dp"
                 android:textColor="@color/colorDarkstateBlue"
                 android:text="Street Number :"
+                android:fontFamily="@font/amaranth"
                 android:layout_marginTop="@dimen/size_8dp"
                 android:layout_below="@id/textView_buildingnumber"
                 android:padding="@dimen/size_5dp"
@@ -69,6 +72,7 @@
                 android:layout_below="@id/textView_buildingnumber"
                 android:layout_marginTop="@dimen/size_8dp"
                 android:layout_alignParentRight="true"
+                android:fontFamily="@font/amaranth"
                 android:layout_marginRight="@dimen/padd_10"
                 android:text="@{address.street_address}"
                 android:padding="@dimen/size_5dp"
@@ -81,6 +85,7 @@
                 android:textSize="@dimen/size_16dp"
                 android:textColor="@color/colorDarkstateBlue"
                 android:text="Zone Number :"
+                android:fontFamily="@font/amaranth"
                 android:layout_marginTop="@dimen/size_8dp"
                 android:layout_below="@id/textView_streetNumber"
                 android:padding="@dimen/size_5dp"
@@ -96,6 +101,7 @@
                 android:layout_marginTop="@dimen/size_8dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/padd_10"
+                android:fontFamily="@font/amaranth"
                 android:text="@{address.zone_no}"
                 android:padding="@dimen/size_5dp"
                 android:layout_marginLeft="@dimen/size_16dp"/>
@@ -104,12 +110,13 @@
                 android:id="@+id/button_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorDarkstateBlue"
-                android:layout_below="@id/zone_number"
+                android:background="@drawable/login_button"                android:layout_below="@id/zone_number"
                 android:layout_marginBottom="@dimen/size_8dp"
                 android:layout_marginLeft="@dimen/size_15dp"
                 android:layout_marginRight="@dimen/size_15dp"
                 android:text="Use this address"
+                android:textAllCaps="false"
+                android:fontFamily="@font/amaranth"
                 android:textColor="@color/mdtp_white"
                 android:layout_marginTop="@dimen/size_5dp"/>
 

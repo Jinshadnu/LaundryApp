@@ -99,6 +99,9 @@ public AddAddressAdapter addressAdapter;
 
             if (validatefields()){
                addAddress();
+                addAddressBinding.editTextBuildingAddress.setText(" ");
+                addAddressBinding.editTextStreetnumber.setText(" ");
+
             }
         });
 
@@ -145,8 +148,10 @@ public AddAddressAdapter addressAdapter;
     public void addAddress(){
         addressViewModel.addAddress(user_id,building_address,street_number,zone).observe(this,comonResponse  -> {
             if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                showSnackBar(this,comonResponse.getMessage());
+                openSuccessDialog(comonResponse.getMessage());
+                getAddress();
             }
+
         });
     }
 
@@ -155,7 +160,12 @@ public AddAddressAdapter addressAdapter;
             if (addressResponse != null && addressResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
                 addressAdapter=new AddAddressAdapter(this,addressResponse.getAddress());
                 addAddressBinding.recyclerAddress.setAdapter(addressAdapter);
+                addAddressBinding.editTextStreetnumber.setEnabled(false);
+                addAddressBinding.editTextBuildingAddress.setEnabled(false);
+
             }
+
+
         });
     }
 

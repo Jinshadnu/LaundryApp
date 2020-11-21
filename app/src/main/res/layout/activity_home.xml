@@ -8,6 +8,13 @@
         android:layout_height="match_parent"
         tools:context=".user.HomeActivity">
 
+<!--        <include-->
+<!--            android:id="@+id/layoutBase"-->
+<!--            layout="@layout/location_layout"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
 
         <LinearLayout
             android:id="@+id/layoutFragment"

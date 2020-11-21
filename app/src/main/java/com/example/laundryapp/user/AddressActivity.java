@@ -56,6 +56,9 @@ import com.example.laundryapp.utilities.GPSTracker;
 import com.example.laundryapp.utilities.Utilities;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -172,6 +175,8 @@ public ActivityAddressBinding addressBinding;
 
 
 
+
+
         addressBinding.buttonsubmit.setOnClickListener(v -> {
 
 
@@ -206,8 +211,8 @@ public ActivityAddressBinding addressBinding;
 
 
             // \n is for new line
-            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
-                    + latitude + "\nLong: " + longitude + "https://www.google.com/maps/search/?api=1&query= " + String.valueOf(latitude) + "," +String.valueOf(longitude)  , Toast.LENGTH_LONG).show();
+//            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "
+//                    + latitude + "\nLong: " + longitude + "https://www.google.com/maps/search/?api=1&query= " + String.valueOf(latitude) + "," +String.valueOf(longitude)  , Toast.LENGTH_LONG).show();
 
             getTheAddress(latitude,longitude);
         }else{
@@ -223,6 +228,7 @@ public ActivityAddressBinding addressBinding;
 
     }
 
+    // ask location permission for user if location is off
     public void askUserToOpenGPS() {
         AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(this);
 
@@ -262,6 +268,8 @@ public ActivityAddressBinding addressBinding;
 //            }
 //        }
 //    }
+
+    // get Address
 private void getTheAddress(double latitude, double longitude) {
     List<Address> addresses;
     geocoder = new Geocoder(this, Locale.getDefault());
@@ -346,6 +354,7 @@ private void getTheAddress(double latitude, double longitude) {
         mNotificationManager.notify(0, mBuilder.build());
     }
 
+    //add order
     public void addOrder(){
         orderViewModel.addOrder(user_id,building_address,street_number,zone,String.valueOf(latitude),String.valueOf(longitude),order_address).observe(this,comonResponse -> {
             if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
@@ -416,6 +425,7 @@ private void getTheAddress(double latitude, double longitude) {
      adOrder();
     }
 
+    //add order if user already add their address
     public void adOrder(){
         orderViewModel.addOrder(user_id,building,street,zone_no,String.valueOf(latitude),String.valueOf(longitude),order_address).observe(this,comonResponse -> {
             if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
@@ -484,6 +494,13 @@ private void getTheAddress(double latitude, double longitude) {
 //
 //    }
 
+//    private void getMyLocation() {
+//        //LatLng latLng = new LatLng(Double.parseDouble(getLatitude()), Double.parseDouble(getLongitude()));
+//        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 18);
+//        //googleMap.animateCamera(cameraUpdate);
+//    }
+
+
     @SuppressLint("LongLogTag")
     private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
         String strAdd = "";
@@ -509,6 +526,8 @@ private void getTheAddress(double latitude, double longitude) {
         }
         return strAdd;
     }
+
+
 
 
 }

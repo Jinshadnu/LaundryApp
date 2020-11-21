@@ -133,7 +133,7 @@ public ActivityRegisterBinding registerBinding;
                   finish();
                 }
                 if (registerResponse != null && registerResponse.getStatus().equals(Constants.SERVER_RESPONSE_ERROR)){
-                    showSnackBar(this,"Email or phone already exsist");
+                    showErrorSnackBar(this,"Email or phone already exsist");
                 }
                 else {
                     //showSnackBar(this,commonResponse.getStatus());

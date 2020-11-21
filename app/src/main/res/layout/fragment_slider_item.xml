@@ -39,6 +39,7 @@
         android:text="Look for things around you"
         android:textColor="@color/colorDarkstateBlue"
         android:textSize="18sp"
+        android:fontFamily="@font/amaranth"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

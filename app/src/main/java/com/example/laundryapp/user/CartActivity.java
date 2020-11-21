@@ -238,7 +238,7 @@ public void fetchCart(){
             if (updateResponse != null && updateResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)) {
              // fetchCart();
                 String cart_total=String.valueOf(updateResponse.getOrder_total());
-                cartBinding.orederLayout.total.setText("QAR: " +cart_total);
+                cartBinding.orederLayout.total.setText("QAR: " +cart_total+".00");
             }
         });
     }

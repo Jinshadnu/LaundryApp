@@ -162,6 +162,8 @@
                     android:layout_marginRight="16dp"
                     android:padding="@dimen/size_16dp"
                     android:text="Forget Password"
+                    android:textStyle="bold"
+                    android:textSize="18dp"
                     android:textColor="@color/colorblack"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/edittext_phone" />

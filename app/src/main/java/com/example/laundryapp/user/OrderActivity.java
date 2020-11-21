@@ -162,7 +162,7 @@ public int pos;
                 orderBinding.layoutBase.count.setText(String.valueOf(cart_count));
             }
             if(comonResponse != null && comonResponse.getStatus().equals("failed")){
-                showSnackBar(this,comonResponse.getMessage());
+                showErrorSnackBar(this,comonResponse.getMessage());
             }
         });
     }

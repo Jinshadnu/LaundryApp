@@ -10,6 +10,8 @@
     <color name="colorwhite">#fff</color>
     <color name="colorblack">#000</color>
     <color name="colorDarkstateBlue">#253a95</color>
+    <color name="midnight_blue">#191970</color>
+    <color name="teal">#228B22</color>
 
     <!--grey-->
     <color name="md_grey_50">#FAFAFA</color>

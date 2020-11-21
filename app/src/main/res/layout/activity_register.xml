@@ -248,6 +248,7 @@
                     android:layout_marginTop="8dp"
                     android:text="Already have Account ?  SignIn"
                     android:textColor="@color/colorblack"
+                    android:textStyle="bold"
                     android:textSize="18sp"
                     android:padding="@dimen/size_5dp"
                     app:layout_constraintEnd_toEndOf="parent"

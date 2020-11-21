@@ -2,6 +2,7 @@ package com.example.laundryapp.fragments;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -94,6 +95,11 @@ public FragmentSettingsBinding settingsBinding;
 
         settingsBinding.textMyOrders.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), HistoryActivity.class));
+        });
+
+        settingsBinding.privacy.setOnClickListener(view -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://laundryhubqatar.com/mobile_app/privacypolicy/laundry_hub_privacy_policy.html"));
+            startActivity(browserIntent);
         });
 
         settingsBinding.logout.setOnClickListener(v -> {

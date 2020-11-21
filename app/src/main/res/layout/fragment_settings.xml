@@ -104,6 +104,32 @@
                 android:layout_marginEnd="@dimen/size_20dp"
                 android:background="@color/md_grey_400" />
 
+        <TextView
+            android:id="@+id/privacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:text="Privacy and Policy"
+            android:padding="@dimen/size_10dp"
+            android:textColor="@color/colorwhite"
+            android:textSize="@dimen/size_15sp"
+            android:drawableLeft="@drawable/ic_baseline_privacy_tip_24"
+            android:drawablePadding="@dimen/size_10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_change_password"
+            android:layout_marginLeft="20dp" />
+
+        <View
+            android:id="@+id/view_privacy"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1dp"
+            android:layout_below="@id/privacy"
+            app:layout_constraintTop_toBottomOf="@id/privacy"
+            android:layout_marginStart="@dimen/size_20dp"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:layout_marginEnd="@dimen/size_20dp"
+            android:background="@color/md_grey_400" />
 
             <TextView
                 android:id="@+id/logout"
@@ -118,14 +144,14 @@
                 android:drawableLeft="@drawable/ic_power"
                 android:drawablePadding="@dimen/size_10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view_change_password"
+                app:layout_constraintTop_toBottomOf="@id/view_privacy"
                 android:layout_marginLeft="20dp" />
 
             <View
                 android:id="@+id/view_logout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_1dp"
-                android:layout_below="@id/text_change_password"
+                android:layout_below="@id/privacy"
                 app:layout_constraintTop_toBottomOf="@id/logout"
                 android:layout_marginStart="@dimen/size_20dp"
                 android:layout_marginTop="@dimen/size_10dp"

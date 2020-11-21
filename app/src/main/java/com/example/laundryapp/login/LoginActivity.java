@@ -99,7 +99,7 @@ public int position;
                 }
 
                 if(loginResponse != null && loginResponse.getStatus().equals("false")){
-                    showSnackBar(this,"Invalid username or password");
+                    showErrorSnackBar(this,"Invalid username or password");
                 }
 
 

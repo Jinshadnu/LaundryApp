@@ -99,6 +99,9 @@ public class ChangePassword extends BaseActivity {
 
                 if (commonResponse != null && commonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
                     openSuccessDialog(commonResponse.getMessage());
+                    changePasswordBinding.edittextOldpassword.setText(" ");
+                    changePasswordBinding.edittextNewPassword.setText(" ");
+                    changePasswordBinding.editTextConfirmPassword.setText(" ");
                 }
                else {
                    showSnackBar(this,commonResponse.getMessage());
