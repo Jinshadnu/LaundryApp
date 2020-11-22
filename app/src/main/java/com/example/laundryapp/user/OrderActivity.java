@@ -32,6 +32,7 @@ import com.example.laundryapp.user.viewModel.AddCartViewModel;
 import com.example.laundryapp.utilities.BaseActivity;
 import com.example.laundryapp.utilities.Constants;
 import com.example.laundryapp.utilities.GridSpacingItemDecoration;
+import com.example.laundryapp.utilities.NetworkUtilities;
 
 import static java.util.Objects.requireNonNull;
 
@@ -109,14 +110,20 @@ public int pos;
     }
 
     private void fetchItems(int clickedPosition) {
-        serviceViewModel.getServices().observe((LifecycleOwner) this, serviceResponse -> {
-            if (serviceResponse != null && serviceResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-             itemAdapter=new ItemAdapter(this,serviceResponse.getServices().get(pos).getCategory().get(clickedPosition).getItems());
-             orderBinding.recyclerProducts.setAdapter(itemAdapter);
-            }
+        if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
+            serviceViewModel.getServices().observe((LifecycleOwner) this, serviceResponse -> {
+                if (serviceResponse != null && serviceResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                    itemAdapter=new ItemAdapter(this,serviceResponse.getServices().get(pos).getCategory().get(clickedPosition).getItems());
+                    orderBinding.recyclerProducts.setAdapter(itemAdapter);
+                }
 
             });
+        }else {
+            showErrorSnackBar(this,"No Internet Connection");
         }
+
+        }
+
 
 
 
@@ -154,17 +161,23 @@ public int pos;
 
     @Override
     public void addToCart(String item_id,String quantity,String price) {
-        cartViewModel.addToCart(user_id,service_name,item_id,quantity,price).observe(this,comonResponse -> {
-            if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                showSnackBar(this,comonResponse.getMessage());
-                cart_count++;
-                orderBinding.layoutBase.count.setVisibility(View.VISIBLE);
-                orderBinding.layoutBase.count.setText(String.valueOf(cart_count));
-            }
-            if(comonResponse != null && comonResponse.getStatus().equals("failed")){
-                showErrorSnackBar(this,comonResponse.getMessage());
-            }
-        });
+        if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
+            cartViewModel.addToCart(user_id,service_name,item_id,quantity,price).observe(this,comonResponse -> {
+                if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                    showSnackBar(this,comonResponse.getMessage());
+                    cart_count++;
+                    orderBinding.layoutBase.count.setVisibility(View.VISIBLE);
+                    orderBinding.layoutBase.count.setText(String.valueOf(cart_count));
+                }
+                if(comonResponse != null && comonResponse.getStatus().equals("failed")){
+                    showErrorSnackBar(this,comonResponse.getMessage());
+                }
+            });
+        }
+        else {
+            showErrorSnackBar(this,"No Internet Connection");
+        }
+
     }
 
 
@@ -178,17 +191,22 @@ public int pos;
 //    orderBinding.textPrice.setText(String.valueOf(total));
 //}
 private void fetchCategories() {
-
-    serviceViewModel.getServices().observe((LifecycleOwner) this, serviceResponse ->  {
-     if (serviceResponse != null && serviceResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-       categoriesAdapater=new CategoriesAdapater(this, serviceResponse.getServices().get(pos).getCategory());
-       orderBinding.recyclerCategories.setAdapter(categoriesAdapater);
-       fetchItems(0);
-       categoriesAdapater.setItemClickListener((view, position1) -> {
-        fetchItems(position1);
-       });
+     if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
+         serviceViewModel.getServices().observe((LifecycleOwner) this, serviceResponse ->  {
+             if (serviceResponse != null && serviceResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                 categoriesAdapater=new CategoriesAdapater(this, serviceResponse.getServices().get(pos).getCategory());
+                 orderBinding.recyclerCategories.setAdapter(categoriesAdapater);
+                 fetchItems(0);
+                 categoriesAdapater.setItemClickListener((view, position1) -> {
+                     fetchItems(position1);
+                 });
+             }
+         });
      }
-    });
+     else {
+         showErrorSnackBar(this,"No Internet connection");
+     }
+
 
 }
 

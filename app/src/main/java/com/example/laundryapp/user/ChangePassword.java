@@ -108,6 +108,9 @@ public class ChangePassword extends BaseActivity {
                 }
             });
         }
+        else {
+            showErrorSnackBar(this,"No Internet Connection");
+        }
     }
 
 }

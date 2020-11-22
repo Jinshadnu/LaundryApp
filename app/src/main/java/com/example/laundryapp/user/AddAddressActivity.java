@@ -21,6 +21,7 @@ import com.example.laundryapp.user.adapter.AddressAdapter;
 import com.example.laundryapp.user.viewModel.AddressViewModel;
 import com.example.laundryapp.utilities.BaseActivity;
 import com.example.laundryapp.utilities.Constants;
+import com.example.laundryapp.utilities.NetworkUtilities;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -94,6 +95,8 @@ public AddAddressAdapter addressAdapter;
 
         addressViewModel= ViewModelProviders.of(this).get(AddressViewModel.class);
 
+
+
         addAddressBinding.buttonsubmit.setOnClickListener(v -> {
             zone=addAddressBinding.spinnerZone.getSelectedItem().toString();
 
@@ -146,27 +149,39 @@ public AddAddressAdapter addressAdapter;
     }
 
     public void addAddress(){
-        addressViewModel.addAddress(user_id,building_address,street_number,zone).observe(this,comonResponse  -> {
-            if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                openSuccessDialog(comonResponse.getMessage());
-                getAddress();
-            }
+        if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
+            addressViewModel.addAddress(user_id,building_address,street_number,zone).observe(this,comonResponse  -> {
+                if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                    openSuccessDialog(comonResponse.getMessage());
+                    getAddress();
+                }
 
-        });
+            });
+        }
+        else {
+            showErrorSnackBar(this,"No Internet Connection");
+        }
+
     }
 
     public void getAddress(){
-        addressViewModel.getAddress(user_id).observe(this,addressResponse -> {
-            if (addressResponse != null && addressResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                addressAdapter=new AddAddressAdapter(this,addressResponse.getAddress());
-                addAddressBinding.recyclerAddress.setAdapter(addressAdapter);
-                addAddressBinding.editTextStreetnumber.setEnabled(false);
-                addAddressBinding.editTextBuildingAddress.setEnabled(false);
+        if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
+            addressViewModel.getAddress(user_id).observe(this,addressResponse -> {
+                if (addressResponse != null && addressResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                    addressAdapter=new AddAddressAdapter(this,addressResponse.getAddress());
+                    addAddressBinding.recyclerAddress.setAdapter(addressAdapter);
+                    addAddressBinding.editTextStreetnumber.setEnabled(false);
+                    addAddressBinding.editTextBuildingAddress.setEnabled(false);
 
-            }
+                }
 
 
-        });
+            });
+        }
+        else {
+            showErrorSnackBar(this,"No Internet Connection");
+        }
+
     }
 
 

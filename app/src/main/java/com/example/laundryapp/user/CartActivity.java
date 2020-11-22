@@ -28,6 +28,7 @@ import com.example.laundryapp.user.response.CartResponse;
 import com.example.laundryapp.user.viewModel.AddCartViewModel;
 import com.example.laundryapp.utilities.BaseActivity;
 import com.example.laundryapp.utilities.Constants;
+import com.example.laundryapp.utilities.NetworkUtilities;
 import com.example.laundryapp.utilities.RecyclerItemTouchHelper;
 
 import java.util.List;
@@ -154,20 +155,27 @@ public  int quant;
 
     }
 public void fetchCart(){
-    addCartViewModel.getCartItems(user_id).observe(this,cartResponse -> {
-        if (cartResponse != null && cartResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-            cartAdapter=new CartAdapter(this,cartResponse.getCart());
-            cartBinding.recyclerCart.setAdapter(cartAdapter);
-            cartAdapter.setActionListener(this);
-            grandTotal();
-        }
+    if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
+        addCartViewModel.getCartItems(user_id).observe(this,cartResponse -> {
+            if (cartResponse != null && cartResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                cartAdapter=new CartAdapter(this,cartResponse.getCart());
+                cartBinding.recyclerCart.setAdapter(cartAdapter);
+                cartAdapter.setActionListener(this);
+                grandTotal();
+            }
 
-        if (cartAdapter.getItemCount() == 0){
-            cartBinding.textNodata.setVisibility(View.VISIBLE);
-            cartBinding.recyclerCart.setVisibility(View.GONE);
-            cartBinding.orederLayout.layoutPrice.setVisibility(View.GONE);
-        }
-    });
+            if (cartAdapter.getItemCount() == 0){
+                cartBinding.textNodata.setVisibility(View.VISIBLE);
+                cartBinding.recyclerCart.setVisibility(View.GONE);
+                cartBinding.orederLayout.layoutPrice.setVisibility(View.GONE);
+            }
+        });
+    }
+    else {
+        cartBinding.orederLayout.buttonOrder.setVisibility(View.GONE);
+        showErrorSnackBar(this,"No Internet Connection");
+    }
+
 }
 
 
@@ -206,14 +214,22 @@ public void fetchCart(){
             // remove the item from recycler view
             //cartAdapter.removeItem(viewHolder.getAdapterPosition());
 
-            addCartViewModel.deletecartItem(user_id,item_id).observe(this,comonResponse -> {
-                if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                    openSuccessDialog(comonResponse.getMessage());
+            if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
+                addCartViewModel.deletecartItem(user_id,item_id).observe(this,comonResponse -> {
+                    if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                        openSuccessDialog(comonResponse.getMessage());
 
-                    fetchCart();
+                        fetchCart();
 
-                }
-            });
+                    }
+                });
+            }
+
+            else {
+                showErrorSnackBar(this,"No Internet Connection");
+            }
+
+
 
            // fetchCart();
 
@@ -234,13 +250,20 @@ public void fetchCart(){
 
     }
     public void updateCartItem(){
-        addCartViewModel.updateCartItem(item_id,user_id,quantity,price).observe(this,updateResponse -> {
-            if (updateResponse != null && updateResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)) {
-             // fetchCart();
-                String cart_total=String.valueOf(updateResponse.getOrder_total());
-                cartBinding.orederLayout.total.setText("QAR: " +cart_total+".00");
-            }
-        });
+        if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
+            addCartViewModel.updateCartItem(item_id,user_id,quantity,price).observe(this,updateResponse -> {
+                if (updateResponse != null && updateResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)) {
+                    // fetchCart();
+                    String cart_total=String.valueOf(updateResponse.getOrder_total());
+                    cartBinding.orederLayout.total.setText("QAR: " +cart_total+".00");
+                }
+            });
+        }
+        else {
+            showErrorSnackBar(this,"No Internet Connection");
+        }
+
+
     }
 
 

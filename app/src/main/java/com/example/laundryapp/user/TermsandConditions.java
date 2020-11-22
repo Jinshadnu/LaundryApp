@@ -26,8 +26,5 @@ public class TermsandConditions extends AppCompatActivity {
 
         termsandConditionsBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
 
-
-
-
     }
 }

@@ -1,189 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-    <androidx.constraintlayout.widget.ConstraintLayout
+<layout>
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".user.AddressActivity">
+        android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/layoutBase"
-            layout="@layout/layout_base"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <fragment
-            android:id="@+id/map"
-            class="com.google.android.gms.maps.MapFragment"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.7"
-            tools:ignore="MissingConstraints" />
+            android:layout_height="match_parent"
+            tools:context=".user.AddressActivity">
 
-        <EditText
-            android:id="@+id/editText_buildingNumber"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/size_50dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/edittext_background"
-            android:ems="10"
-            android:fontFamily="@font/amaranth"
-            android:hint="Building Address or Bilding Number"
-            android:inputType="textPersonName"
-            android:padding="@dimen/size_10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView23" />
-
-        <EditText
-            android:id="@+id/editText_streetNumber"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/size_50dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/edittext_background"
-            android:padding="@dimen/size_10dp"
-            android:ems="10"
-            android:fontFamily="@font/amaranth"
-            android:hint="Street Address,Landmark, etc"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText_buildingNumber" />
-
-        <Spinner
-            android:id="@+id/spinner_zone"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_50dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:gravity="left"
-            android:background="@drawable/edittext_background"
-            android:textColorHint="#CFD8DC"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editText_streetNumber"
-            app:met_floatingLabel="normal"
-            tools:ignore="MissingConstraints" />
-
-        <EditText
-            android:id="@+id/editText_location"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/size_50dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/edittext_background"
-            android:padding="@dimen/size_5dp"
-            android:textSize="@dimen/size_14dp"
-            android:textColor="@color/colorblack"
-            android:editable="false"
-            android:singleLine="true"
-            android:fontFamily="@font/amaranth"
-            android:maxLines="1"
-            android:drawablePadding="@dimen/size_8dp"
-            android:drawableLeft="@drawable/ic_baseline_location_on_24"
-            android:textStyle="bold"
-            android:ems="10"
-            android:hint="Location"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_zone" />
-
-        <Button
-            android:id="@+id/button_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/login_button"
-            android:drawableLeft="@drawable/ic_location_24"
-            android:drawablePadding="@dimen/size_8dp"
-            android:padding="@dimen/size_10dp"
-            android:text="Select Location"
-            android:textAllCaps="false"
-            android:textColor="@color/mdtp_white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText_location" />
+            <include
+                android:id="@+id/layoutBase"
+                layout="@layout/layout_base"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
+            <EditText
+                android:id="@+id/editText_buildingNumber"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size_50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/edittext_background"
+                android:ems="10"
+                android:fontFamily="@font/amaranth"
+                android:hint="Building Address or Bilding Number"
+                android:inputType="textPersonName"
+                android:padding="@dimen/size_10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
+            <EditText
+                android:id="@+id/editText_streetNumber"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size_50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/edittext_background"
+                android:padding="@dimen/size_10dp"
+                android:ems="10"
+                android:fontFamily="@font/amaranth"
+                android:hint="Street Address,Landmark, etc"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText_buildingNumber" />
 
+            <Spinner
+                android:id="@+id/spinner_zone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="left"
+                android:background="@drawable/edittext_background"
+                android:textColorHint="#CFD8DC"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editText_streetNumber"
+                app:met_floatingLabel="normal"
+                tools:ignore="MissingConstraints" />
 
-        <TextView
-            android:id="@+id/textView23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/amaranth"
-            android:text="Select Pick up and Delivery Address"
-            android:textColor="@color/colorblack"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView22" />
+            <EditText
+                android:id="@+id/editText_location"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size_50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/edittext_background"
+                android:padding="@dimen/size_5dp"
+                android:textSize="@dimen/size_14dp"
+                android:textColor="@color/colorblack"
+                android:editable="false"
+                android:singleLine="true"
+                android:fontFamily="@font/amaranth"
+                android:maxLines="1"
+                android:drawablePadding="@dimen/size_8dp"
+                android:drawableLeft="@drawable/ic_baseline_location_on_24"
+                android:textStyle="bold"
+                android:ems="10"
+                android:hint="Location"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_zone" />
 
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp"
-            android:fontFamily="@font/amaranth"
-            android:text="Select Adress"
-            android:textColor="@color/colorblack"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layoutBase"
-            tools:ignore="MissingConstraints" />
-
-
-        <Button
-            android:id="@+id/buttonsubmit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/login_button"
-            android:text="Submit"
-            android:textAllCaps="false"
-            android:textColor="@color/colorwhite"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_location"
-            tools:ignore="MissingConstraints" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonsubmit" />
+            <Button
+                android:id="@+id/button_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/login_button"
+                android:drawableLeft="@drawable/ic_location_24"
+                android:drawablePadding="@dimen/size_8dp"
+                android:padding="@dimen/size_10dp"
+                android:text="Select Location"
+                android:textAllCaps="false"
+                android:textColor="@color/mdtp_white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText_location" />
 
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/amaranth"
+                android:text="Select Pick up and Delivery Address"
+                android:textColor="@color/colorblack"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/amaranth"
+                android:text="Select Adress"
+                android:textColor="@color/colorblack"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layoutBase"
+                tools:ignore="MissingConstraints" />
+
+
+            <Button
+                android:id="@+id/buttonsubmit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/login_button"
+                android:text="Submit"
+                android:textAllCaps="false"
+                android:textColor="@color/colorwhite"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_location"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonsubmit" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </layout>

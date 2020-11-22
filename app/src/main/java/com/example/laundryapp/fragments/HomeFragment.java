@@ -48,9 +48,11 @@ import com.example.laundryapp.fragments.viewmodel.ServiceViewModel;
 import com.example.laundryapp.user.DetailsActivity;
 import com.example.laundryapp.user.ServiceDetails;
 import com.example.laundryapp.user.pojo.ServiceResponse;
+import com.example.laundryapp.utilities.BaseActivity;
 import com.example.laundryapp.utilities.Constants;
 import com.example.laundryapp.utilities.GetAddressIntentService;
 import com.example.laundryapp.utilities.GridSpacingItemDecoration;
+import com.example.laundryapp.utilities.NetworkUtilities;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -77,6 +79,7 @@ public class HomeFragment extends Fragment {
     public ServiceAdapter serviceAdapter;
     public double latitude;
     public double longitude;
+    private BaseActivity baseActivity;
     public Location currentLocation;
     public Context context;
     public String user_id;
@@ -139,6 +142,8 @@ public class HomeFragment extends Fragment {
         homeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
         homeBinding.layoutBase.toolbar.setTitle("Home");
         homeBinding.layoutBase.textTitle.setText("Home");
+
+        //baseActivity = (BaseActivity) this.getActivity();
 
         SharedPreferences sharedpreferences = getActivity().getSharedPreferences(Constants.MyPREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
@@ -209,12 +214,17 @@ public class HomeFragment extends Fragment {
 
     //Get services
     private void getServices() {
-     serviceViewModel.getServices().observe(getActivity(),serviceResponse -> {
-       if (serviceResponse != null && serviceResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-        serviceAdapter=new ServiceAdapter(getActivity(), serviceResponse.getServices());
-        homeBinding.recyclerService.setAdapter(serviceAdapter);
-       }
-     });
+     if (NetworkUtilities.getNetworkInstance(getActivity()).isConnectedToInternet()) {
+         serviceViewModel.getServices().observe(getActivity(), serviceResponse -> {
+             if (serviceResponse != null && serviceResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)) {
+                 serviceAdapter = new ServiceAdapter(getActivity(), serviceResponse.getServices());
+                 homeBinding.recyclerService.setAdapter(serviceAdapter);
+             }
+         });
+     }
+     else {
+         Toast.makeText(getActivity(),"No Internet connection",Toast.LENGTH_LONG).show();
+     }
     }
 
 

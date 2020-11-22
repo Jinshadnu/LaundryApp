@@ -73,5 +73,8 @@ public String email;
 
 
         }
+        else {
+            showErrorSnackBar(this,"No Internet Connection");
+        }
     }
 }

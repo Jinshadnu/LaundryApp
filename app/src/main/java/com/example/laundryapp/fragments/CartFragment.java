@@ -32,6 +32,7 @@ import com.example.laundryapp.user.response.CartResponse;
 import com.example.laundryapp.user.viewModel.AddCartViewModel;
 import com.example.laundryapp.utilities.BaseActivity;
 import com.example.laundryapp.utilities.Constants;
+import com.example.laundryapp.utilities.NetworkUtilities;
 import com.example.laundryapp.utilities.RecyclerItemTouchHelper;
 
 import java.util.ArrayList;
@@ -109,8 +110,6 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
 
         cartBinding.layoutBase.textTitle.setText("My Cart");
 
-
-//      baseActivity = (BaseActivity) getActivity();
 
         cartList=new ArrayList<>();
 
@@ -203,20 +202,27 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
 //    }
 
     public void fetchCart(){
-        addCartViewModel.getCartItems(user_id).observe(getActivity(),cartResponse -> {
-            if (cartResponse != null && cartResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                cartAdapter=new CartAdapter(getActivity(),cartResponse.getCart());
-                cartBinding.recyclerCart.setAdapter(cartAdapter);
-                cartAdapter.setActionListener(this);
-               // count=String.valueOf(cartAdapter.cartList.size());
-               grandTotal();
-            }
-            if (cartAdapter.getItemCount() == 0){
-                cartBinding.textNodata.setVisibility(View.VISIBLE);
-                cartBinding.recyclerCart.setVisibility(View.GONE);
-                cartBinding.orederLayout.layoutPrice.setVisibility(View.GONE);
-            }
-        });
+        if (NetworkUtilities.getNetworkInstance(getActivity()).isConnectedToInternet()){
+            addCartViewModel.getCartItems(user_id).observe(getActivity(),cartResponse -> {
+                if (cartResponse != null && cartResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                    cartAdapter=new CartAdapter(getActivity(),cartResponse.getCart());
+                    cartBinding.recyclerCart.setAdapter(cartAdapter);
+                    cartAdapter.setActionListener(this);
+                    // count=String.valueOf(cartAdapter.cartList.size());
+                    grandTotal();
+                }
+                if (cartAdapter.getItemCount() == 0){
+                    cartBinding.textNodata.setVisibility(View.VISIBLE);
+                    cartBinding.recyclerCart.setVisibility(View.GONE);
+                    cartBinding.orederLayout.layoutPrice.setVisibility(View.GONE);
+                }
+            });
+        }
+        else {
+            cartBinding.orederLayout.buttonOrder.setVisibility(View.GONE);
+            Toast.makeText(getActivity(),"No Internet connection",Toast.LENGTH_LONG).show();
+        }
+
     }
 
     public void calculateTotal() {
@@ -267,16 +273,23 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
 
             // remove the item from recycler view
             //cartAdapter.removeItem(viewHolder.getAdapterPosition());
+            if (NetworkUtilities.getNetworkInstance(getActivity()).isConnectedToInternet()){
+                addCartViewModel.deletecartItem(user_id,item_id).observe(this,comonResponse -> {
+                    if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                        //baseActivity.openSuccessDialog(comonResponse.getMessage());
+                        Toast.makeText(getActivity(),comonResponse.getMessage(),Toast.LENGTH_LONG).show();
+                    }
+                });
+                fetchCart();
+            }
 
-            addCartViewModel.deletecartItem(user_id,item_id).observe(this,comonResponse -> {
-                if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                 //baseActivity.openSuccessDialog(comonResponse.getMessage());
-                    Toast.makeText(getActivity(),comonResponse.getMessage(),Toast.LENGTH_LONG).show();
-                }
-            });
+            else {
+                Toast.makeText(getActivity(),"No Internet connection",Toast.LENGTH_LONG).show();
+            }
 
 
-           fetchCart();
+
+
 
         }
     }
@@ -308,12 +321,18 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
     }
 
     public void updateCartItem(){
-        addCartViewModel.updateCartItem(item_id,user_id,quantity,price).observe(getActivity(),updateResponse -> {
-            if (updateResponse != null && updateResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-              String cart_total=String.valueOf(updateResponse.getOrder_total());
-              cartBinding.orederLayout.total.setText("QAR: " +cart_total);
-            }
-        });
+        if (NetworkUtilities.getNetworkInstance(getActivity()).isConnectedToInternet()){
+            addCartViewModel.updateCartItem(item_id,user_id,quantity,price).observe(getActivity(),updateResponse -> {
+                if (updateResponse != null && updateResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                    String cart_total=String.valueOf(updateResponse.getOrder_total());
+                    cartBinding.orederLayout.total.setText("QAR: " +cart_total);
+                }
+            });
+        }
+        else {
+            Toast.makeText(getActivity(),"No Internet Connection",Toast.LENGTH_LONG).show();
+        }
+
     }
 
 

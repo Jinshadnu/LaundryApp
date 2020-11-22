@@ -53,6 +53,7 @@ import com.example.laundryapp.user.viewModel.OrderViewModel;
 import com.example.laundryapp.utilities.BaseActivity;
 import com.example.laundryapp.utilities.Constants;
 import com.example.laundryapp.utilities.GPSTracker;
+import com.example.laundryapp.utilities.NetworkUtilities;
 import com.example.laundryapp.utilities.Utilities;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -174,6 +175,10 @@ public ActivityAddressBinding addressBinding;
         addressViewModel= ViewModelProviders.of(this).get(AddressViewModel.class);
 
 
+//        addressBinding.buttonLocation.setOnClickListener(v -> {
+//            startActivity(new Intent(this,MylocationActivity.class));
+//
+//        });
 
 
 
@@ -184,6 +189,8 @@ public ActivityAddressBinding addressBinding;
             if (validatefields()){
                 addOrder();
             }
+
+
 
 
 
@@ -427,44 +434,50 @@ private void getTheAddress(double latitude, double longitude) {
 
     //add order if user already add their address
     public void adOrder(){
-        orderViewModel.addOrder(user_id,building,street,zone_no,String.valueOf(latitude),String.valueOf(longitude),order_address).observe(this,comonResponse -> {
-            if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                NotificationCompat.Builder mBuilder =
-                        new NotificationCompat.Builder(this, "notify_001");
-                Intent ii = new Intent(this, HistoryActivity.class);
-                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, ii, 0);
+        if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
+            orderViewModel.addOrder(user_id,building,street,zone_no,String.valueOf(latitude),String.valueOf(longitude),order_address).observe(this,comonResponse -> {
+                if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                    NotificationCompat.Builder mBuilder =
+                            new NotificationCompat.Builder(this, "notify_001");
+                    Intent ii = new Intent(this, HistoryActivity.class);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, ii, 0);
 
-                NotificationCompat.BigTextStyle bigText = new NotificationCompat.BigTextStyle();
-                //   bigText.bigText(verseurl);
-                bigText.setBigContentTitle("Order Status");
-                bigText.setSummaryText("Order Status");
+                    NotificationCompat.BigTextStyle bigText = new NotificationCompat.BigTextStyle();
+                    //   bigText.bigText(verseurl);
+                    bigText.setBigContentTitle("Order Status");
+                    bigText.setSummaryText("Order Status");
 
-                mBuilder.setContentIntent(pendingIntent);
-                mBuilder.setSmallIcon(R.mipmap.ic_launcher_round);
-                mBuilder.setContentTitle("Your Title");
-                mBuilder.setContentText(comonResponse.getMessage());
-                mBuilder.setPriority(Notification.PRIORITY_MAX);
-                mBuilder.setStyle(bigText);
+                    mBuilder.setContentIntent(pendingIntent);
+                    mBuilder.setSmallIcon(R.mipmap.ic_launcher_round);
+                    mBuilder.setContentTitle("Your Title");
+                    mBuilder.setContentText(comonResponse.getMessage());
+                    mBuilder.setPriority(Notification.PRIORITY_MAX);
+                    mBuilder.setStyle(bigText);
 
-                mNotificationManager =
-                        (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+                    mNotificationManager =
+                            (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 
 // === Removed some obsoletes
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-                {
-                    String channelId = "Your_channel_id";
-                    NotificationChannel channel = new NotificationChannel(
-                            channelId,
-                            "Channel human readable title",
-                            NotificationManager.IMPORTANCE_HIGH);
-                    mNotificationManager.createNotificationChannel(channel);
-                    mBuilder.setChannelId(channelId);
-                }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                    {
+                        String channelId = "Your_channel_id";
+                        NotificationChannel channel = new NotificationChannel(
+                                channelId,
+                                "Channel human readable title",
+                                NotificationManager.IMPORTANCE_HIGH);
+                        mNotificationManager.createNotificationChannel(channel);
+                        mBuilder.setChannelId(channelId);
+                    }
 
-                mNotificationManager.notify(0, mBuilder.build());
-                startActivity(new Intent(AddressActivity.this,SuccessActivity.class));
-            }
-        });
+                    mNotificationManager.notify(0, mBuilder.build());
+                    startActivity(new Intent(AddressActivity.this,SuccessActivity.class));
+                }
+            });
+        }
+        else {
+            showErrorSnackBar(this,"No Internet Connection");
+        }
+
     }
 
 
