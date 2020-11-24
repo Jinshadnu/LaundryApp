@@ -86,6 +86,8 @@ public ActivityAddressBinding addressBinding;
     String mPermission = Manifest.permission.ACCESS_FINE_LOCATION;
     GPSTracker gps;
     private Geocoder geocoder;
+    public String latit,longit;
+    public String strAddress;
 
 
     public String user_id;
@@ -112,6 +114,13 @@ public ActivityAddressBinding addressBinding;
 
         addressBinding.recyclerAddress.setLayoutManager(new LinearLayoutManager(this));
         addressBinding.recyclerAddress.setHasFixedSize(true);
+
+        addressBinding.buttonLocation.setOnClickListener(view -> {
+            Intent OpenMap = new Intent(AddressActivity.this, LocationActivity.class);
+            startActivityForResult(OpenMap, 1);
+        });
+
+
 
 
 
@@ -203,6 +212,21 @@ public ActivityAddressBinding addressBinding;
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                String strEditText = data.getStringExtra("GetAddress");
+                latit=data.getStringExtra("GetLatitude");
+                longit=data.getStringExtra("GetLongitude");
+
+                addressBinding.editTextLocation.setText(strEditText);
+
+
+            }
+        }
+    }
 
     @Override
     protected void onResume() {
@@ -290,7 +314,7 @@ private void getTheAddress(double latitude, double longitude) {
         String postalCode = addresses.get(0).getPostalCode();
         String knownName = addresses.get(0).getFeatureName();
         Log.d("neel", order_address);
-        addressBinding.editTextLocation.setText(order_address);
+        //addressBinding.editTextLocation.setText(order_address);
     } catch (IOException e) {
         e.printStackTrace();
     }
@@ -300,6 +324,7 @@ private void getTheAddress(double latitude, double longitude) {
     public boolean validatefields(){
         building_address= requireNonNull(addressBinding.editTextBuildingNumber.getText().toString().trim());
         street_number= requireNonNull(addressBinding.editTextStreetNumber.getText().toString().trim());
+        strAddress=requireNonNull(addressBinding.editTextLocation.getText().toString().trim());
 
 
 
@@ -312,6 +337,11 @@ private void getTheAddress(double latitude, double longitude) {
             addressBinding.editTextStreetNumber.setError("please enter street number");
             return false;
         }
+        if (isEmpty(strAddress)){
+            addressBinding.editTextLocation.setError("please select your location");
+            return false;
+        }
+
 
         if (addressBinding.spinnerZone.getSelectedItem().equals("Select your zone")){
             showSnackBar(this,"Please select your zone");
@@ -363,79 +393,8 @@ private void getTheAddress(double latitude, double longitude) {
 
     //add order
     public void addOrder(){
-        orderViewModel.addOrder(user_id,building_address,street_number,zone,String.valueOf(latitude),String.valueOf(longitude),order_address).observe(this,comonResponse -> {
-            if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                NotificationCompat.Builder mBuilder =
-                        new NotificationCompat.Builder(this, "notify_001");
-                Intent ii = new Intent(this, HistoryActivity.class);
-                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, ii, 0);
-
-                NotificationCompat.BigTextStyle bigText = new NotificationCompat.BigTextStyle();
-                //   bigText.bigText(verseurl);
-                bigText.setBigContentTitle("Order Status");
-                bigText.setSummaryText("Order Status");
-
-                mBuilder.setContentIntent(pendingIntent);
-                mBuilder.setSmallIcon(R.mipmap.ic_launcher_round);
-                mBuilder.setContentTitle("Your Title");
-                mBuilder.setContentText(comonResponse.getMessage());
-                mBuilder.setPriority(Notification.PRIORITY_MAX);
-                mBuilder.setStyle(bigText);
-
-                mNotificationManager =
-                        (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-
-// === Removed some obsoletes
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-                {
-                    String channelId = "Your_channel_id";
-                    NotificationChannel channel = new NotificationChannel(
-                            channelId,
-                            "Channel human readable title",
-                            NotificationManager.IMPORTANCE_HIGH);
-                    mNotificationManager.createNotificationChannel(channel);
-                    mBuilder.setChannelId(channelId);
-                }
-
-                mNotificationManager.notify(0, mBuilder.build());
-                startActivity(new Intent(AddressActivity.this,SuccessActivity.class));
-            }
-            else {
-                showSnackBar(this,comonResponse.getMessage());
-            }
-        });
-    }
-
-    public void getAddress(){
-        addressViewModel.getAddress(user_id).observe(this,addressResponse -> {
-            if (addressResponse != null && addressResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                addressAdapter=new AddressAdapter(this,addressResponse.getAddress());
-                addressBinding.recyclerAddress.setAdapter(addressAdapter);
-                addressAdapter.setActionListener(this);
-            }
-//            if(addressAdapter.getItemCount() == 0){
-//                addressBinding.recyclerAddress.setVisibility(View.GONE);
-//                //addressBinding.button3.setVisibility(View.GONE);
-//            }
-        });
-    }
-
-
-
-
-    @Override
-    public void onActionPerformed(String building_number, String street_address, String zone) {
-     this.building=building_number;
-     this.street=street_address;
-     this.zone_no=zone;
-
-     adOrder();
-    }
-
-    //add order if user already add their address
-    public void adOrder(){
         if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
-            orderViewModel.addOrder(user_id,building,street,zone_no,String.valueOf(latitude),String.valueOf(longitude),order_address).observe(this,comonResponse -> {
+            orderViewModel.addOrder(user_id,building_address,street_number,zone,latit,longit,order_address).observe(this,comonResponse -> {
                 if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
                     NotificationCompat.Builder mBuilder =
                             new NotificationCompat.Builder(this, "notify_001");
@@ -472,8 +431,110 @@ private void getTheAddress(double latitude, double longitude) {
                     mNotificationManager.notify(0, mBuilder.build());
                     startActivity(new Intent(AddressActivity.this,SuccessActivity.class));
                 }
+                else {
+                    showSnackBar(this,comonResponse.getMessage());
+                }
             });
         }
+        else {
+            showErrorSnackBar(this,"No Internet Connection");
+        }
+
+    }
+
+    public void getAddress(){
+        if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
+            addressViewModel.getAddress(user_id).observe(this,addressResponse -> {
+                if (addressResponse != null && addressResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                    addressAdapter=new AddressAdapter(this,addressResponse.getAddress());
+                    addressBinding.recyclerAddress.setAdapter(addressAdapter);
+                    addressAdapter.setActionListener(this);
+                }
+//            if(addressAdapter.getItemCount() == 0){
+//                addressBinding.recyclerAddress.setVisibility(View.GONE);
+//                //addressBinding.button3.setVisibility(View.GONE);
+//            }
+            });
+        }
+        else {
+            showErrorSnackBar(this,"No Internet Connection");
+        }
+
+    }
+
+    public boolean validateLocation(){
+        strAddress=requireNonNull(addressBinding.editTextLocation.getText().toString().trim());
+        if (isEmpty(strAddress)){
+            showErrorSnackBar(this,"Please select your location");
+            return false;
+        }
+
+        return true;
+
+    }
+
+
+
+    @Override
+    public void onActionPerformed(String building_number, String street_address, String zone) {
+     this.building=building_number;
+     this.street=street_address;
+     this.zone_no=zone;
+
+     if (validateLocation()){
+         adOrder();
+     }
+
+
+
+    }
+
+    //add order if user already add their address
+    public void adOrder(){
+        if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
+                orderViewModel.addOrder(user_id,building,street,zone_no,latit,longit,order_address).observe(this,comonResponse -> {
+                    if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                        NotificationCompat.Builder mBuilder =
+                                new NotificationCompat.Builder(this, "notify_001");
+                        Intent ii = new Intent(this, HistoryActivity.class);
+                        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, ii, 0);
+
+                        NotificationCompat.BigTextStyle bigText = new NotificationCompat.BigTextStyle();
+                        //   bigText.bigText(verseurl);
+                        bigText.setBigContentTitle("Order Status");
+                        bigText.setSummaryText("Order Status");
+
+                        mBuilder.setContentIntent(pendingIntent);
+                        mBuilder.setSmallIcon(R.mipmap.ic_launcher_round);
+                        mBuilder.setContentTitle("Your Title");
+                        mBuilder.setContentText(comonResponse.getMessage());
+                        mBuilder.setPriority(Notification.PRIORITY_MAX);
+                        mBuilder.setStyle(bigText);
+
+                        mNotificationManager =
+                                (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+// === Removed some obsoletes
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                        {
+                            String channelId = "Your_channel_id";
+                            NotificationChannel channel = new NotificationChannel(
+                                    channelId,
+                                    "Channel human readable title",
+                                    NotificationManager.IMPORTANCE_HIGH);
+                            mNotificationManager.createNotificationChannel(channel);
+                            mBuilder.setChannelId(channelId);
+                        }
+
+                        mNotificationManager.notify(0, mBuilder.build());
+                        startActivity(new Intent(AddressActivity.this,SuccessActivity.class));
+                    }
+                });
+            }
+
+
+
+
         else {
             showErrorSnackBar(this,"No Internet Connection");
         }

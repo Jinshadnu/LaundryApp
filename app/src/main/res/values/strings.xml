@@ -51,4 +51,6 @@
     <string name="delete">Delete</string>
     <string name="title_activity_mylocation">Map</string>
 
+    <string name="map_key" translatable="false">AIzaSyCF6L9NRuvk2VzZFF9ACwSD2vqJxaNKO3g</string>
+
 </resources>

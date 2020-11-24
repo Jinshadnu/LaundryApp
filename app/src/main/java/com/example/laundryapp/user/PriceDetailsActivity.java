@@ -27,6 +27,10 @@ public class PriceDetailsActivity extends AppCompatActivity {
             onBackPressed();
         });
 
+        priceDetailsBinding.layoutBase.imageViewCart.setOnClickListener(v -> {
+            startActivity(new Intent(PriceDetailsActivity.this,CartActivity.class));
+        });
+
         priceDetailsBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
 
 
