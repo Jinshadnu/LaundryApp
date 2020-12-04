@@ -283,7 +283,7 @@ public class HomeFragment extends Fragment {
             locationRequest.setInterval(2000);
             locationRequest.setFastestInterval(1000);
             locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-//            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+
         }
     }
 
@@ -307,63 +307,8 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    @SuppressWarnings("MissingPermission")
-//    private void getAddress() {
-//        if (!Geocoder.isPresent()) {
-//            Toast.makeText(getActivity(), "Can't find current address, ",
-//                    Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        Intent intent = new Intent(getActivity(), GetAddressIntentService.class);
-//        intent.putExtra("add_receiver", addressResultReceiver);
-//        intent.putExtra("add_location", currentLocation);
-//        getActivity().startService(intent);
-//    }
-//
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                startLocationUpdates();
-//            }
-//            else {
-//                Toast.makeText(getActivity(), "Location permission not granted, " + "restart the app if you want the feature", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
 
-    //    public void getMyLocation() {
-//        // create class object
-//        gps = new GPSTracker(getActivity());
-//        // check if GPS enabled
-//        if (gps.canGetLocation()) {
-//            latitude = gps.getLatitude();
-//            longitude = gps.getLongitude();
-//            Geocoder geocoder;
-//            List<Address> addresses;
-//            geocoder = new Geocoder(this, Locale.getDefault());
-//            try {
-//                addresses = geocoder.getFromLocation(latitude, longitude, 1);
-//                postalCode = addresses.get(0).getPostalCode();
-//                city = addresses.get(0).getLocality();
-//                address = addresses.get(0).getAddressLine(0);
-//                state = addresses.get(0).getAdminArea();
-//                country = addresses.get(0).getCountryName();
-//                knownName = addresses.get(0).getFeatureName();
-//                Log.e("Location",postalCode+" "+city+" "+address+" "+state+" "+knownName);
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        } else {
-//            gps.showSettingsAlert();
-//        }
-//    }
 
-//    private void showResults(String currentAdd) {
-//        homeBinding.textLocation.setText(currentAdd);
-//    }
 
     private void runAnimationAgain() {
 
