@@ -17,7 +17,8 @@
         android:layout_marginLeft="@dimen/size_16dp"
         android:layout_marginRight="@dimen/size_16dp"
         android:layout_marginBottom="@dimen/size_8dp"
-        android:layout_height="@dimen/size_170dp">
+        android:layout_height="@dimen/size_200dp"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -37,6 +38,26 @@
                     android:textColor="@color/colorwhite"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/size_16dp"/>
+
+                <TextView
+                    android:id="@+id/text_viewmore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View More"
+                    android:textSize="@dimen/size_18dp"
+                    android:textColor="@color/colorwhite"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/size_15dp"
+                    android:layout_marginLeft="@dimen/size_16dp"/>
+
+                <View
+                    android:layout_width="@dimen/size_85dp"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/text_viewmore"
+                    android:layout_marginRight="@dimen/size_15dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/colorwhite"/>
 
 
             </RelativeLayout>
@@ -67,8 +88,6 @@
                 android:layout_marginTop="@dimen/size_10dp"
                 android:layout_marginLeft="@dimen/size_16dp"
                 android:textSize="@dimen/size_16dp"/>
-
-
 
 
             <TextView
@@ -123,6 +142,28 @@
                 android:layout_marginTop="@dimen/size_10dp"
                 android:layout_marginLeft="@dimen/size_16dp"
                 android:textSize="@dimen/size_16dp"/>
+
+            <TextView
+                android:id="@+id/text_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FF0000"
+                android:layout_below="@id/text_oreder_status"
+                android:layout_marginTop="@dimen/size_8dp"
+                android:text="Cancel this Order"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/amaranth"
+                android:textStyle="bold"
+                android:padding="@dimen/size_4dp"
+                android:textSize="@dimen/size_18sp"/>
+
+            <View
+                android:layout_width="@dimen/size_135dp"
+                android:layout_height="1dp"
+                android:layout_below="@id/text_cancel"
+                android:layout_centerHorizontal="true"
+                android:background="@color/bg_row_background"/>
+
 
 
         </RelativeLayout>

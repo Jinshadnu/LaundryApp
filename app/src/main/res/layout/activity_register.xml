@@ -88,28 +88,47 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
+
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/amaranth"
+                    android:padding="@dimen/size_15dp"
+                    android:text="+974"
+                    android:background="@drawable/edittext_background"
+                    android:editable="false"
+                    android:drawableLeft="@drawable/ic_qatar"
+                    android:drawablePadding="@dimen/size_5dp"
+                    android:textColor="@color/colorblack"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView13" />
+
                 <EditText
                     android:id="@+id/edittext_phone"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
+                    android:background="@drawable/edittext_background"
                     android:drawableLeft="@drawable/ic_phone_android_2"
                     android:drawablePadding="@dimen/size_8dp"
-                    android:background="@drawable/edittext_background"
                     android:ems="10"
-                    android:textStyle="bold"
-                    android:maxLength="8"
-                    android:textColor="@color/colorblack"
-                    android:textSize="@dimen/size_18dp"
                     android:hint="Phone"
                     android:inputType="phone"
+                    android:maxLength="8"
                     android:paddingLeft="10dp"
+                    android:textColor="@color/colorblack"
+                    android:textSize="@dimen/size_18dp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/editText"
                     app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
                 <EditText

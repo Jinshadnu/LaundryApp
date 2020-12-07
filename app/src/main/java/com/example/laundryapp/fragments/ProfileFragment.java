@@ -1,6 +1,8 @@
 package com.example.laundryapp.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.FragmentProfileBinding;
@@ -31,6 +35,7 @@ import com.example.laundryapp.utilities.Constants;
 public class ProfileFragment extends Fragment {
 public FragmentProfileBinding profileBinding;
 public String username,phone,email;
+public View view;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -84,6 +89,8 @@ public String username,phone,email;
 
         profileBinding.textViewName.setText(username);
         profileBinding.textViewPhone.setText(phone);
+        profileBinding.textViewEmail.setText(email);
+
 
 
         profileBinding.textViewChangePassword.setOnClickListener(v -> {
@@ -111,8 +118,40 @@ public String username,phone,email;
             startActivity(new Intent(getActivity(), HelpsActivity.class));
         });
 
+        profileBinding.textViewEdit.setOnClickListener(view1 -> {
+            withEditText(view1);
+        });
+
+
+
 
 
         return profileBinding.getRoot();
+    }
+
+    public void withEditText(View view) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Edit Profile");
+        LayoutInflater inflater = getLayoutInflater();
+        view = inflater.inflate(R.layout.layout_edit_profile, null);
+        final EditText editText_phone=view.findViewById(R.id.edittext_phone);
+        final EditText editText_email=view.findViewById(R.id.editext_email);
+        builder.setView(view);
+        builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+               // Toast.makeText(cogetApplicationContext(), "Text entered is " + input.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+                // Toast.makeText(cogetApplicationContext(), "Text entered is " + input.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.show();
     }
 }

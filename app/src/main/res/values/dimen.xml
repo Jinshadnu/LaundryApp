@@ -60,10 +60,14 @@
     <dimen name="size_100dp">100dp</dimen>
     <dimen name="size_120dp">120dp</dimen>
     <dimen name="size_130dp">130dp</dimen>
+    <dimen name="size_135dp">135dp</dimen>
     <dimen name="size_140dp">140dp</dimen>
+    <dimen name="size_145dp">145dp</dimen>
     <dimen name="size_150dp">150dp</dimen>
     <dimen name="size_160dp">160dp</dimen>
     <dimen name="size_180dp">180dp</dimen>
+    <dimen name="size_190dp">190dp</dimen>
+    <dimen name="size_195dp">195dp</dimen>
     <dimen name="size_200dp">200dp</dimen>
     <dimen name="size_210dp">210dp</dimen>
     <dimen name="size_220dp">220dp</dimen>

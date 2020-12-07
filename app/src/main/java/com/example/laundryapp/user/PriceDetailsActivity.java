@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.ActivityPriceDetailsBinding;
@@ -14,6 +15,8 @@ import java.util.Date;
 
 public class PriceDetailsActivity extends AppCompatActivity {
    public ActivityPriceDetailsBinding priceDetailsBinding;
+   public double aDouble;
+   public double amount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +29,10 @@ public class PriceDetailsActivity extends AppCompatActivity {
         priceDetailsBinding.layoutBase.toolbar.setNavigationOnClickListener(v -> {
             onBackPressed();
         });
+
+
+
+
 
         priceDetailsBinding.layoutBase.imageViewCart.setOnClickListener(v -> {
             startActivity(new Intent(PriceDetailsActivity.this,CartActivity.class));
@@ -42,15 +49,29 @@ public class PriceDetailsActivity extends AppCompatActivity {
 
         String total_amount=getIntent().getStringExtra("price");
         String quantity=getIntent().getStringExtra("qauntity");
+        aDouble=getIntent().getDoubleExtra("amount",0.00);
 
         priceDetailsBinding.textAmount.setText(total_amount);
-        priceDetailsBinding.textOrderTotal.setText(total_amount);
         priceDetailsBinding.textItemscount.setText(quantity);
+        priceDetailsBinding.txtAmount.setText(total_amount);
 
+        priceDetailsBinding.checkBoxUrgent.setOnCheckedChangeListener((compoundButton, b) -> {
+            if(priceDetailsBinding.checkBoxUrgent.isChecked()){
+                priceDetailsBinding.textUrgentMessage.setVisibility(View.VISIBLE);
+                amount=aDouble * 2;
+                priceDetailsBinding.txtAmount.setText("QAR: " + String.valueOf(amount));
 
+            }
+            else {
+                priceDetailsBinding.textUrgentMessage.setVisibility(View.GONE);
+                priceDetailsBinding.txtAmount.setText(total_amount);
+            }
+        });
 
         priceDetailsBinding.buttonPickup.setOnClickListener(v -> {
-            startActivity(new Intent(PriceDetailsActivity.this,AddressActivity.class));
+            Intent intent=new Intent(PriceDetailsActivity.this,AddressActivity.class);
+            intent.putExtra("total_amount",priceDetailsBinding.txtAmount.getText().toString());
+            startActivity(intent);
         });
     }
 }

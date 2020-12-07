@@ -144,8 +144,10 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
             Intent intent=new Intent(getActivity(),PriceDetailsActivity.class);
             count=String.valueOf(cartAdapter.cartList.size());
             String totalPrice=cartBinding.orederLayout.total.getText().toString();
+            double price=grandTotal();
             intent.putExtra("qauntity",count);
             intent.putExtra("price",totalPrice);
+            intent.putExtra("amount",price);
             startActivity(intent);
         });
 
@@ -159,7 +161,7 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
     }
 
 
-      private double grandTotal(){
+      private  double grandTotal(){
         //cartList=new ArrayList<>();
           double totalPrice = 0.0;
           for(int i = 0 ; i < cartAdapter.cartList.size(); i++) {

@@ -68,8 +68,10 @@ public  int quant;
             Intent intent=new Intent(CartActivity.this,PriceDetailsActivity.class);
             count=String.valueOf(cartAdapter.cartList.size());
             String totalPrice=cartBinding.orederLayout.total.getText().toString();
+            double price=grandTotal();
             intent.putExtra("qauntity",count);
             intent.putExtra("price",totalPrice);
+            intent.putExtra("amount",price);
             startActivity(intent);
         });
 

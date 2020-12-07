@@ -50,7 +50,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginTop="32dp"
+                        android:layout_marginTop="24dp"
                         android:drawableLeft="@drawable/icperson24"
                         android:drawablePadding="@dimen/size_5dp"
                         android:fontFamily="@font/amaranth"
@@ -60,6 +60,20 @@
                         android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@+id/imageView2"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/amaranth"
+                        android:text="jinshadnu06@gmail.com"
+                        android:textColor="@color/colorDarkstateBlue"
+                        android:textSize="@dimen/size_15dp"
+                        app:layout_constraintStart_toEndOf="@+id/imageView2"
+                        app:layout_constraintTop_toBottomOf="@+id/textView_phone" />
 
                     <TextView
                         android:id="@+id/textView_phone"
@@ -84,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="32dp"
                         android:layout_marginLeft="32dp"
-                        android:layout_marginTop="64dp"
+                        android:layout_marginTop="16dp"
                         android:drawableLeft="@drawable/ic_baseline_lock_24"
                         android:drawablePadding="10dp"
                         android:padding="5dp"
@@ -93,7 +107,7 @@
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView_phone" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView_email" />
 
 
                     <ImageView
@@ -159,6 +173,23 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView_history" />
 
                     <TextView
+                        android:id="@+id/textView_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginLeft="32dp"
+                        android:layout_marginTop="16dp"
+                        android:drawableLeft="@drawable/icperson24"
+                        android:drawablePadding="8dp"
+                        android:padding="5dp"
+                        android:text="Edit Profile"
+                        android:textColor="@color/md_grey_800"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView_address" />
+
+                    <TextView
                         android:id="@+id/textView_terms"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -173,7 +204,7 @@
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView_address" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView_edit" />
 
                     <TextView
                         android:id="@+id/textView_help"

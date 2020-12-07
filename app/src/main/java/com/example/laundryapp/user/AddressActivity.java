@@ -88,6 +88,8 @@ public ActivityAddressBinding addressBinding;
     private Geocoder geocoder;
     public String latit,longit;
     public String strAddress;
+    public String total_amount;
+
 
 
     public String user_id;
@@ -110,6 +112,9 @@ public ActivityAddressBinding addressBinding;
         SharedPreferences sharedPreferences=getSharedPreferences(Constants.MyPREFERENCES,MODE_PRIVATE);
         user_id=sharedPreferences.getString(Constants.USER_ID,null);
 
+        total_amount=getIntent().getStringExtra("total_amount");
+
+        addressBinding.textViewTotal.setText("Total Amount " + total_amount);
 
 
         addressBinding.recyclerAddress.setLayoutManager(new LinearLayoutManager(this));
@@ -238,8 +243,6 @@ public ActivityAddressBinding addressBinding;
 
              latitude = gps.getLatitude();
              longitude = gps.getLongitude();
-
-
 
             // \n is for new line
 //            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: "

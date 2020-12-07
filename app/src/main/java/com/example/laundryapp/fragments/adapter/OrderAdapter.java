@@ -1,5 +1,6 @@
 package com.example.laundryapp.fragments.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,6 +52,26 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         OrderResponse.Order orders=ordersList.get(position);
         holder.oredersBinding.setOrder(orders);
+
+        holder.oredersBinding.textCancel.setOnClickListener(view -> {
+            AlertDialog.Builder alertDialog=new AlertDialog.Builder(context);
+            alertDialog.setTitle("Cancel Order");
+            alertDialog.setMessage("Are you sure want to cancel this Order ? ");
+
+            alertDialog.setPositiveButton("Yes",(dialogInterface, i) -> {
+
+            });
+
+            alertDialog.setNegativeButton("No",(dialogInterface, i) -> {
+             dialogInterface.cancel();
+            });
+
+            alertDialog.show();
+
+
+        });
+
+
     }
 
     public void filter(String charText) {
