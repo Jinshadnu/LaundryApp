@@ -2,7 +2,9 @@ package com.example.laundryapp.core;
 
 import com.example.laundryapp.login.pojo.LoginResponse;
 import com.example.laundryapp.register.pojo.RegisterResponse;
+import com.example.laundryapp.user.pojo.OrderedItemResponse;
 import com.example.laundryapp.user.pojo.ServiceResponse;
+import com.example.laundryapp.user.pojo.UserResponse;
 import com.example.laundryapp.user.response.AddressResponse;
 import com.example.laundryapp.user.response.CartResponse;
 import com.example.laundryapp.user.response.ComonResponse;
@@ -69,6 +71,22 @@ public interface NetworkAPI {
     @FormUrlEncoded
     @POST("update_count")
     Call<UpdateResponse> updateCartItem(@Field("item_id")String item_id, @Field("user_id")String user_id, @Field("quantity")String quantity,@Field("price")String price);
+
+    @GET("getuser_details")
+    Call<UserResponse> getuserDetails(@Query("user_id") String user_id);
+
+    @FormUrlEncoded
+    @POST("edit_profile")
+    Call<ComonResponse> editProfile(@Field("user_id")String userId,@Field("phone") String phone,@Field("email") String email);
+
+    @FormUrlEncoded
+    @POST("order_cancel")
+    Call<ComonResponse> orderCancel(@Field("order_id")String orderId);
+
+    @FormUrlEncoded
+    @POST("getordered_items")
+    Call<OrderedItemResponse> getOrderedItems(@Field("order_id")String orderId);
+
 
 
 

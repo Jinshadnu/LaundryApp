@@ -144,7 +144,8 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
             Intent intent=new Intent(getActivity(),PriceDetailsActivity.class);
             count=String.valueOf(cartAdapter.cartList.size());
             String totalPrice=cartBinding.orederLayout.total.getText().toString();
-            double price=grandTotal();
+           // double price=grandTotal();
+            double price=Double.parseDouble(cartBinding.orederLayout.total.getText().toString());
             intent.putExtra("qauntity",count);
             intent.putExtra("price",totalPrice);
             intent.putExtra("amount",price);
@@ -174,7 +175,7 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
 
           }
 
-          cartBinding.orederLayout.total.setText("QAR: " + String.valueOf(totalPrice));
+          cartBinding.orederLayout.total.setText(String.valueOf(totalPrice));
 
 
         return totalPrice;
@@ -327,7 +328,7 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
             addCartViewModel.updateCartItem(item_id,user_id,quantity,price).observe(getActivity(),updateResponse -> {
                 if (updateResponse != null && updateResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
                     String cart_total=String.valueOf(updateResponse.getOrder_total());
-                    cartBinding.orederLayout.total.setText("QAR: " +cart_total);
+                    cartBinding.orederLayout.total.setText(cart_total);
                 }
             });
         }

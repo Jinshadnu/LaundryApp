@@ -1,6 +1,7 @@
 package com.example.laundryapp.fragments;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,10 +10,15 @@ import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.MediatorLiveData;
+import androidx.lifecycle.ViewModelProviders;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,7 +31,12 @@ import com.example.laundryapp.user.ChangePassword;
 import com.example.laundryapp.user.HelpsActivity;
 import com.example.laundryapp.user.HistoryActivity;
 import com.example.laundryapp.user.TermsandConditions;
+import com.example.laundryapp.user.viewModel.AddCartViewModel;
+import com.example.laundryapp.user.viewModel.UsersViewModel;
 import com.example.laundryapp.utilities.Constants;
+import com.example.laundryapp.utilities.NetworkUtilities;
+
+import static android.text.TextUtils.isEmpty;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,6 +47,12 @@ public class ProfileFragment extends Fragment {
 public FragmentProfileBinding profileBinding;
 public String username,phone,email;
 public View view;
+public UsersViewModel usersViewModel;
+public String user_id;
+public int position;
+public String userphone,useremail;
+    public EditText editText_phone,editText_email;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -74,6 +91,7 @@ public View view;
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        usersViewModel= ViewModelProviders.of((FragmentActivity) this.getActivity()).get(UsersViewModel.class);
     }
 
     @Override
@@ -86,10 +104,9 @@ public View view;
         username=sharedpreferences.getString(Constants.USER_NAME,null);
         phone=sharedpreferences.getString(Constants.PHONE,null);
         email=sharedpreferences.getString(Constants.EMAIL,null);
+        user_id=sharedpreferences.getString(Constants.USER_ID,user_id);
 
-        profileBinding.textViewName.setText(username);
-        profileBinding.textViewPhone.setText(phone);
-        profileBinding.textViewEmail.setText(email);
+
 
 
 
@@ -124,10 +141,54 @@ public View view;
 
 
 
-
+       getUsers();
 
         return profileBinding.getRoot();
     }
+
+    public boolean validate(String phone,String email){
+        if (isEmpty(phone)) {
+            return false;
+        }
+
+        if (isEmpty(email)) {
+            editText_email.setError("Please enter email");
+
+            return false;
+        }
+        if(phone.length() < 8){
+            editText_phone.setError("Invalid phone number");
+            return false;
+        }
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() && email.length() < 5){
+            //editText_email.setError("Invalid email address");
+            return false;
+        }
+        return true;
+    }
+
+    public void showDialog(){
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.layout_edit_profile);
+        dialog.setTitle("Edit Profile");
+        editText_phone=dialog.findViewById(R.id.editText_phone);
+        editText_email=dialog.findViewById(R.id.editTextEmail);
+        final Button button=dialog.findViewById(R.id.button_save);
+
+        button.setOnClickListener(view1  -> {
+            userphone=editText_phone.getText().toString();
+            useremail=editText_email.getText().toString();
+
+            if (validate(userphone,useremail)){
+                editProfile(user_id,userphone,useremail);
+                dialog.dismiss();
+            }
+        });
+
+
+    }
+
+
 
     public void withEditText(View view) {
 
@@ -135,15 +196,35 @@ public View view;
         builder.setTitle("Edit Profile");
         LayoutInflater inflater = getLayoutInflater();
         view = inflater.inflate(R.layout.layout_edit_profile, null);
-        final EditText editText_phone=view.findViewById(R.id.edittext_phone);
-        final EditText editText_email=view.findViewById(R.id.editext_email);
+        editText_phone=view.findViewById(R.id.editText_phone);
+        editText_email=view.findViewById(R.id.editTextEmail);
         builder.setView(view);
+        editText_email.setText(profileBinding.textViewEmail.getText().toString());
+        editText_phone.setText(profileBinding.textViewPhone.getText().toString());
+        final Button button=view.findViewById(R.id.button_save);
+
+
         builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                // Toast.makeText(cogetApplicationContext(), "Text entered is " + input.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                userphone=editText_phone.getText().toString();
+                useremail=editText_email.getText().toString();
+
+                if (validate(userphone,useremail)){
+                    editProfile(user_id,userphone,useremail);
+                    dialogInterface.dismiss();
+                }
+                else {
+                    Toast.makeText(getActivity(), "Updation Failed", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
+
+
+
 
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -152,6 +233,35 @@ public View view;
                 // Toast.makeText(cogetApplicationContext(), "Text entered is " + input.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
+        builder.setCancelable(false);
         builder.show();
     }
+
+    public void getUsers(){
+        if (NetworkUtilities.getNetworkInstance(getActivity()).isConnectedToInternet()){
+            usersViewModel.getUsers(user_id).observe(getActivity(),userResponse -> {
+              if (userResponse != null && userResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                  profileBinding.textViewName.setText(userResponse.getUser().get(position).getUsername());
+                  profileBinding.textViewPhone.setText(userResponse.getUser().get(position).getPhone());
+                  profileBinding.textViewEmail.setText(userResponse.getUser().get(position).getEmail());
+              }
+            });
+        }
+    }
+
+    public void editProfile(String user_id,String userphone,String useremail){
+        if (NetworkUtilities.getNetworkInstance(getActivity()).isConnectedToInternet()){
+            usersViewModel.editProfile(user_id,userphone,useremail).observe(getActivity(),comonResponse -> {
+                if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                    Toast.makeText(getActivity(),comonResponse.getMessage(),Toast.LENGTH_LONG).show();
+                    getUsers();
+                }
+                else {
+                    Toast.makeText(getActivity(),comonResponse.getMessage(),Toast.LENGTH_LONG).show();
+                }
+
+            });
+        }
+    }
+
 }

@@ -28,12 +28,24 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/total"
+                android:id="@+id/money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/text_total"
                 android:layout_marginLeft="@dimen/size_16dp"
+                android:text="QAR :"
+                android:textColor="@color/colorDarkstateBlue"
+                android:textSize="@dimen/size_18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_total"
+                android:layout_marginLeft="@dimen/size_2dp"
                 android:text="0.00"
+                android:layout_toRightOf="@id/money"
                 android:textColor="@color/colorDarkstateBlue"
                 android:textSize="@dimen/size_18dp"
                 android:textStyle="bold" />

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +23,7 @@ import com.example.laundryapp.utilities.BaseActivity;
 import com.example.laundryapp.utilities.Constants;
 import com.example.laundryapp.utilities.NetworkUtilities;
 
-public class HistoryActivity extends BaseActivity implements SearchView.OnQueryTextListener {
+public class HistoryActivity extends BaseActivity implements SearchView.OnQueryTextListener,OrderAdapter.cancelOrderListener {
 public ActivityHistoryBinding historyBinding;
     public OrderViewModel orderViewModel;
     public OrderAdapter orderAdapter;
@@ -39,6 +40,10 @@ public ActivityHistoryBinding historyBinding;
 
         historyBinding.layoutBase.toolbar.setNavigationOnClickListener(v -> {
             onBackPressed();
+        });
+
+        historyBinding.layoutBase.imageViewCart.setOnClickListener(v -> {
+            startActivity(new Intent(HistoryActivity.this,CartActivity.class));
         });
 
 
@@ -67,7 +72,9 @@ public ActivityHistoryBinding historyBinding;
 
                 if (orderResponse != null && orderResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
                     orderAdapter=new OrderAdapter(this,orderResponse.getOrders());
+                    orderAdapter.setCancelListener(this);
                     historyBinding.recyclerOrders.setAdapter(orderAdapter);
+
                 }
 
                 if(orderAdapter.getItemCount() == 0){
@@ -108,5 +115,28 @@ public ActivityHistoryBinding historyBinding;
         if (orderAdapter != null)
             orderAdapter.filter(newText);
         return true;
+    }
+
+    public void cancelOrder(){
+        if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
+
+        }
+    }
+
+    @Override
+    public void onOrderCancel(String orderId) {
+     if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
+        orderViewModel.orderCancel(orderId).observe(this,comonResponse -> {
+            if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                openSuccessDialog(comonResponse.getMessage());
+            }
+            else {
+               showErrorSnackBar(this,comonResponse.getMessage());
+            }
+        });
+     }
+     else {
+
+     }
     }
 }

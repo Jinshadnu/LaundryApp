@@ -68,7 +68,7 @@ public  int quant;
             Intent intent=new Intent(CartActivity.this,PriceDetailsActivity.class);
             count=String.valueOf(cartAdapter.cartList.size());
             String totalPrice=cartBinding.orederLayout.total.getText().toString();
-            double price=grandTotal();
+            double price=Double.parseDouble(cartBinding.orederLayout.total.getText().toString());
             intent.putExtra("qauntity",count);
             intent.putExtra("price",totalPrice);
             intent.putExtra("amount",price);
@@ -136,7 +136,7 @@ public  int quant;
 
         }
 
-        cartBinding.orederLayout.total.setText("QAR " + String.valueOf(totalPrice));
+        cartBinding.orederLayout.total.setText(String.valueOf(totalPrice));
 
         return totalPrice;
     }
@@ -257,7 +257,7 @@ public void fetchCart(){
                 if (updateResponse != null && updateResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)) {
                     // fetchCart();
                     String cart_total=String.valueOf(updateResponse.getOrder_total());
-                    cartBinding.orederLayout.total.setText("QAR: " +cart_total+".00");
+                    cartBinding.orederLayout.total.setText(cart_total);
                 }
             });
         }

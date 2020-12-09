@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
-
         <variable
-            name="order"
-            type="com.example.laundryapp.user.response.OrderResponse.Order" />
-
+            name="ordereditems"
+            type="com.example.laundryapp.user.pojo.OrderedItemResponse.OrderItems" />
     </data>
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -35,31 +33,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Order Details"
+                    android:text="Items"
                     android:textSize="@dimen/size_18dp"
                     android:textColor="@color/colorwhite"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/size_16dp"/>
 
-                <TextView
-                    android:id="@+id/text_viewmore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View More"
-                    android:textSize="@dimen/size_18dp"
-                    android:textColor="@color/colorwhite"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/size_15dp"
-                    android:layout_marginLeft="@dimen/size_16dp"/>
 
-                <View
-                    android:layout_width="@dimen/size_85dp"
-                    android:layout_height="1dp"
-                    android:layout_below="@id/text_viewmore"
-                    android:layout_marginRight="@dimen/size_15dp"
-                    android:layout_alignParentRight="true"
-                    android:background="@color/colorwhite"/>
+
 
 
             </RelativeLayout>
@@ -69,7 +50,7 @@
                 android:id="@+id/text_oreder_Id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Order ID  :"
+                android:text="Item Name  :"
                 android:textColor="@color/colorblack"
                 android:layout_below="@id/relativeLayout"
                 android:layout_marginTop="@dimen/size_10dp"
@@ -81,7 +62,7 @@
                 android:id="@+id/oreder_Id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{order.order_id}"
+                android:text="@{ordereditems.item_name}"
                 android:textColor="#ff471a"
                 android:textStyle="bold"
                 android:layout_below="@id/relativeLayout"
@@ -96,7 +77,7 @@
                 android:id="@+id/text_oreder_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Date  :"
+                android:text="Quantity  :"
                 android:textStyle="bold"
                 android:textColor="@color/colorblack"
                 android:layout_below="@id/text_oreder_Id"
@@ -108,7 +89,7 @@
                 android:id="@+id/oreder_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{order.date}"
+                android:text="@{ordereditems.quantiy}"
                 android:textStyle="bold"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/size_16dp"
@@ -123,7 +104,7 @@
                 android:id="@+id/text_oreder_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Status  :"
+                android:text="Service Name  :"
                 android:textStyle="bold"
                 android:textColor="@color/colorblack"
                 android:layout_below="@id/text_oreder_date"
@@ -136,7 +117,7 @@
                 android:id="@+id/oreder_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{order.order_status}"
+                android:text="@{ordereditems.service_name}"
                 android:textStyle="bold"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/size_16dp"
@@ -147,28 +128,6 @@
                 android:layout_marginBottom="@dimen/size_5dp"
                 android:textSize="@dimen/size_16dp"/>
 
-            <TextView
-                android:id="@+id/text_cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#FF0000"
-                android:layout_below="@id/text_oreder_status"
-                android:layout_marginTop="@dimen/size_8dp"
-                android:text="Cancel this Order"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/amaranth"
-                android:textStyle="bold"
-                android:padding="@dimen/size_4dp"
-                android:textSize="@dimen/size_18sp"/>
-
-            <View
-                android:id="@+id/view_cancel"
-                android:layout_width="@dimen/size_135dp"
-                android:layout_height="1dp"
-                android:layout_below="@id/text_cancel"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="@dimen/size_5dp"
-                android:background="@color/bg_row_background"/>
 
 
 

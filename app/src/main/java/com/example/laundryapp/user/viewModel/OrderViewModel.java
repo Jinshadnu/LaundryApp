@@ -1,5 +1,6 @@
 package com.example.laundryapp.user.viewModel;
 
+import com.example.laundryapp.user.pojo.OrderedItemResponse;
 import com.example.laundryapp.user.repository.OrderRepository;
 import com.example.laundryapp.user.response.ComonResponse;
 import com.example.laundryapp.user.response.OrderResponse;
@@ -24,5 +25,11 @@ public class OrderViewModel extends ViewModel {
         return orderRepository.getOrders(user_id);
     }
 
+    public LiveData<ComonResponse> orderCancel(String orderId){
+        return orderRepository.cancelOrder(orderId);
+    }
 
+    public LiveData<OrderedItemResponse> getItems(String orderId){
+        return orderRepository.getItems(orderId);
+    }
 }

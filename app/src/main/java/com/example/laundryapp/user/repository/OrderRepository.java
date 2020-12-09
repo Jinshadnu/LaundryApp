@@ -2,6 +2,7 @@ package com.example.laundryapp.user.repository;
 
 import com.example.laundryapp.core.NetworkAPI;
 import com.example.laundryapp.core.NetworkService;
+import com.example.laundryapp.user.pojo.OrderedItemResponse;
 import com.example.laundryapp.user.response.ComonResponse;
 import com.example.laundryapp.user.response.OrderResponse;
 import com.example.laundryapp.utilities.CommonResponse;
@@ -60,6 +61,50 @@ public class OrderRepository {
             @Override
             public void onFailure(Call<OrderResponse> call, Throwable t) {
                 mutableLiveData.setValue(null);
+            }
+        });
+        return mutableLiveData;
+    }
+
+    public LiveData<ComonResponse> cancelOrder(String orderId){
+        MutableLiveData mutableLiveData=new MutableLiveData();
+
+        networkAPI=NetworkService.getRetrofitInstance().create(NetworkAPI.class);
+        Call<ComonResponse> responseCall=networkAPI.orderCancel(orderId);
+        responseCall.enqueue(new Callback<ComonResponse>() {
+            @Override
+            public void onResponse(Call<ComonResponse> call, Response<ComonResponse> response) {
+                ComonResponse comonResponse=response.body();
+                if (comonResponse != null){
+                    mutableLiveData.postValue(comonResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ComonResponse> call, Throwable t) {
+             mutableLiveData.postValue(null);
+            }
+        });
+        return mutableLiveData;
+    }
+
+    public LiveData<OrderedItemResponse> getItems(String orderId){
+        MutableLiveData mutableLiveData=new MutableLiveData();
+
+        networkAPI=NetworkService.getRetrofitInstance().create(NetworkAPI.class);
+        Call<OrderedItemResponse> responseCall=networkAPI.getOrderedItems(orderId);
+        responseCall.enqueue(new Callback<OrderedItemResponse>() {
+            @Override
+            public void onResponse(Call<OrderedItemResponse> call, Response<OrderedItemResponse> response) {
+                OrderedItemResponse itemResponse=response.body();
+                if (itemResponse != null){
+                    mutableLiveData.setValue(itemResponse);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OrderedItemResponse> call, Throwable t) {
+             mutableLiveData.setValue(null);
             }
         });
         return mutableLiveData;
