@@ -31,6 +31,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
     public static List <Cart> selecteditems;
     public static int total=0;
     public setOnActionListener listener;
+    public onDeleteListener deleteListener;
     public int quantity;
     public ValueFilter valueFilter;
     public static LayoutCartBinding cartBinding;
@@ -41,10 +42,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
 
 
 
-    public CartAdapter(Context context, List<CartResponse.Carts> cartList) {
+    public CartAdapter(Context context, List<CartResponse.Carts> cartList,String user_id) {
         this.context = context;
         this.cartList = cartList;
         this.cartListFiltered=cartList;
+        this.user_id=user_id;
     }
 
 
@@ -81,6 +83,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
             listener.onActionPerformed(item_id,quantity,amount);
 
 
+        });
+
+        holder.cartBinding.textDelete.setOnClickListener(view -> {
+          String item_id=cartList.get(position).getItem_id();
+          deleteListener.onDelete(user_id,item_id);
         });
 
 //        holder.cartBinding.icAdd.setOnClickListener(v -> {
@@ -180,4 +187,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewModel>
     {
         this.listener=listener;
     }
+
+    public interface onDeleteListener{
+        void onDelete(String userId,String itemId);
+    }
+    public void setDeleteListener(onDeleteListener listener)
+    {
+        this.deleteListener=listener;
+    }
+
 }

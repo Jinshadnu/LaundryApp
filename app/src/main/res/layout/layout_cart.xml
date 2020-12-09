@@ -50,10 +50,11 @@
             android:id="@+id/view_foreground"
             android:layout_width="match_parent"
             android:background="@color/colorwhite"
-            android:layout_height="@dimen/size_100dp"
+            android:layout_height="@dimen/size_160dp"
             android:elevation="@dimen/size_50dp"
             android:clipToPadding="false"
             android:padding="@dimen/padd_10">
+
 
 
                 <ImageView
@@ -70,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size_16dp"
-                android:layout_marginTop="@dimen/size_5dp"
+                android:layout_marginTop="@dimen/size_15dp"
                 android:layout_toRightOf="@id/image_item"
                 android:fontFamily="@font/amaranth"
                 android:text="@{carts.item_name}"
@@ -200,10 +201,38 @@
                 android:id="@+id/elegant_count"
                 android:layout_width="80dp"
                 android:layout_height="@dimen/size_40dp"
-                android:layout_centerVertical="true"
                 app:initialNumber="1"
                 android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/size_5dp"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/size_5dp"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_item"
+                android:layout_marginTop="@dimen/size_5dp">
+
+                <TextView
+                    android:id="@+id/text_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/size_5dp"
+                    android:textAlignment="center"
+                    android:text="Delete Item"
+                    android:background="#F5F5F5"
+                    android:drawableLeft="@drawable/ic_baseline_delete_24"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorDarkstateBlue"
+                    android:drawablePadding="@dimen/size_5dp"
+                    android:fontFamily="@font/amaranth"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="@dimen/size_18sp"
+                    android:gravity="center_horizontal" />
+
+
+            </RelativeLayout>
 
 
         </RelativeLayout>

@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.Toast;
 
 import com.example.laundryapp.R;
 import com.example.laundryapp.databinding.ActivityCartBinding;
@@ -33,7 +34,7 @@ import com.example.laundryapp.utilities.RecyclerItemTouchHelper;
 
 import java.util.List;
 
-public class CartActivity extends BaseActivity implements  RecyclerItemTouchHelper.RecyclerItemTouchHelperListener,CartAdapter.setOnActionListener {
+public class CartActivity extends BaseActivity implements  RecyclerItemTouchHelper.RecyclerItemTouchHelperListener,CartAdapter.setOnActionListener,CartAdapter.onDeleteListener {
 public static ActivityCartBinding cartBinding;
 public CartViewModel cartViewModel;
 public AddCartViewModel addCartViewModel;
@@ -160,9 +161,10 @@ public void fetchCart(){
     if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
         addCartViewModel.getCartItems(user_id).observe(this,cartResponse -> {
             if (cartResponse != null && cartResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                cartAdapter=new CartAdapter(this,cartResponse.getCart());
+                cartAdapter=new CartAdapter(this,cartResponse.getCart(),user_id);
                 cartBinding.recyclerCart.setAdapter(cartAdapter);
                 cartAdapter.setActionListener(this);
+                cartAdapter.setDeleteListener(this);
                 grandTotal();
             }
 
@@ -184,7 +186,7 @@ public void fetchCart(){
     public void getCart(){
         addCartViewModel.getCartItems(user_id).observe(this,cartResponse -> {
             if (cartResponse != null && cartResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                cartAdapter=new CartAdapter(this,cartResponse.getCart());
+                cartAdapter=new CartAdapter(this,cartResponse.getCart(),user_id);
                 cartBinding.recyclerCart.setAdapter(cartAdapter);
                 cartAdapter.setActionListener(this);
                 //grandTotal();
@@ -268,7 +270,24 @@ public void fetchCart(){
 
     }
 
+    @Override
+    public void onDelete(String userId, String itemId) {
+        if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
+            addCartViewModel.deletecartItem(userId,itemId).observe(this,comonResponse -> {
+                if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                    //baseActivity.openSuccessDialog(comonResponse.getMessage());
+                    Toast.makeText(this,comonResponse.getMessage(),Toast.LENGTH_LONG).show();
+                    fetchCart();
+                }
+            });
 
+        }
+
+        else {
+            Toast.makeText(this,"No Internet connection",Toast.LENGTH_LONG).show();
+        }
+    }
+    }
 
 
 //    @Override
@@ -289,6 +308,6 @@ public void fetchCart(){
 //
 //
 //    }
-    }
+
 
     

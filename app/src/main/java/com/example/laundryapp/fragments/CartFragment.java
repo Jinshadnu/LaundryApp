@@ -43,7 +43,7 @@ import java.util.List;
  * Use the {@link CartFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CartFragment extends Fragment implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener, CartAdapter.setOnActionListener {
+public class CartFragment extends Fragment implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener, CartAdapter.setOnActionListener,CartAdapter.onDeleteListener {
     public CartViewModel cartViewModel;
     public AddCartViewModel addCartViewModel;
     public CartAdapter cartAdapter;
@@ -208,9 +208,10 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
         if (NetworkUtilities.getNetworkInstance(getActivity()).isConnectedToInternet()){
             addCartViewModel.getCartItems(user_id).observe(getActivity(),cartResponse -> {
                 if (cartResponse != null && cartResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
-                    cartAdapter=new CartAdapter(getActivity(),cartResponse.getCart());
+                    cartAdapter=new CartAdapter(getActivity(),cartResponse.getCart(),user_id);
                     cartBinding.recyclerCart.setAdapter(cartAdapter);
                     cartAdapter.setActionListener(this);
+                    cartAdapter.setDeleteListener(this);
                     // count=String.valueOf(cartAdapter.cartList.size());
                     grandTotal();
                 }
@@ -339,4 +340,22 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
     }
 
 
+    @Override
+    public void onDelete(String userId, String itemId) {
+        if (NetworkUtilities.getNetworkInstance(getActivity()).isConnectedToInternet()){
+            addCartViewModel.deletecartItem(userId,itemId).observe(this,comonResponse -> {
+                if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
+                    //baseActivity.openSuccessDialog(comonResponse.getMessage());
+                    Toast.makeText(getActivity(),comonResponse.getMessage(),Toast.LENGTH_LONG).show();
+
+                    fetchCart();
+                }
+            });
+
+        }
+
+        else {
+            Toast.makeText(getActivity(),"No Internet connection",Toast.LENGTH_LONG).show();
+        }
+    }
 }

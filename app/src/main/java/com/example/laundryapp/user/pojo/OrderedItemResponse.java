@@ -22,7 +22,7 @@ public class OrderedItemResponse {
 
 
     public class OrderItems {
-        @SerializedName("quantiy")
+        @SerializedName("quantity")
         public String quantiy;
 
         @SerializedName("service_name")
