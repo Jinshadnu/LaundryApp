@@ -163,7 +163,29 @@
                 android:textStyle="bold"
                 android:layout_marginLeft="@dimen/size_16dp"/>
 
+            <TextView
+                android:id="@+id/text_note9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/note9"
+                android:textColor="@color/colorblack"
+                android:textSize="@dimen/size_16dp"
+                android:layout_below="@id/text_note8"
+                android:layout_marginTop="@dimen/size_5dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/size_16dp"/>
 
+            <TextView
+                android:id="@+id/text_note10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10.For Urgent Service,we charge double amount of normal service charge."
+                android:textColor="@color/colorblack"
+                android:textSize="@dimen/size_16dp"
+                android:layout_below="@id/text_note9"
+                android:layout_marginTop="@dimen/size_5dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/size_16dp"/>
 
 
         </RelativeLayout>

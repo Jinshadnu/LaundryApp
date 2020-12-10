@@ -67,6 +67,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             holder.oredersBinding.textCancel.setVisibility(View.GONE);
             holder.oredersBinding.viewCancel.setVisibility(View.GONE);
         }
+        if (order_status.equals("DISPATCHED")){
+            holder.oredersBinding.textCancel.setVisibility(View.GONE);
+            holder.oredersBinding.viewCancel.setVisibility(View.GONE);
+        }
 
 
 

@@ -65,11 +65,11 @@ public  int quant;
 
         addCartViewModel=ViewModelProviders.of((FragmentActivity) this).get(AddCartViewModel.class);
 
-        cartBinding.orederLayout.buttonOrder.setOnClickListener(v -> {
+        cartBinding.buttonOrder.setOnClickListener(v -> {
             Intent intent=new Intent(CartActivity.this,PriceDetailsActivity.class);
             count=String.valueOf(cartAdapter.cartList.size());
-            String totalPrice=cartBinding.orederLayout.total.getText().toString();
-            double price=Double.parseDouble(cartBinding.orederLayout.total.getText().toString());
+            String totalPrice=cartBinding.total.getText().toString();
+            double price=Double.parseDouble(cartBinding.total.getText().toString());
             intent.putExtra("qauntity",count);
             intent.putExtra("price",totalPrice);
             intent.putExtra("amount",price);
@@ -120,7 +120,7 @@ public  int quant;
     }
 
     public static void getTotal(int total){
-        cartBinding.orederLayout.total.setText(String.valueOf(total));
+        cartBinding.total.setText(String.valueOf(total));
     }
 
     private double grandTotal(){
@@ -137,7 +137,7 @@ public  int quant;
 
         }
 
-        cartBinding.orederLayout.total.setText(String.valueOf(totalPrice));
+        cartBinding.total.setText(String.valueOf(totalPrice));
 
         return totalPrice;
     }
@@ -153,7 +153,7 @@ public  int quant;
             totalAmount = totalAmount + price;
         }
 
-        cartBinding.orederLayout.total.setText(String.valueOf(totalAmount));
+        cartBinding.total.setText(String.valueOf(totalAmount));
 
 
     }
@@ -171,12 +171,12 @@ public void fetchCart(){
             if (cartAdapter.getItemCount() == 0){
                 cartBinding.textNodata.setVisibility(View.VISIBLE);
                 cartBinding.recyclerCart.setVisibility(View.GONE);
-                cartBinding.orederLayout.layoutPrice.setVisibility(View.GONE);
+                cartBinding.layoutPrice.setVisibility(View.GONE);
             }
         });
     }
     else {
-        cartBinding.orederLayout.buttonOrder.setVisibility(View.GONE);
+        cartBinding.buttonOrder.setVisibility(View.GONE);
         showErrorSnackBar(this,"No Internet Connection");
     }
 
@@ -196,7 +196,7 @@ public void fetchCart(){
             if (cartAdapter.getItemCount() == 0){
                 cartBinding.textNodata.setVisibility(View.VISIBLE);
                 cartBinding.recyclerCart.setVisibility(View.GONE);
-                cartBinding.orederLayout.layoutPrice.setVisibility(View.GONE);
+                cartBinding.layoutPrice.setVisibility(View.GONE);
             }
         });
     }
@@ -259,7 +259,7 @@ public void fetchCart(){
                 if (updateResponse != null && updateResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)) {
                     // fetchCart();
                     String cart_total=String.valueOf(updateResponse.getOrder_total());
-                    cartBinding.orederLayout.total.setText(cart_total);
+                    cartBinding.total.setText(cart_total+".00");
                 }
             });
         }

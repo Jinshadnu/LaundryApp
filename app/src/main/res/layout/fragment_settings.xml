@@ -52,7 +52,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="12dp"
                         android:drawableLeft="@drawable/ic_baseline_supervisor_account_24"
                         android:drawablePadding="@dimen/size_10dp"
                         android:text="Contact us"
@@ -131,6 +131,35 @@
             android:layout_marginEnd="@dimen/size_20dp"
             android:background="@color/md_grey_400" />
 
+        <TextView
+            android:id="@+id/update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:text="Check for Update"
+            android:padding="@dimen/size_10dp"
+            android:textColor="@color/colorwhite"
+            android:textSize="@dimen/size_15sp"
+            android:drawableLeft="@drawable/ic_baseline_update_24"
+            android:drawablePadding="@dimen/size_10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_privacy"
+            android:layout_marginLeft="20dp" />
+
+        <View
+            android:id="@+id/view_update"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1dp"
+            android:layout_below="@id/update"
+            app:layout_constraintTop_toBottomOf="@id/update"
+            android:layout_marginStart="@dimen/size_20dp"
+            android:layout_marginTop="@dimen/size_10dp"
+            android:layout_marginEnd="@dimen/size_20dp"
+            android:background="@color/md_grey_400" />
+
+
+
             <TextView
                 android:id="@+id/logout"
                 android:layout_width="wrap_content"
@@ -144,7 +173,7 @@
                 android:drawableLeft="@drawable/ic_power"
                 android:drawablePadding="@dimen/size_10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view_privacy"
+                app:layout_constraintTop_toBottomOf="@id/view_update"
                 android:layout_marginLeft="20dp" />
 
             <View

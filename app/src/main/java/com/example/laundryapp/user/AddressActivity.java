@@ -89,6 +89,7 @@ public ActivityAddressBinding addressBinding;
     public String latit,longit;
     public String strAddress;
     public String total_amount;
+    public int order_type;
 
 
 
@@ -113,6 +114,7 @@ public ActivityAddressBinding addressBinding;
         user_id=sharedPreferences.getString(Constants.USER_ID,null);
 
         total_amount=getIntent().getStringExtra("total_amount");
+        order_type=getIntent().getIntExtra("order_type",order_type);
 
         addressBinding.textViewTotal.setText("Total Amount " + total_amount);
 
@@ -397,7 +399,7 @@ private void getTheAddress(double latitude, double longitude) {
     //add order
     public void addOrder(){
         if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
-            orderViewModel.addOrder(user_id,building_address,street_number,zone,latit,longit,order_address).observe(this,comonResponse -> {
+            orderViewModel.addOrder(user_id,building_address,street_number,zone,latit,longit,order_address,order_type).observe(this,comonResponse -> {
                 if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
                     NotificationCompat.Builder mBuilder =
                             new NotificationCompat.Builder(this, "notify_001");
@@ -495,7 +497,7 @@ private void getTheAddress(double latitude, double longitude) {
     //add order if user already add their address
     public void adOrder(){
         if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
-                orderViewModel.addOrder(user_id,building,street,zone_no,latit,longit,order_address).observe(this,comonResponse -> {
+                orderViewModel.addOrder(user_id,building,street,zone_no,latit,longit,order_address,order_type).observe(this,comonResponse -> {
                     if (comonResponse != null && comonResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
                         NotificationCompat.Builder mBuilder =
                                 new NotificationCompat.Builder(this, "notify_001");

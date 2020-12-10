@@ -102,6 +102,11 @@ public FragmentSettingsBinding settingsBinding;
             startActivity(browserIntent);
         });
 
+        settingsBinding.update.setOnClickListener(v -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.vingcoz.laundryapp"));
+            startActivity(browserIntent);
+        });
+
         settingsBinding.logout.setOnClickListener(v -> {
             AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
             alertDialog.setTitle(getActivity().getString(R.string.logout));

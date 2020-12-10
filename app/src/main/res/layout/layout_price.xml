@@ -23,6 +23,7 @@
                 android:layout_marginLeft="@dimen/size_16dp"
                 android:layout_marginTop="@dimen/size_16dp"
                 android:text="Total Price"
+                android:fontFamily="@font/amaranth"
                 android:textColor="@color/colorDarkstateBlue"
                 android:textSize="@dimen/size_20dp"
                 android:textStyle="bold" />
@@ -34,6 +35,7 @@
                 android:layout_below="@id/text_total"
                 android:layout_marginLeft="@dimen/size_16dp"
                 android:text="QAR :"
+                android:fontFamily="@font/amaranth"
                 android:textColor="@color/colorDarkstateBlue"
                 android:textSize="@dimen/size_18dp"
                 android:textStyle="bold" />
@@ -45,6 +47,7 @@
                 android:layout_below="@id/text_total"
                 android:layout_marginLeft="@dimen/size_2dp"
                 android:text="0.00"
+                android:fontFamily="@font/amaranth"
                 android:layout_toRightOf="@id/money"
                 android:textColor="@color/colorDarkstateBlue"
                 android:textSize="@dimen/size_18dp"

@@ -19,12 +19,12 @@ public class OrderRepository {
     public OrderRepository() {
     }
 
-    public LiveData<ComonResponse> addOrder(String user_id, String building_number, String street_number, String zone,String latitude,String longitude,String address){
+    public LiveData<ComonResponse> addOrder(String user_id, String building_number, String street_number, String zone,String latitude,String longitude,String address,int orderType){
         MutableLiveData mutableLiveData=new MutableLiveData();
 
         networkAPI= NetworkService.getRetrofitInstance().create(NetworkAPI.class);
 
-        Call<ComonResponse> responseCall=networkAPI.addOrder(user_id,building_number,street_number,zone,latitude,longitude,address);
+        Call<ComonResponse> responseCall=networkAPI.addOrder(user_id,building_number,street_number,zone,latitude,longitude,address,orderType);
         responseCall.enqueue(new Callback<ComonResponse>() {
             @Override
             public void onResponse(Call<ComonResponse> call, Response<ComonResponse> response) {

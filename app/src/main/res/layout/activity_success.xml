@@ -47,11 +47,12 @@
 
                     <ImageView
                         android:id="@+id/imageView7"
-                        android:layout_width="@dimen/size_250dp"
-                        android:layout_height="@dimen/size_150dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_15dp"
                         android:scaleType="centerInside"
                         android:layout_centerHorizontal="true"
-                        app:srcCompat="@drawable/order_success" />
+                        android:src="@drawable/ic_check" />
 
                     <TextView
                         android:id="@+id/text_thanks"

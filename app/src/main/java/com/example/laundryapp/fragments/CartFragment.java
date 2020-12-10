@@ -329,7 +329,7 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
             addCartViewModel.updateCartItem(item_id,user_id,quantity,price).observe(getActivity(),updateResponse -> {
                 if (updateResponse != null && updateResponse.getStatus().equals(Constants.SERVER_RESPONSE_SUCCESS)){
                     String cart_total=String.valueOf(updateResponse.getOrder_total());
-                    cartBinding.orederLayout.total.setText(cart_total);
+                    cartBinding.orederLayout.total.setText(cart_total+".00");
                 }
             });
         }

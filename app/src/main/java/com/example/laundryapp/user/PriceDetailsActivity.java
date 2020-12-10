@@ -17,6 +17,7 @@ public class PriceDetailsActivity extends AppCompatActivity {
    public ActivityPriceDetailsBinding priceDetailsBinding;
    public double aDouble;
    public double amount;
+   public int orderType=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,24 +54,27 @@ public class PriceDetailsActivity extends AppCompatActivity {
 
         priceDetailsBinding.textAmount.setText(total_amount);
         priceDetailsBinding.textItemscount.setText(quantity);
-        priceDetailsBinding.txtAmount.setText(total_amount);
+        priceDetailsBinding.txtAmount.setText("QAR: " + total_amount);
 
         priceDetailsBinding.checkBoxUrgent.setOnCheckedChangeListener((compoundButton, b) -> {
             if(priceDetailsBinding.checkBoxUrgent.isChecked()){
                 priceDetailsBinding.textUrgentMessage.setVisibility(View.VISIBLE);
                 amount=aDouble * 2;
                 priceDetailsBinding.txtAmount.setText("QAR: " + String.valueOf(amount));
+                orderType=1;
 
             }
             else {
                 priceDetailsBinding.textUrgentMessage.setVisibility(View.GONE);
-                priceDetailsBinding.txtAmount.setText(total_amount);
+                priceDetailsBinding.txtAmount.setText("QAR: " + total_amount);
+                orderType=0;
             }
         });
 
         priceDetailsBinding.buttonPickup.setOnClickListener(v -> {
             Intent intent=new Intent(PriceDetailsActivity.this,AddressActivity.class);
             intent.putExtra("total_amount",priceDetailsBinding.txtAmount.getText().toString());
+            intent.putExtra("order_type",orderType);
             startActivity(intent);
         });
     }
