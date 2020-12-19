@@ -118,6 +118,32 @@
                 android:layout_marginLeft="@dimen/size_16dp"
                 android:textSize="@dimen/size_16dp"/>
 
+            <TextView
+                android:id="@+id/text_oreder_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total  :"
+                android:textStyle="bold"
+                android:textColor="@color/colorblack"
+                android:layout_below="@id/text_oreder_date"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:textSize="@dimen/size_16dp"/>
+
+            <TextView
+                android:id="@+id/oreder_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{order.total_price}"
+                android:textStyle="bold"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:textColor="@color/colorblack"
+                android:layout_below="@id/text_oreder_date"
+                android:layout_marginTop="@dimen/size_10dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:textSize="@dimen/size_16dp"/>
+
 
             <TextView
                 android:id="@+id/text_oreder_status"
@@ -126,7 +152,7 @@
                 android:text="Status  :"
                 android:textStyle="bold"
                 android:textColor="@color/colorblack"
-                android:layout_below="@id/text_oreder_date"
+                android:layout_below="@id/text_oreder_total"
                 android:layout_marginTop="@dimen/size_10dp"
                 android:layout_marginLeft="@dimen/size_16dp"
                 android:layout_marginBottom="@dimen/size_5dp"
@@ -141,7 +167,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/size_16dp"
                 android:textColor="@color/colorblack"
-                android:layout_below="@id/text_oreder_date"
+                android:layout_below="@id/text_oreder_total"
                 android:layout_marginTop="@dimen/size_10dp"
                 android:layout_marginLeft="@dimen/size_16dp"
                 android:layout_marginBottom="@dimen/size_5dp"

@@ -137,7 +137,7 @@ public  int quant;
 
         }
 
-        cartBinding.total.setText(String.valueOf(totalPrice));
+        cartBinding.total.setText(String.valueOf(totalPrice)+"0");
 
         return totalPrice;
     }

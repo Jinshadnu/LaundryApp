@@ -60,7 +60,7 @@ public class PriceDetailsActivity extends AppCompatActivity {
             if(priceDetailsBinding.checkBoxUrgent.isChecked()){
                 priceDetailsBinding.textUrgentMessage.setVisibility(View.VISIBLE);
                 amount=aDouble * 2;
-                priceDetailsBinding.txtAmount.setText("QAR: " + String.valueOf(amount));
+                priceDetailsBinding.txtAmount.setText("QAR: " + String.valueOf(amount)+"0");
                 orderType=1;
 
             }

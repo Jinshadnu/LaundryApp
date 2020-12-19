@@ -213,32 +213,55 @@
                 android:textColor="@color/colorwhite" />
         </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/checkBox_urgent"
-            android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/card_message"
-            android:textSize="@dimen/size_18sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorDarkstateBlue"
-            android:layout_marginTop="@dimen/size_16dp"
-            android:layout_marginLeft="@dimen/size_16dp"
-            android:text="Urgent" />
+            android:layout_below="@id/card_message"
+            android:layout_marginTop="@dimen/padd_10"
+            android:layout_marginLeft="@dimen/size_15dp"
+            android:layout_marginRight="@dimen/size_15dp"
+            app:cardBackgroundColor="@color/colorDarkstateBlue">
 
-        <TextView
-            android:id="@+id/text_urgent_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="For Urgent Service,we charge double amount of normal service charge"
-            android:textColor="@color/colorDarkstateBlue"
-            android:layout_below="@id/checkBox_urgent"
-            android:layout_marginLeft="@dimen/size_16dp"
-            android:lines="2"
-            android:maxLines="2"
-            android:textStyle="bold"
-            android:fontFamily="@font/amaranth"
-            android:visibility="gone"
-            android:layout_marginTop="@dimen/size_5dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <CheckBox
+                    android:id="@+id/checkBox_urgent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/size_18sp"
+                    android:textStyle="bold"
+                    android:padding="@dimen/padd_10"
+                    android:shadowColor="@color/colorwhite"
+                    android:textColor="@color/colorwhite"
+                    android:fontFamily="@font/amaranth"
+                    android:outlineSpotShadowColor="@color/colorwhite"
+                    android:buttonTint="@android:color/white"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:text="Urgent" />
+
+                <TextView
+                    android:id="@+id/text_urgent_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="For Urgent Service,we charge double amount of normal service charge"
+                    android:textColor="@color/colorwhite"
+                    android:layout_below="@id/checkBox_urgent"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/amaranth"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/size_5dp"/>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
 
 
 

@@ -5,6 +5,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -56,12 +57,21 @@ public ActivityHistoryBinding historyBinding;
 
         historyBinding.searchview.setOnQueryTextListener(this);
 
+        historyBinding.swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchOrders();
+                historyBinding.swipe.setRefreshing(false);
+            }
+        });
+
         fetchOrders();
         runAnimationAgain();
 
     }
 
     private void fetchOrders() {
+        //historyBinding.swipe.setRefreshing(true);
         if (NetworkUtilities.getNetworkInstance(this).isConnectedToInternet()){
             progressDialog = new ProgressDialog(HistoryActivity.this);
             progressDialog.setMessage("Loading.....");

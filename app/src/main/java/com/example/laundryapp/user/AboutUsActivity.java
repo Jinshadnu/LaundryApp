@@ -38,7 +38,7 @@ public ActivityAboutUsBinding aboutUsBinding;
         aboutUsBinding.layoutBase.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
 
         aboutUsBinding.textOpenMap.setOnClickListener(v -> {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://maps.app.goo.gl/fSi985xb7m63GmCw5"));
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/TMoXU5Zp8homEfPf8"));
             startActivity(browserIntent);
         });
 

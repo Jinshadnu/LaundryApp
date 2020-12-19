@@ -28,17 +28,29 @@
             android:layout_marginRight="@dimen/size_16dp"
             android:layout_marginTop="@dimen/size_16dp"/>
 
-
-        <com.example.laundryapp.utilities.CustomGridRecyclerView
-            android:id="@+id/recycler_orders"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_below="@id/searchview"
+            android:layout_marginTop="10dp"
+            >
 
-            />
+
+            <com.example.laundryapp.utilities.CustomGridRecyclerView
+                android:id="@+id/recycler_orders"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_below="@id/searchview"
+
+                />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
         <TextView
             android:id="@+id/text_nodata"

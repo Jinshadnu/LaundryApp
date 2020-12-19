@@ -30,6 +30,13 @@ public class OrderResponse {
         @SerializedName("Date")
         public String date;
 
+        public String getTotal_price() {
+            return total_price;
+        }
+
+        @SerializedName("total_price")
+        public String total_price;
+
         @SerializedName("order_status")
         public String order_status;
 

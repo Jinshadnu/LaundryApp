@@ -175,7 +175,7 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
 
           }
 
-          cartBinding.orederLayout.total.setText(String.valueOf(totalPrice));
+          cartBinding.orederLayout.total.setText(String.valueOf(totalPrice)+"0");
 
 
         return totalPrice;
@@ -257,7 +257,7 @@ public class CartFragment extends Fragment implements RecyclerItemTouchHelper.Re
     }
 
     public static void getTotal(int total) {
-        cartBinding.orederLayout.total.setText(String.valueOf(total));
+        cartBinding.orederLayout.total.setText(String.valueOf(total)+ "0");
     }
 
 
