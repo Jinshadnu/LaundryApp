@@ -206,6 +206,7 @@ public void fetchCart(){
         if (viewHolder instanceof CartAdapter.CartViewModel) {
             // get the removed item name to display it in snack bar
             //  String name = cartList.get(viewHolder.getAdapterPosition()).getItem_name();
+            //
             position= viewHolder.getAdapterPosition();
 
             String item_id=cartAdapter.cartList.get(position).getItem_id();
