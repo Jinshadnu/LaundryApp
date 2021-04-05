@@ -7,11 +7,11 @@
     </data>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/relativeLayout"
-        android:layout_width="@dimen/size_150dp"
+        android:layout_width="@dimen/size_140dp"
         android:layout_height="@dimen/size_50dp"
         android:layout_marginTop="@dimen/size_5dp"
         android:layout_marginBottom="@dimen/size_5dp"
-        android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginLeft="@dimen/size_5dp"
         android:layout_marginRight="@dimen/size_2dp"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 

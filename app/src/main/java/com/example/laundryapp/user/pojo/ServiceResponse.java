@@ -213,13 +213,13 @@ public class ServiceResponse {
     @BindingAdapter({"service_image"})
     public static void loadImage(ImageView view, String imageUrl) {
         Glide.with(view.getContext())
-                .load(imageUrl).apply(new RequestOptions().circleCrop())
+                .load(imageUrl).apply(new RequestOptions())
                 .into(view);
     }
     @BindingAdapter({"item_image"})
     public static void loadItemImage(ImageView view, String imageUrl) {
         Glide.with(view.getContext())
-                .load(imageUrl).apply(new RequestOptions().circleCrop())
+                .load(imageUrl).apply(new RequestOptions())
                 .into(view);
     }
 }
